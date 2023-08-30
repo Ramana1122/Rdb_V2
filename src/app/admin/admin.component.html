@@ -1,0 +1,11 @@
+
+<div class="container-fluid g-0">
+    <app-header (sideNavToggled)="apps($event)"></app-header>
+    <main *ngIf="sideNavStatus==true">
+      <app-side-nav  [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}"></app-side-nav>
+    
+  </main>
+</div>
+<div (click)="apps($event)">
+  <router-outlet></router-outlet> 
+</div>

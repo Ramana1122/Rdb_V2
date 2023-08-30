@@ -1,0 +1,246 @@
+
+  <div class="container" *ngIf="!formSubmitted">
+    <div class="card">
+      <header class="mainHeader card backhead">
+        <div class="row classRow">
+          <div>
+            <div class="title" style="padding-top: 12px;">
+              <h4>Edit EMPLOYEE</h4>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="container1">
+        <form [formGroup]="editForm"> 
+          <div *ngIf="employee">  
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="DedalusId">Dedalus Id<span  style="color:red"> *</span></label>
+              <input type="text" class="form-control" id="DedalusId" formControlName="DedalusId" placeholder="Enter Dedalus Id"style="background-color: #e9ecef;opacity: 1;" readonly>
+              <span *ngIf="editForm.get('DedalusId')?.invalid && editForm.get('DedalusId')?.touched" class="text-danger">Dedalus Id required.</span>
+            </div> 
+          </div>      
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="EmployeeCode">Employee Code <span  style="color:red"> *</span></label>
+              <input type="text" class="form-control" id="EmployeeCode" formControlName="EmployeeCode" placeholder="Enter Employee Code" style="background-color: #e9ecef;opacity: 1;" readonly>
+              <span *ngIf="editForm.get('EmployeeCode')?.invalid && editForm.get('EmployeeCode')?.touched" class="text-danger">Please Enter only Numerics.</span>
+            </div>
+          </div>        
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="EmployeeName">Employee Name<span  style="color:red"> *</span></label>
+              <input type="text" class="form-control" id="EmployeeName" formControlName="EmployeeName" placeholder="Enter Employee Name"style="background-color: #e9ecef;opacity: 1;"readonly>
+              <span *ngIf="editForm.get('EmployeeName')?.invalid && editForm.get('EmployeeName')?.touched" class="text-danger">Please Enter only Charecters.</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Employee_MailId">Employee Email<span  style="color:red"> *</span></label>
+              <input type="Employee_MailId" class="form-control" id="Employee_MailId" formControlName="Employee_MailId" placeholder="Enter Employee Email">           
+              <span *ngIf="editForm.get('Employee_MailId')?.invalid && editForm.get('Employee_MailId')?.touched" class="text-danger">Mai lId is required.</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">         
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Gender" >Gender<span  style="color:red"> *</span></label>
+
+          <select class="form-control" id="gender" formControlName="Gender">
+
+            <option value="Male">Male</option>
+
+            <option value="Female">Female</option>
+
+          </select>
+              <span *ngIf="editForm.get('Gender')?.invalid && editForm.get('Gender')?.touched" class="text-danger">Gender is required.</span>
+            </div>                   
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Location">Location<span  style="color:red"> *</span></label>
+              <select class="form-select" id="" formControlName="Location" [(ngModel)]="editForm.value.Location">
+                <option [ngValue]="null" [disabled]="true" >Select Location  </option>
+                <option *ngFor="let s of Locationdata" [value]="s.Description">{{s.Description}}</option>                                         
+              </select>              
+              <span *ngIf="editForm.get('Location')?.invalid && editForm.get('Location')?.touched" class="text-danger">Location is required.</span>
+            </div>                  
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+           <div class="form-group">
+
+          
+            <label for="ManagerName">Manager Name<span  style="color:red"> *</span></label>
+            <ng-select formControlName="ManagerName" (keyup)="onkeypress($event)" (change)="onselect($event,editForm.value.ManagerName)">
+              <ng-option *ngFor="let ManagerName of ManagerNames"  [value]="ManagerName">{{ManagerName.EmployeeName}}</ng-option>
+           </ng-select>
+            <!-- <input type="text" class="form-control"  (keypress)="($event)" id="ManagerName" formControlName="ManagerName"> -->
+          </div>
+        </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ManagerEmail"> Manager Email<span  style="color:red"> *</span></label>
+              <input type="ManagerMailId" class="form-control" id="ManagerMailId" formControlName="ManagerMailId" placeholder="Enter Manager Email"style="background-color: #e9ecef;opacity: 1;" readonly>           
+              <span *ngIf="editForm.get('ManagerMailId')?.invalid && editForm.get('ManagerMailId')?.touched" class="text-danger">Manager Email is required.</span>              
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ManagerCode">Manager Code <span style="color:red"> *</span></label>
+              <input type="text" class="form-control" id="ManagerCode" formControlName="ManagerCode" placeholder="Enter Manager Code" style="background-color: #e9ecef;opacity: 1;"readOnly>
+              <span *ngIf="editForm.get('ManagerCode')?.invalid && editForm.get('ManagerCode')?.touched" class="text-danger">Please Enter the Numeric Values</span>                        
+            </div>          
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="DateofJoin">Date of Join<span  style="color:red"> *</span></label>
+              <input type="text" class="form-control" id="cscDoj" formControlName="DateofJoin" readonly>
+              <span *ngIf="editForm.get('DateofJoin')?.invalid && editForm.get('DateofJoin')?.touched" class="text-danger">Date of Join is required.</span>             
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ProductGroup">Product Group <span  style="color:red"> *</span></label>
+              <select class="form-select" id="ProductGroup"  formControlName="ProductGroup" [(ngModel)]="editForm.value.ProductGroup">
+                <option [ngValue]="null" [disabled]="true" >Select Product Group  </option>
+                <option *ngFor="let a of  productgroup" [value]="a.Description">{{a.Description}}</option>                                   
+              </select>              
+              <span *ngIf="editForm.get('ProductGroup')?.invalid && editForm.get('ProductGroup')?.touched" class="text-danger">Product Group is required.</span>            
+            </div>         
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Product">Product <span  style="color:red"> *</span></label>
+              <select class="form-select" id="Product" formControlName="Product"  [(ngModel)]="editForm.value.Product">
+                <option [ngValue]="null" [disabled]="true" >Select Product </option>
+               <option *ngFor="let b of productdata" [value]="b.Description">{{b.Description}}</option>                                         
+              </select>               
+              <span *ngIf="editForm.get('Product')?.invalid && editForm.get('Product')?.touched" class="text-danger">Product is required.</span>
+            </div>                
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ProductWorkArea">Product Work Area<span  style="color:red"> *</span></label>
+              <select class="form-select" id="productWorkedArea" formControlName="ProductWorkArea"  [(ngModel)]="editForm.value.ProductWorkArea">
+                <option [ngValue]="null" [disabled]="true" >Select Product Work Area</option>
+                <option *ngFor="let c of productworkdata" [value]="c.Description">{{c.Description}}</option>                                         
+              </select> 
+              <span *ngIf="editForm.get('ProductWorkArea')?.invalid && editForm.get('ProductWorkArea')?.touched" class="text-danger">Product Work Area is required.</span>            
+            </div>
+          </div>        
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="WorkGroup">Work Group<span  style="color:red"> *</span></label>
+              <select class="form-select" id="WorkGroup" formControlName="WorkGroup"  [(ngModel)]="editForm.value.WorkGroup">
+                <option [ngValue]="null" [disabled]="true" >Select Work Group</option>
+                <option *ngFor="let d of workgroupdata" [value]="d.Description">{{d.Description}}</option>                 
+               </select> 
+              <span *ngIf="editForm.get('WorkGroup')?.invalid && editForm.get('WorkGroup')?.touched" class="text-danger">Work Group is required.</span>
+           </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="UnifiedRoles">Unified Roles<span  style="color:red"> *</span></label>          
+              <select class="form-select" id="unifiedRoles" formControlName="UnifiedRoles" [(ngModel)]="editForm.value.UnifiedRoles">
+                <option [ngValue]="null" [disabled]="true" >Select Unified Roles</option> 
+                <option *ngFor="let e of unifieddata" [value]="e.Description">{{e.Description}}</option>                         
+             </select>
+              <span *ngIf="editForm.get('UnifiedRoles')?.invalid && editForm.get('UnifiedRoles')?.touched" class="text-danger">Unified Roles is required.</span>
+            </div>            
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="HLRole">HL Role<span  style="color:red"> *</span></label>
+              <select class="form-select" id="HLRole" formControlName="HLRole" [(ngModel)]="editForm.value.HLRole">
+                <option [ngValue]="null" [disabled]="true" >Select HL Role</option>                                                 
+                <option *ngFor="let x of roledata" [value]="x.Description">{{x.Description}}</option>                
+              </select>
+              <span *ngIf="editForm.get('HLRole')?.invalid && editForm.get('HLRole')?.touched" class="text-danger">HL Role is required.</span>                              
+            </div>        
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <!-- (selectionChange)="getdomain($event)" -->
+              <label for="HLDesignation">HL Designation <span  style="color:red"> *</span></label>
+              <select class="form-select" id="HLDesignation"   formControlName="HLDesignation" [(ngModel)]="editForm.value.HLDesignation">
+                <option [ngValue]="null" [disabled]="true" >Select HL Designation</option> 
+                <option *ngFor="let datas of desiginationdata" [value]="datas.Description">{{datas.Description}}</option>       
+               </select> 
+              <span *ngIf="editForm.get('HLDesignation')?.invalid && editForm.get('HLDesignation')?.touched" class="text-danger">HL Designation is required.</span>                      
+            </div>        
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="HLTitle">HL Title<span  style="color:red"> *</span></label>
+              <select class="form-select" id="HLTitle"  formControlName="HLTitle" [(ngModel)]="editForm.value.HLTitle">
+                <option [ngValue]="null" [disabled]="true" >Select HL Title</option>                     
+                <option *ngFor="let y of titledata" [value]="y.Description">{{y.Description}}</option>    
+               </select> 
+              <span *ngIf="editForm.get('HLTitle')?.invalid && editForm.get('HLTitle')?.touched" class="text-danger">HL Title is required.</span>              
+           </div>       
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Unit">Unit<span  style="color:red"> *</span></label>
+              <select class="form-select" id="Unit"   formControlName="Unit" [(ngModel)]="editForm.value.Unit"> 
+                <option [ngValue]="null" [disabled]="true" >Select Unit</option>                   
+                <option *ngFor="let z of unitdata " [value]="z.Description">{{z.Description}}</option>    
+               </select>             
+              <span *ngIf="editForm.get('Unit')?.invalid && editForm.get('Unit')?.touched" class="text-danger">Unit is required.</span>
+            </div>                         
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="owning">Owning<span  style="color:red"> *</span></label>
+              <select class="form-select" id="Owning"  formControlName="Owning" [(ngModel)]="editForm.value.Owning">
+                <option [ngValue]="null" [disabled]="true" >Select Owning</option>                    
+                <option *ngFor="let l of owingdata" [value]="l.Description">{{l.Description}}</option>    
+               </select> 
+              <span *ngIf="editForm.get('Owning')?.invalid && editForm.get('Owning')?.touched" class="text-danger">Owning is required.</span>
+            </div>                        
+          </div>
+        </div>     
+      <div class="row buttons">
+        <div class="col-md-12 alignGetCheck">
+          <label for="graduate engineer">Graduate Engineer?<span> <input type="checkbox" class="chk-box" formControlName="GET"></span> </label>                                                          
+        </div>      
+      </div>
+          </div>
+    </form>
+  
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-md-12">
+  
+      <div class="bu">
+  
+        <button class="btn btn-primary" (click)="updateEmployee()">Update</button>
+  
+      </div>
+  
+  
+  
+  
+    </div>
+  

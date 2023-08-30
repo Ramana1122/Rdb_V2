@@ -1,0 +1,76 @@
+<!-- <div class="ram" >
+<div class="container1">
+  
+  <div style="display: flex; justify-content: center;margin-left: 120vh;">
+
+    <button (click)="downloadEmployeeDetails()" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Print details"><i class="fas fa-print"></i></button>
+
+  </div>
+  <H3 style="text-align: center;">My Peers</H3>
+  <div class="row header-row">
+    <div class="col-md-4 header">Employee Name</div>
+    <div class="col-md-4 header">Mail Id</div>
+    <div class="col-md-4 head" style="padding-left: 150px;">Details</div>
+  </div>
+
+  <div class="scroll">
+    <div class="row" *ngFor="let employee of employeeData3 | team:employeeData.EmployeeName">
+      <div class="col-md-4">{{ employee['EmployeeName'] }}</div>
+      <div class="col-md-4">{{ employee['Employee_MailId'] }}</div>
+      <div class="col-md-4">
+        <div style="display: flex; justify-content: center;">
+          <button (click)="openpop(employee['EmployeeCode'])" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="View employee details">
+              <i class="fa-solid fa-eye"></i>
+          </button>
+      </div>
+      
+        
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="ram" style="overflow: hidden" >
+  <div class="container">
+   
+  <div class="container1 ">
+    <div class="ram1">
+    <div>
+    <h4 style="text-align: center;">My Peers</h4>
+  </div>
+    <div style="display: flex; justify-content: center;margin-left: 170px;">
+      <button (click)="downloadEmployeeDetails()" class="btn btn-primary btn-sm"data-bs-toggle="tooltip" data-bs-placement="top" title="Print details"><i class="fas fa-print"></i></button>
+    </div>
+    
+  </div>
+    <div class="scroll">
+    <table class="table table-bordered table-striped">
+     
+      <thead style="position: sticky">
+        <tr>
+          <th class="header backhead">Employee Name</th>
+          <th class="header backhead">Mail Id</th>
+          <th class="header backhead">View Details</th>
+        
+        </tr>
+      </thead>  
+     <tbody>
+  
+        <tr *ngFor="let employee of employeeData3">
+          <td>{{ employee.EmployeeName}}</td>
+          <td>
+            {{ employee.Employee_MailId}}</td>
+          <td>
+              <div style="display: flex; justify-content: center;">
+            <button (click)="openpop(employee['EmployeeCode'])" class="btn1 btn-sm"data-bs-toggle="tooltip" data-bs-placement="top" title="View employee details">
+              <i class="fa-solid fa-eye"></i></button>
+              </div>
+          </td>
+         
+        </tr>
+      </tbody>
+    </table>
+    </div>
+ 
+</div>

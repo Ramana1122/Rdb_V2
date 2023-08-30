@@ -1,0 +1,252 @@
+<div class="d-flex justify-content-center" style="margin-top: 90px;">
+  <div class="input-group" style="width: 300px; margin-left:95px;">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Enter ID or Name" class="form-control"
+      (keyup.enter)="onSearch()" (input)="change()" />
+    <div class="input-group-append">
+      <button class="btn btn-primary" style="background-color: rgb(50, 122, 169);" color type="button"
+        (click)="onSearch()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="ram1" *ngIf=" !isViewSelect && showList && searchClicked && employees.length > 0 &&!isViewSelect">
+  <div style="margin-left: 820px;margin-top: 20px; overflow: hidden;">
+    <button (click)="downloadEmployeeDetails()" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+      data-bs-placement="top" title="Print details"><i class="fas fa-print"></i></button>
+  </div>
+  <div class="ram" style="max-width: 800px;margin-left: 95px; margin-top: 20px;">
+    <table class="table fixed-header">
+      <thead>
+        <tr>
+          <th style="background-color: rgb(50, 122, 169);color: white;">Employee Name</th>
+          <th style="background-color: rgb(50, 122, 169);color: white;">Job Role</th>
+          <th style="background-color: rgb(50, 122, 169);color: white;">Email ID</th>
+          <th style="background-color: rgb(50, 122, 169);color: white;">Details</th>
+          <th style="background-color: rgb(50, 122, 169);color: white;">History</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let employee of employees; let rowIndex = index;">
+          <tr [class.alternate-row]="rowIndex % 2 !== 0" [class.normal-row]="rowIndex % 2 === 0">
+            <td class="employee-name">{{ employee['EmployeeName'] }}</td>
+            <td class="job-role">{{ employee['HLRole'] }}</td>
+            <td class="email-id">{{ employee['Employee_MailId'] }}</td>
+            <td>
+              <div style="display: flex; justify-content: center;">
+                <a (click)="navigateToEmployeeDetails(employee)" #employee class="btn btn-primary btn-sm"
+                  style="background-color:rgb(50, 122, 169) ;" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="View employee details"><i class="fa-solid fa-eye"></i></a>
+              </div>
+            </td>
+            <td>
+              <div style="display: flex; justify-content: center;">
+                <a (click)="openpop2(employee)" #employee class="btn btn-primary btn-sm"
+                  style="background-color:rgb(50, 122, 169) ;" data-bs-toggle="tooltip" data-bs-placement="top"
+                  data-bs-placement="top" title="View employee history"><i
+                          class="fa-solid fa-clock-rotate-left"></i></a>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-employee-details-1 *ngIf="isViewSelect" [empId]="employeeID"></app-employee-details-1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-12">
+    
+      <div class="d-flex justify-content-center" style="margin-top: 90px;">
+        <div class="input-group" style="width: 300px; margin-left:95px;">
+          <input type="text" [(ngModel)]="searchQuery" placeholder="Enter ID or Name" class="form-control"
+            (keyup.enter)="onSearch()" (input)="change()" />
+          <div class="input-group-append">
+            <button class="btn btn-primary" style="background-color: rgb(50, 122, 169);" color type="button"
+              (click)="onSearch()">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-9 col-md-8 col-sm-12">
+    
+      <div class="ram1" *ngIf="!isViewSelect && showList && searchClicked && employees.length > 0 &&!isViewSelect">
+        <div class="d-flex justify-content-center mt-3">
+          <button (click)="downloadEmployeeDetails()" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+            data-bs-placement="top" title="Print details"><i class="fas fa-print"></i></button>
+        </div>
+        <div class="ram" style="max-width: 800px;margin-left: 95px; margin-top: 50px;">
+          <table class="table fixed-header">
+            <thead>
+              <tr>
+                <th style="background-color: rgb(50, 122, 169);color: white;">Employee Name</th>
+                <th style="background-color: rgb(50, 122, 169);color: white;">Job Role</th>
+                <th style="background-color: rgb(50, 122, 169);color: white;">Email ID</th>
+                <th style="background-color: rgb(50, 122, 169);color: white;">Details</th>
+                <th style="background-color: rgb(50, 122, 169);color: white;">History</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let employee of employees; let rowIndex = index;">
+                <tr [class.alternate-row]="rowIndex % 2 !== 0" [class.normal-row]="rowIndex % 2 === 0">
+                  <td class="employee-name">{{ employee['EmployeeName'] }}</td>
+                  <td class="job-role">{{ employee['HLRole'] }}</td>
+                  <td class="email-id">{{ employee['Employee_MailId'] }}</td>
+                  <td>
+                    <div class="d-flex justify-content-center">
+                      <a (click)="navigateToEmployeeDetails(employee)" #employee class="btn btn-primary btn-sm"
+                        style="background-color:rgb(50, 122, 169) ;" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="View employee details"><i class="fa-solid fa-eye"></i></a>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex justify-content-center">
+                      <a (click)="openpop2(employee)" #employee class="btn btn-primary btn-sm"
+                        style="background-color:rgb(50, 122, 169) ;" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="View employee history"><i
+                          class="fa-solid fa-clock-rotate-left"></i></a>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <app-employee-details-1 *ngIf="isViewSelect" [empId]="employeeID"></app-employee-details-1>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+<!-- <div class="d-flex justify-content-center" style="margin-top: 90px;">
+
+  <div class="input-group" style="width: 300px; margin-left:55px;">
+
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Enter ID or Name" class="form-control"
+      (keyup.enter)="onSearch()" (input)="change()" />
+
+    <div class="input-group-append">
+
+      <button class="btn btn-primary" style="background-color: rgb(50, 122, 169);" color type="button"
+        (click)="onSearch()">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+<div class="ram1" *ngIf=" !isViewSelect && showList && searchClicked && employees.length > 0 &&!isViewSelect">
+
+  <div style="display: flex; justify-content: center;margin-left: 120vh;">
+    <button (click)="downloadEmployeeDetails()" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+      data-bs-placement="top" title="Print details"><i class="fas fa-print"></i></button>
+  </div>
+
+  <div class="ram" style="max-width: 800px;margin-left: 260px; margin-top: 50px;">
+
+    <table class="table fixed-header">
+
+      <thead>
+
+        <tr>
+
+          <th style="background-color: rgb(50, 122, 169);color: white;">Employee Name</th>
+
+          <th style="background-color: rgb(50, 122, 169);color: white;">Job Role</th>
+
+          <th style="background-color: rgb(50, 122, 169);color: white;">Email ID</th>
+
+          <th style="background-color: rgb(50, 122, 169);color: white;">Details</th>
+
+
+          <th style="background-color: rgb(50, 122, 169);color: white;">History</th>
+
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <ng-container *ngFor="let employee of employees; let rowIndex = index;">
+
+          <tr [class.alternate-row]="rowIndex % 2 !== 0" [class.normal-row]="rowIndex % 2 === 0">
+
+            <td class="employee-name">{{ employee['EmployeeName'] }}</td>
+
+            <td class="job-role">{{ employee['HLRole'] }}</td>
+
+            <td class="email-id">{{ employee['Employee_MailId'] }}</td>
+
+            <td>
+
+              <div style="display: flex; justify-content: center;">
+                <a (click)="navigateToEmployeeDetails(employee)" #employee class="btn btn-primary btn-sm"
+                  style="background-color:rgb(50, 122, 169) ;" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="View employee details"><i class="fa-solid fa-eye"></i></a>
+
+              </div>
+            </td>
+
+            <td>
+              <div style="display: flex; justify-content: center;">
+                <a (click)="openpop2(employee)" #employee class="btn btn-primary btn-sm"
+                  style="background-color:rgb(50, 122, 169) ;" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="View employee history"><i class="fa-regular fa-rectangle-history"></i></a>
+              </div>
+            </td>
+          </tr>
+
+        </ng-container>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<app-employee-details-1 *ngIf="isViewSelect" [empId]="employeeID"></app-employee-details-1> -->

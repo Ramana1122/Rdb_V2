@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand navbar-dark backhead" style="overflow-x: hidden;overflow-y:hidden">
+    <div class="side-nav-button p-2 me-3 text-light" (click)="sideNavToggle()">
+        <i class="fa-solid fa-bars"></i>
+    
+    </div>
+    <a class="navbar-brand px-4"><img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/053935b5e2d38ec5249e.png" alt="" height="110"></a>
+    
+    <div class="avatar">
+    
+      <img src="../../assets/img/3237472.png" height="40">
+
+      
+  <div class="name break-word">
+    {{ userName?.['EmployeeName']}}        
+  </div>
+  
+     
+  </div>
+
+ 
+
+
+    <div class="logout">
+        <!-- <button (click)="logout()"> -->
+          <span class="fa-solid fa-right-from-bracket fa-xl"(click)="logout()" style="color: #f5f5f5;"data-bs-toggle="tooltip" data-bs-placement="right" title= "logout"></span>
+        <!-- </button> -->
+      </div>
+    
+      
+</nav>
+
+

@@ -1,0 +1,120 @@
+<div class="side-nav-content">
+
+  <!-- <div class="custom-control custom-switch" style="padding-left: 16px;">
+
+    <input type="checkbox" class="custom-control-input" id="darkSwitch" (change)="toggleMode($event)">
+
+    <label class="custom-control-label " for="darkSwitch" style="padding-left: 20px;">Dark Mode</label>
+
+  </div> -->
+
+      <ul class="nav-list" [ngClass]="{'nav-list-open': sideNavStatus}" >
+
+        <li class="nav-list-items"[routerLink]="['/admin']"data-bs-toggle="tooltip" data-bs-placement="right" title= "Home" >
+
+          <i class="{{list[0].icon1}}"></i>
+
+          <span>
+
+            <a  >{{ list[0].name1 }}</a>
+
+          </span>
+
+        </li>
+
+        <li class="nav-list-items" [routerLink]="['/admin/mydetails']" routerLinkActive='active'data-bs-toggle="tooltip" data-bs-placement="right" title= "My-details">
+
+          <i class="{{list[1].icon2}}"></i>
+
+          <span>
+
+            <a >{{ list[1].name2 }}</a>
+
+          </span>
+
+        </li>
+
+        <li class="nav-list-items"[routerLink]="['/admin/my-team']"routerLinkActive='active'data-bs-toggle="tooltip" data-bs-placement="right" title= "My-team">
+
+          <i class="{{list[2].icon3}}"></i>
+
+          <span>
+
+            <a >{{ list[2].name3 }}</a>
+
+          </span>
+
+        </li>
+
+        <li class="nav-list-items" [routerLink]="['/admin/pop']" routerLinkActive='active'data-bs-toggle="tooltip" data-bs-placement="right" title= "Add-new" *ngIf="list[3].disable">
+
+          <i class="{{list[3].icon4}}"></i>
+
+          <span>
+
+            <a
+
+            >{{list[3].name4 }}</a>
+
+          </span>
+
+        </li>
+
+        <li class="nav-list-items" [routerLink]="['/admin/report']"routerLinkActive='active'data-bs-toggle="tooltip" data-bs-placement="right" title= "Reportees" *ngIf="list[4].disable">
+
+          <i class="{{list[4].icon5}}"></i>
+
+          <span>
+
+            <a >{{list[4].name5 }}</a>
+
+          </span>
+
+        </li>
+
+        <li class="nav-list-items"[routerLink]="['/admin/searchbar']"routerLinkActive='active'data-bs-toggle="tooltip" data-bs-placement="right" title= "Search-bar" >
+
+          <i class="{{list[5].icon6}}"></i>
+
+          <span>
+
+            <a  >{{list[5].name6 }}</a>
+
+          </span>
+
+        </li>
+        <li class="nav-list-items"[routerLink]="['/admin/reports']"routerLinkActive='active'data-bs-toggle="tooltip" data-bs-placement="right" title= "search-bar">
+
+          <i class="{{list[6].icon7}}"></i>
+            <span>
+              <a  >{{list[6].name7 }}</a>
+            </span>
+  
+          </li>
+
+        <li class="nav-list-items2">
+
+          <img src="assets/img/removebg-preview.png" class="version-image">
+
+          <span class="nav-item-span">Version 1.0</span>
+
+
+
+
+        </li>
+
+      </ul>
+
+     
+
+</div>
+
+<!-- <div class="ver">
+
+    <img src="../../assets/normal_4e31334a0a30a862-removebg-preview.png" style="height:
+
+    35px; width: 35px;">
+
+    Version 1.0
+
+  </div> -->

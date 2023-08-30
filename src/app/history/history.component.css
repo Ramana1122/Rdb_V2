@@ -1,0 +1,614 @@
+/* .dropdown-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+ 
+
+    margin-top : 25px
+
+  }
+
+ 
+
+  .results-container{
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-top : 55px
+
+  }
+
+ 
+
+  .dropdown-container select {
+
+    width: 250px;
+
+    padding: 5px;
+
+    font-size: 18px;
+
+  }
+
+ 
+
+  .container1 {
+
+    max-width: 800px;
+
+    margin: 15px auto;
+
+    margin-left: 300px;
+
+    margin-top: 30px;
+
+  }
+
+ 
+
+  .table {
+
+    border-collapse: collapse;
+
+    width: 80%;
+
+  }
+
+ 
+
+  th, td {
+
+    padding: 8px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #ddd;
+
+  }
+
+ 
+
+  th {
+
+    background-color: rgb(50, 122, 169);
+
+    color: white;
+
+  }
+
+ 
+
+  tbody tr:hover {
+
+    background-color: #f5f5f5;
+
+  }
+
+ 
+
+  h5{
+
+    padding-right: 15px;
+
+  }
+
+ 
+
+  .header-column{
+
+    background-color: rgb(50, 122, 169);
+
+    color: white;
+
+  }
+
+ 
+
+  .header-column {
+
+    padding: 8px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #ddd;
+
+  }
+
+ 
+
+  .data-column{
+
+    padding: 8px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #ddd;
+
+  }
+
+ 
+
+  .row {
+
+    margin-bottom: 0;
+
+  }
+
+ 
+
+  .rasam{
+
+    margin-top: 95px;
+
+    padding-bottom: 0px;
+
+    margin-left: 240px;
+
+    margin-right: 240px;
+
+   
+
+
+
+  }
+
+ 
+
+  .title{
+
+    background-color: rgb(50, 122, 169);
+
+    color: white;
+
+    text-align: center;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 45px;
+
+   
+
+  }
+
+  h5{
+    margin-left: -170px;
+  }
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+ Default styles
+
+.dropdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.results-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 55px;
+}
+
+.dropdown-container select {
+  width: 250px;
+  padding: 5px;
+  font-size: 18px;
+}
+
+.container1 {
+  max-width: 800px;
+  margin: 15px auto;
+  margin-left: 300px;
+  margin-top: 30px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 80%;
+  margin-left: 55px;
+}
+
+.ram{
+  margin-left:55px;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: rgb(50, 122, 169);
+  color: white;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+h5 {
+  padding-right: 195px;
+}
+
+.header-column {
+  background-color: rgb(50, 122, 169);
+  color: white;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.data-column {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.row {
+  margin-bottom: 0;
+}
+
+.rasam {
+  margin-top: 95px;
+  padding-bottom: 0px;
+  margin-left: 240px;
+  margin-right: 240px;
+}
+
+.title {
+  background-color: rgb(50, 122, 169);
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+}
+
+h5 {
+  margin-left: -170px;
+}
+
+/* Media queries for responsiveness */
+
+/* @media only screen and (max-width: 768px) {
+  .rasam {
+    margin: 95px 15px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .container1 {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  
+  .title {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  
+  .dropdown-container,
+  .results-container {
+    margin-top: 15px;
+  }
+
+  .dropdown-container select {
+    width: 100%;
+  }
+} */
+
+
+
+.dropdown-container {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-top: 25px;
+
+}
+
+
+
+
+.results-container {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-top: 55px;
+
+}
+
+
+
+
+.dropdown-container select {
+
+  width: 250px;
+
+  padding: 5px;
+
+  font-size: 18px;
+
+}
+
+
+
+
+.container1 {
+
+  max-width: 800px;
+
+  margin: 15px auto;
+
+  /* margin-left: 95px; */
+
+  margin-top: 30px;
+
+}
+
+
+
+
+.table {
+
+  border-collapse: collapse;
+
+  width: 80%;
+
+  margin-left: 85px;
+
+}
+
+
+
+
+.ram{
+
+  margin-left:55px;
+
+}
+
+
+
+
+th,
+
+td {
+
+  padding: 8px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #ddd;
+
+}
+
+
+
+
+th {
+
+  background-color: rgb(50, 122, 169);
+
+  color: white;
+
+}
+
+
+
+
+tbody tr:hover {
+
+  background-color: #f5f5f5;
+
+}
+
+
+
+
+h5 {
+
+  padding-left: 185px;
+
+}
+
+
+
+
+.header-column {
+
+  background-color: rgb(50, 122, 169);
+
+  color: white;
+
+  padding: 8px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #ddd;
+
+}
+
+
+
+
+.data-column {
+
+  padding: 8px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #ddd;
+
+}
+
+
+
+
+.row {
+
+  margin-bottom: 0;
+
+}
+
+
+
+
+.rasam {
+
+  margin-top: 95px;
+
+  padding-bottom: 0px;
+
+  margin-left: 240px;
+
+  margin-right: 240px;
+
+}
+
+
+
+
+.title {
+
+  background-color: rgb(50, 122, 169);
+
+  color: white;
+
+  text-align: center;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  height: 45px;
+
+}
+
+
+
+
+.word{
+
+  padding-right: 55px;
+
+}
+
+
+
+
+h5 {
+
+  margin-left: -150px;
+
+}
+
+
+
+
+/* Media queries for responsiveness */
+
+
+
+
+@media only screen and (max-width: 768px) {
+
+  .rasam {
+
+    margin: 95px 15px;
+
+    margin-left: 0;
+
+    margin-right: 0;
+
+  }
+
+
+
+
+  .container1 {
+
+    margin-left: 15px;
+
+    margin-right: 15px;
+
+  }
+
+
+
+
+  .value{
+
+    margin-right: 25px;
+
+  }
+
+ 
+
+  .title {
+
+    margin-left: -15px;
+
+    margin-right: -15px;
+
+  }
+
+ 
+
+  .dropdown-container,
+
+  .results-container {
+
+    margin-top: 15px;
+
+  }
+
+
+
+
+  .dropdown-container select {
+
+    width: 100%;
+
+  }
+
+}
+
+

@@ -1,0 +1,46 @@
+<div class="ram">
+    <div class="container">
+     
+    <div class="container1 ">
+      <div class="ram1">
+      <div>
+      <h4 style="text-align: center;">My Reportees</h4>
+    </div>
+      <div style="display: flex; justify-content: center;margin-left: 150px;">
+        <button (click)="downloadEmployeeDetails()" class="btn btn-primary btn-sm"data-bs-toggle="tooltip" data-bs-placement="top" title="Print details"><i class="fas fa-print"></i></button>
+      </div>
+    </div>
+      <div class="scroll">
+      <table class="table table-bordered table-striped">
+       
+        <thead style="position: sticky">
+          <tr>
+            <th class="header backhead">Employee Name</th>
+            <th class="header backhead">Mail Id</th>
+            <th class="header backhead">View Details</th>
+           <th class="header backhead">Edit Details</th>
+         </tr>
+        </thead>  
+       <tbody>
+      <h5 *ngIf="!isReportees" style="text-align: center;" > No Reportees to Display </h5>  
+          <tr *ngFor="let employee of employeeData2">
+            <td>{{ employee.EmployeeName}}</td>
+            <td>
+              {{ employee.Employee_MailId}}</td>
+            <td>
+                <div style="display: flex; justify-content: center;">
+              <button (click)="openpop(employee['EmployeeCode'])" class="btn1  btn-sm"data-bs-toggle="tooltip" data-bs-placement="top" title="View employee details">
+                <i class="fa-solid fa-eye"></i></button>
+                </div>
+            </td>
+            <td>
+               <div style="display: flex; justify-content: center;">
+               <button (click)="openpop1(employee['EmployeeCode'])" class="btn1 btn-sm"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit employee details"><i class="fas fa-user-pen"></i></button>
+               </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+   
+  </div>

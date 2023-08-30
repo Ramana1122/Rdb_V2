@@ -1,0 +1,390 @@
+.container {
+
+    margin-top: 120px;
+
+    width: 980px;
+
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+
+    padding: 0;
+
+    margin-left: 230px;
+
+    margin-right: 0;
+
+  }
+
+  .tabs-container{
+
+    color: white;
+
+  }
+
+  .nav-link{
+
+    color:white;
+
+  }
+
+ 
+
+
+
+
+  .data {
+
+    border: 1px solid #dee2e6;
+
+ 
+
+    width: 950px;
+
+   
+
+    position: relative;
+
+     
+
+  }
+
+  .nav-tabs{
+
+    color:white;
+
+  } 
+  .nav-link.active {
+
+     background-color:rgb(50, 122, 169); 
+
+    color: white;
+
+  }
+
+  .nav-tabs{
+
+    color:white;
+
+  }
+
+  .nav-item2{
+
+    background-color: #81a594;
+
+  }
+
+  .nav-item1{
+
+    background-color: #81a594;
+
+
+
+
+  }
+
+  .nav-item3{
+
+    background-color: #81a594;
+
+  }
+
+ 
+
+ 
+
+
+
+
+  .col {
+
+    flex: 1;
+
+    border-right: 1px solid #dee2e6;
+
+
+
+
+    width:950px;
+
+  }
+
+
+
+
+  .col:last-child {
+
+    border-right: none;
+
+    width: 950px;
+
+  }
+
+
+
+
+  .row {
+
+   
+
+    border-bottom: 1px solid #dee2e6;
+
+    margin-right: 0px;
+
+   
+
+    width:950px;
+
+  }
+
+ 
+
+
+
+
+  .row:last-child {
+
+    border-bottom: none;
+
+    width:950px;
+
+  }
+
+ 
+
+  .even-row {
+
+    background-color: #f9f9f9;
+
+  }
+
+ 
+
+  .odd-row {
+
+    background-color: #ffffff;
+
+  }
+
+  .container1 {
+
+    max-height: 250px;
+
+
+
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+  }
+
+  /* Custom date picker styles */
+
+.bs-datepicker-container {
+
+    font-family: Arial, sans-serif;
+
+    background-color: #fff;
+
+    border: 1px solid #ccc;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+   
+
+    z-index: 9999;
+
+  }
+
+ 
+
+  .bs-datepicker-header {
+
+    text-align: center;
+
+   
+
+    border-bottom: 1px solid #ccc;
+
+  }
+
+ 
+
+ 
+
+ 
+
+  .bs-datepicker-calendar .bs-datepicker-body table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar th,
+
+  .bs-datepicker-calendar td {
+
+    text-align: center;
+
+   
+
+  }
+
+ 
+
+  .bs-datepicker-calendar th {
+
+    font-weight: bold;
+
+    color: #333;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar td {
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar td:hover {
+
+    background-color: #f5f5f5;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar td.weekend {
+
+    color: red;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar td.other-month {
+
+    color: #999;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar td.selected {
+
+    background-color: #007bff;
+
+    color: #fff;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar td.selected:hover {
+
+    background-color: #0056b3;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar .today {
+
+    font-weight: bold;
+
+  }
+
+ 
+
+  .bs-datepicker-calendar .disabled {
+
+    color: #ccc;
+
+    cursor: not-allowed;
+
+  }
+
+ 
+
+  .header-row {
+
+    /*position: sticky;*/
+
+   
+
+   
+
+    z-index: 1;
+
+    top: 0;
+
+   
+
+    background-color: rgb(50, 122, 169);
+
+    color: white;
+
+    display: flex;
+
+    font-weight: bold;
+
+    width: 100%;
+
+  }
+
+ 
+
+  .row {
+
+    display: flex;
+
+  }
+
+ 
+
+ 
+
+  .col {
+
+    width: 160px;
+
+    max-width: 160px;
+
+    min-width: 160px;
+
+    box-sizing: border-box;
+
+  }
+
+ 
+
+  .btn {
+
+    background-color: rgb(50, 122, 169);
+    margin-right: -40px;
+  }
+  .btn1{
+    background-color: rgb(50, 122, 169);
+    color: white;
+  }
+  .sticky-header {
+
+    position: sticky;
+   top: 0;
+
+    color:white;
+
+    background-color: rgb(50, 122, 169);
+
+    z-index: 1;
+
+  }

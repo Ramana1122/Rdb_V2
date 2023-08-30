@@ -1,0 +1,53 @@
+/* display: block;
+box-sizing: border-box;
+height: 575px;
+width: 1110px;
+margin-top: 92px; */
+
+.chart-container{
+  height: 80vh;
+  width:170vh;
+  margin-left: 10%;
+  margin-top: 80px;
+}
+
+.fa-solid  {
+  position: relative;
+}
+
+.fa-solid  {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 3%;
+  margin-right: 2%
+}
+
+
+
+.hamburger-menu {
+  position: absolute;
+  /* display: contents; */
+  top: 20%;
+  right: 19%;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 0%;
+}
+
+.menus {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menuOpen .menus {
+  display: block;
+}
+

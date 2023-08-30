@@ -1,0 +1,194 @@
+<div class="ram" *ngIf="employee">
+
+    <div class="container" style="margin-top: 100px; margin-left:130px;width:100%;">
+
+      <div class="row justify-content-center">
+
+        <div class="col-md-11">
+
+          <div class="card">
+
+            <div class="card-header backhead">
+
+              <h4 class="card-title"> {{ employee['EmployeeName'] }}</h4>
+
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <div class="col-md-6">
+
+                  <div class="details-row">  
+
+                    <div class="label">Dedalus ID</div>    
+
+                    <div class="value">{{ employee['DedalusId'] }}</div>
+
+                  </div>  
+
+                  <div class="details-row">
+
+                    <div class="label">Employee ID</div>
+
+                    <div class="value">{{ employee['EmployeeCode'] }}</div>  
+
+                  </div>  
+
+                  <div class="details-row">  
+
+                    <div class="label">Gender</div>
+
+                    <div class="value">{{ employee['Gender'] }}</div>
+
+                  </div>
+
+                  <div class="details-row">  
+
+                    <div class="label">Employee Mail ID</div>
+
+                    <div class="value">{{ employee['Employee_MailId'] }}</div>  
+
+                  </div>    
+
+                  <div class="details-row">
+
+                    <div class="label">Location</div>    
+
+                    <div class="value">{{ employee['Location'] }}</div>    
+
+                  </div>    
+
+                  <div class="details-row">
+
+                    <div class="label">Reporting Manager</div>
+
+                    <div class="value">{{ employee['ManagerName'] }}</div>
+
+                  </div>
+
+                  <div class="details-row">
+
+                    <div class="label">Product</div>
+
+                    <div class="value">{{ employee['Product'] }}</div>  
+
+                  </div>    
+
+                  <div class="details-row">
+
+                    <div class="label">Manager Code</div>  
+
+                    <div class="value">{{ employee['ManagerCode'] }}</div>  
+
+                  </div>
+
+                  <div class="details-row">    
+
+                    <div class="label">Manager Mail ID</div>    
+
+                    <div class="value">{{ employee['ManagerMailId'] }}</div>
+
+                  </div>  
+
+                    <div class="details-row">
+
+                    <div class="label">Date Of Joining</div>
+
+                    <div class="value">{{ employee['DateofJoin'] | date:'dd-MMM-yyyy' }}</div>
+
+                  </div>    
+
+                </div>  
+
+                <div class="col-md-6">
+
+                  <div class="details-row">  
+
+                      <div class="label">HL Designation</div>
+
+                    <div class="value">{{ employee['HLDesignation'] }}</div>
+
+                  </div>
+
+                  <div class="details-row">
+
+                    <div class="label">HL Role</div>
+
+                    <div class="value">{{ employee['HLRole'] }}</div>  
+
+                  </div>
+
+                  <div class="details-row">    
+
+                    <div class="label">HL Title</div>  
+
+                    <div class="value">{{ employee['HLTitle'] }}</div>
+
+                  </div>
+
+                  <div class="details-row">    
+
+                    <div class="label">Owning</div>  
+
+                    <div class="value">{{ employee['Owning'] }}</div>  
+
+                  </div>
+
+                  <div class="details-row">  
+
+                    <div class="label">Product Group</div>
+
+                    <div class="value">{{ employee['ProductGroup'] }}</div>
+
+                </div>
+
+                <div class="details-row">
+
+                    <div class="label">Product Work Area</div>
+
+                    <div class="value">{{ employee['ProductWorkArea'] }}</div>
+
+                </div>
+
+                <div class="details-row">
+
+                    <div class="label">Unified Roles</div>
+
+                    <div class="value">{{ employee['UnifiedRoles'] }}</div>
+
+                </div>
+
+                  <div class="details-row">
+
+                    <div class="label">Unit</div>  
+
+                    <div class="value">{{ employee['Unit'] }}</div>
+
+                  </div>
+
+                  <div class="details-row">
+
+                    <div class="label">Work Group</div>
+
+                    <div class="value">{{ employee['WorkGroup'] }}</div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+

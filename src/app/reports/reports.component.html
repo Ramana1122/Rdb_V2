@@ -1,0 +1,226 @@
+<div _ngcontent-dfl-c16 class="container">
+  <div class="tabs-container">
+    <ul class="nav nav-tabs" style="background-color: rgb(50, 122, 169);">
+      <li class="nav-item1">
+        <a class="nav-link" [class.active]="currentTab === 'tab1'" (click)="changeTab('tab1')">Active Employees</a>
+      </li>
+      <li class="nav-item2">
+        <a class="nav-link" [class.active]="currentTab === 'tab2'" (click)="changeTab('tab2')">Resigned employees</a>
+      </li>
+      <li class="nav-item3">
+        <a class="nav-link" [class.active]="currentTab === 'tab3'" (click)="changeTab('tab3')">Custom reports</a>
+      </li>
+    </ul>
+  </div>
+  <div class="tab-content">
+      <div id="tab1" [ngClass]="{ 'tab-pane': true, 'fade': true, 'show': currentTab === 'tab1', 'active': currentTab === 'tab1' }">
+        <div style="display: flex; justify-content: center;margin-left: 120vh; ">
+          <button (click)="downloadEmployeeData()" class="btn btn-primary btn-sm"data-bs-toggle="tooltip" data-bs-placement="top" title="Print details"><i class="fas fa-print"></i></button>
+        </div>
+          <div class="container1">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="sticky-header">
+                  <th scope="col" class="header-col">Employee code</th>
+                  <th scope="col" class="header-col">Employee name</th>
+                  <th scope="col" class="header-col">Project</th>
+                  <th scope="col" class="header-col">Manager name</th>
+                  <th scope="col" class="header-col">View Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let emp of employees; let even = even; let odd = odd" [ngClass]="{'even-row': even, 'odd-row': odd}">
+                  <td class="col-md-2">{{ emp.EmployeeCode }}</td>
+                  <td class="col-md-2">{{ emp.EmployeeName }}</td>
+                  <td class="col-md-2">{{ emp.Product }}</td>
+                  <td class="col-md-2">{{ emp.ManagerName }}</td>
+                  <td class="col-md-2">
+                    <a (click)="navigateToEmployeeDetails(emp.EmployeeCode)" #employee class="btn btn-primary btn-sm" style="background-color:rgb(50, 122, 169);margin-left: 70px;margin-bottom: 0px;"><i class="fa-solid fa-eye"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="tab2" [ngClass]="{ 'tab-pane': true, 'fade': true, 'show': currentTab === 'tab2', 'active': currentTab === 'tab2' }">
+          <div class="date-operator-wrapper">
+
+            <div style="display: flex; justify-content: center;margin-left: 120vh;">
+    
+              <button (click)="downloadEmployeeData()" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+    
+                data-bs-placement="top" title="Print details"><i class="fas fa-print"></i></button>
+    
+            </div>
+    
+         
+    
+            <div class="date-operator-wrapper">
+    
+              <div class="date-operator-wrapper" style="display: flex; align-items: center; margin-top: 0px;margin-left: 170px;">
+    
+    
+    
+    
+                <h3>Date of Leaving </h3>
+    
+    
+    
+    
+                <div class="dat" style="margin-left: 10px;">
+    
+    
+    
+    
+                    <select id="operator" [(ngModel)]="operator" (change)="onOperatorChange()" style="margin: 0;">
+    
+    
+    
+    
+                      <option value="eq">Equal</option>
+    
+    
+    
+    
+                      <option value="ge">Greater than or Equal</option>
+    
+    
+    
+    
+                      <option value="gt">Greater than</option>
+    
+    
+    
+    
+                      <option value="lt">Less than</option>
+    
+    
+    
+    
+                      <option value="le">Less than or Equal</option>
+    
+    
+    
+    
+                      <option value="ne">Not Equal</option>
+    
+    
+    
+    
+                    </select>
+                  </div>
+                  <div class="date-operator-wrapper" style="display: flex; align-items: center; margin-top: 0px;margin-left: 4px;"> 
+                <input type="date" id="datepicker" [(ngModel)]="selectedDate" (ngModelChange)="onDateSelected($event)" min="{{ getCurrentDate() }}" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" [required]="operator !== 'eq'" />
+    
+    
+    
+    
+              </div>
+    
+    
+    
+    
+            </div>
+    
+         
+    
+            <div class="container1">
+    
+    
+    
+    
+              <table class="table table-bordered">
+    
+    
+    
+    
+                <thead>
+    
+    
+    
+    
+                  <tr class="sticky-header">
+    
+    
+    
+    
+                    <th scope="col" class="header-col">Employee code</th>
+    
+    
+    
+    
+                    <th scope="col" class="header-col">Employee name</th>
+    
+    
+    
+    
+                    <th scope="col" class="header-col">Project</th>
+    
+    
+    
+    
+                    <th scope="col" class="header-col">Manager name</th>
+    
+                    <th scope="col" class="header-col">Date of Leaving</th>
+    
+    
+    
+    
+                    <th scope="col" class="header-col">View Details</th>
+    
+    
+    
+    
+                  </tr>
+    
+    
+    
+    
+                </thead>
+    
+    
+    
+    
+                <tbody>
+    
+    
+    
+    
+                  <tr *ngFor="let emp of employees; let even = even; let odd = odd" [ngClass]="{'even-row': even, 'odd-row': odd}">
+  
+                    <td class="col-md-2">{{ emp.EmployeeCode }}</td>
+                    <td class="col-md-2">{{ emp.EmployeeName }}</td>
+                    <td class="col-md-2">{{ emp.Product }}</td>
+                    <td class="col-md-2">{{ emp.ManagerName }}</td>
+                    <td class="employee-data">{{ emp.DateofLeaving | date: 'dd-MMM-yyyy' }}</td>
+    
+    
+    
+    
+                    <td class="col-md-2" style=" text-align: center; ">
+    
+                      <a (click)="navigateToEmployeeDetails(emp.EmployeeCode)" #employee class="btn btn-primary btn-sm" style="background-color:rgb(50, 122, 169);"><i class="fa-solid fa-eye"></i></a>
+    
+    
+    
+    
+                    </td>
+    
+    
+    
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+        </div>
+      </div>
+    <div id="tab3" *ngIf="currentTab === 'tab3'" [ngClass]="{ 'tab-pane': true, 'fade': true, 'show': currentTab === 'tab3', 'active': currentTab === 'tab3' }">
+      <h3> This will come soon</h3>
+    </div>
+    </div>
+
+  
+

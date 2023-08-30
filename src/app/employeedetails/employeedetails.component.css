@@ -1,0 +1,238 @@
+.ram {
+text-align: left;
+  margin-right: 28vh;
+  margin-top: -27px;
+}
+
+
+
+
+.container {
+
+  margin-top: 0;
+
+  /* margin-left: 3px; */
+
+}
+
+
+
+
+.card {
+
+  margin-top: 10px;
+
+  margin-bottom: 0;
+
+}
+
+
+
+
+.card-title {
+
+  color: white;
+
+  text-align: center;
+
+}
+
+
+
+
+.card-header {
+
+  background-color: rgb(50, 122, 169);
+
+}
+
+
+
+
+.card-body {
+
+  border-top: 1px solid #ccc;
+
+  padding-top: 20px;
+
+}
+
+
+
+
+h4 {
+
+  text-align: left;
+
+  font-weight: bold;
+
+}
+
+
+
+
+.details-row {
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 5px;
+
+}
+
+
+
+
+.details-row .label {
+
+  flex-basis: 35%;
+
+  text-align: left;
+
+  font-weight: bold;
+
+  /* padding-right: 10px; */
+
+}
+
+
+
+
+.details-row .value {
+
+  flex-basis: 65%;
+
+  text-align: left;
+
+  padding-left: -60px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+}
+
+
+
+
+.details-row .value.break-word {
+
+  white-space: normal;
+
+}
+
+
+
+
+.details-row .value1 {
+
+  flex-basis: 65%;
+
+  text-align: left;
+
+  padding-left: 55px;
+
+}
+
+
+
+
+.details-divider {
+
+  border-top: 1px solid #ccc;
+
+  margin-top: 20px;
+
+  margin-bottom: 20px;
+
+}
+
+
+
+
+.details-container {
+
+  display: flex;
+
+  flex-direction: row;
+
+}
+
+
+
+
+.details-container .details-column {
+
+  flex: 1;
+
+  padding: 20px;
+
+}
+
+
+
+
+.details-container .details-column:not(:last-child) {
+
+  border-right: 1px solid #ccc;
+
+}
+
+
+
+
+
+
+
+
+
+/* .container {
+  margin-top: 0;
+}
+
+.card {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.card-title {
+  color: white;
+  text-align: center;
+}
+
+.card-header {
+  background-color: rgb(50, 122, 169);
+}
+
+.card-body {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+h4 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.details-row {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.details-row .label {
+  flex-basis: 35%;
+  text-align: left;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.details-row .value {
+  flex-basis: 65%;
+  text-align: left;
+  padding-left: -50px;
+
+} */

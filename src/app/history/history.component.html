@@ -1,0 +1,519 @@
+<!-- <div class="ram">
+  <div class="rasam">
+    <header class="mainHeader card backhead">
+      <div class="row classRow">
+        <div class="col-12">
+          <div class="title">
+            <h4>{{ employee?.['EmployeeName'] }}</h4>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+  <div class="dropdown-container">
+    <div class="value break-word">
+    <h5>Select Parameter to search based on history</h5>
+
+  </div>
+    <select [(ngModel)]="selectedOption" (change)="onChange()" class="form-select">
+      <option value="" disabled selected>Select an option</option>
+      <option value="HL_Designation">HL_Designation</option>
+      <option value="HL_Role">HL_Role</option>
+      <option value="HL_Title">HL_Title</option>
+      <option value="Owning">Owning</option>
+      <option value="Product">Product</option>
+      <option value="Product_Group">Product_Group</option>
+      <option value="Product_Work_Area">Product_Work_Area</option>
+      <option value="Unified_roles">Unified_roles</option>
+      <option value="Unit">Unit</option>
+      <option value="Work_Group">Work_Group</option>
+    </select>
+  </div>
+  <div class="results-container" *ngIf="selectedOption">
+
+    <h5>Results for search history based on {{ selectedOption }} for {{ employee?.['EmployeeName'] }}</h5>
+
+  </div>
+  <div class="container1" *ngIf="selectedOption">
+    <div class="table-responsive">
+      <table class="table">
+
+        <thead>
+
+          <tr>
+
+            <th>{{ selectedOption }}</th>
+
+            <th>From</th>
+
+            <th>To</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of historyData">
+
+            <td>{{ item.value }}</td>
+
+            <td>{{ item.From | date:'dd-MMM-yyyy' }}</td>
+
+            <td>{{ item.To === '9999-12-31' ? 'Till Date' : item.To | date:'dd-MMM-yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 *ngIf="!isHistory" style="text-align: center;">No History to Display</h5>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+<div class="ram">
+
+
+
+
+  <div class="rasam">
+
+
+
+
+    <header class="mainHeader card backhead">
+
+
+
+
+      <div class="row classRow">
+
+
+
+
+        <div class="col-12">
+
+
+
+
+          <div class="title">
+
+
+
+
+            <h4>{{ employee?.['EmployeeName'] }}</h4>
+
+
+
+
+          </div>
+
+
+
+
+        </div>
+
+
+
+
+      </div>
+
+
+
+
+    </header>
+
+
+
+
+  </div>
+
+
+
+
+  <div class="dropdown-container">
+
+    <div class="value break-word">
+
+
+
+
+    <h5 class="word">Select Parameter to search based on history </h5>
+
+  </div>
+
+
+
+
+    <select [(ngModel)]="selectedOption" (change)="onChange()" class="form-select">
+
+
+
+
+      <option value="" disabled selected>Select an option</option>
+
+
+
+
+      <option value="HL_Designation">HL_Designation</option>
+
+
+
+
+      <option value="HL_Role">HL_Role</option>
+
+
+
+
+      <option value="HL_Title">HL_Title</option>
+
+
+
+
+      <option value="Owning">Owning</option>
+
+
+
+
+      <option value="Product">Product</option>
+
+
+
+
+      <option value="Product_Group">Product_Group</option>
+
+
+
+
+      <option value="Product_Work_Area">Product_Work_Area</option>
+
+
+
+
+      <option value="Unified_roles">Unified_roles</option>
+
+
+
+
+      <option value="Unit">Unit</option>
+
+
+
+
+      <option value="Work_Group">Work_Group</option>
+
+
+
+
+    </select>
+
+
+
+
+  </div>
+
+
+
+
+  <div class="results-container" *ngIf="selectedOption">
+
+
+
+
+    <h5>Results for search history based on {{ selectedOption }} for {{ employee?.['EmployeeName'] }}</h5>
+
+
+
+
+  </div>
+
+
+
+
+  <div class="container1" *ngIf="selectedOption">
+
+
+
+
+    <div class="table-responsive">
+
+
+
+
+      <table class="table">
+
+        <thead>
+
+          <tr>
+
+            <th>{{ selectedOption }}</th>
+
+            <th>From</th>
+
+            <th>To</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of historyData">
+
+            <td>{{ item.value }}</td>
+
+            <td>{{ item.From | date:'dd-MMM-yyyy' }}</td>
+
+            <td>{{ item.To === '9999-12-31' ? 'Till Date' : item.To | date:'dd-MMM-yyyy' }}</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+
+
+      <h5 *ngIf="!isHistory" style="text-align: center;">No History to Display</h5>
+
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="ram">
+
+  <div class="rasam">
+
+    <header class="mainHeader card backhead">
+
+      <div class="row classRow">
+
+        <div class="col-12">
+
+          <div class="title">
+
+            <h4>{{ employee?.['EmployeeName'] }}</h4>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+  </div>
+
+  <div class="dropdown-container">
+    <div class="value break-word">
+
+    <h5>Select Parameter to search based on history</h5>
+  </div>
+
+    <select [(ngModel)]="selectedOption" (change)="onChange()" class="form-select">
+
+      <option value="" disabled selected>Select an option</option>
+
+      <option value="HL_Designation">HL_Designation</option>
+
+      <option value="HL_Role">HL_Role</option>
+
+      <option value="HL_Title">HL_Title</option>
+
+      <option value="Owning">Owning</option>
+
+      <option value="Product">Product</option>
+
+      <option value="Product_Group">Product_Group</option>
+
+      <option value="Product_Work_Area">Product_Work_Area</option>
+
+      <option value="Unified_roles">Unified_roles</option>
+
+      <option value="Unit">Unit</option>
+
+      <option value="Work_Group">Work_Group</option>
+
+    </select>
+
+  </div>
+
+  <div class="results-container" *ngIf="selectedOption">
+
+    <h5>Results for search history based on {{ selectedOption }} for {{ employee?.['EmployeeName'] }}</h5>
+
+  </div>
+
+  <div class="container1" *ngIf="selectedOption">
+
+    <div class="table-responsive">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ selectedOption }}</th>
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of historyData">
+            <td>{{ item.value }}</td>
+            <td>{{ item.From | date:'dd-MMM-yyyy' }}</td>
+            <td>{{ item.To === '9999-12-31' ? 'Till Date' : item.To | date:'dd-MMM-yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h5 *ngIf="!isHistory" style="text-align: center;">No History to Display</h5>
+
+    </div>
+
+  </div>
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="ram">
+
+<div class="rasam">
+
+    <header class="mainHeader card backhead">
+    
+      <div class="row classRow">
+    
+        <div>
+    
+          <div class="title">
+    
+            <h4>{{ employee?.['EmployeeName'] }}</h4>
+    
+          </div>
+    
+        </div>
+    
+      </div>
+    
+    </header>
+    
+    </div>
+    
+     
+    
+    <div class="dropdown-container">
+    
+     
+    
+     
+    
+        <h5>Select Parameter to search based on history</h5>
+    
+        <select [(ngModel)]="selectedOption" (change) = "onChange()">
+    
+          <option value="" disabled selected>Select an option </option>
+    
+          <option value="HL_Designation" >HL_Designation</option>
+    
+          <option value="HL_Role">HL_Role</option>
+    
+          <option value="HL_Title">HL_Title</option>
+    
+          <option value="Owning">Owning</option>
+    
+          <option value="Product">Product</option>
+    
+          <option value="Product_Group">Product_Group</option>
+    
+          <option value="Product_Work_Area">Product_Work_Area</option>
+    
+          <option value="Unified_roles">Unified_roles</option>
+    
+          <option value="Unit">Unit</option>
+    
+          <option value="Work_Group">Work_Group</option>
+    
+        </select>
+    
+      </div>
+    
+     
+    
+      <div class="results-container" *ngIf="selectedOption">
+    
+        <h5>Results for search history based on  {{ selectedOption }} for {{ employee?.['EmployeeName'] }} </h5>
+    
+      </div>
+    
+     
+    
+     
+    
+        <div class="container1" *ngIf="selectedOption">
+    
+          <div class="table">
+    
+            <div class="row header-row">
+    
+              <div class="col header-column">{{ selectedOption }}</div>
+    
+              <div class="col header-column">From</div>
+    
+              <div class="col header-column">To</div>
+    
+            </div>
+    
+            <h5 *ngIf="!isHistory" style="text-align: center;" > No History to Display </h5>  
+    
+            <div class="row" *ngFor="let item of historyData">
+    
+              <div class="col data-column">{{ item.value }}</div>
+    
+              <div class="col data-column">{{ item.From | date:'dd-MMM-yyyy' }}</div>
+    
+              <div class="col data-column">{{ item.To === '9999-12-31' ? 'Till Date' : item.To | date:'dd-MMM-yyyy' }}</div>
+    
+            </div>
+    
+          </div>
+    
+         
+    
+       
+    
+        </div>
+    
+      </div> -->

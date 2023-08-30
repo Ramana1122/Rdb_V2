@@ -1,0 +1,294 @@
+<div class="container23">
+  <mat-sidenav-container class="main-container">
+    <mat-sidenav-content>
+      <mat-toolbar class="header-toolbar">
+        <mat-toolbar-row>
+          <div class="header-content">
+            <span class="dashBoard font-bold">RESOURCE DASHBOARD</span>
+            <button
+              matTooltip="Grid View"
+              matTooltipPosition="below"
+              class="font-white btn m-5 grid-view-button"
+              (click)="onGridViewClick()"
+              [ngClass]="{ dddd: !gridViewActive }"
+            >
+              <i class="fa fa-th-large"></i>
+            </button>
+            <button
+              matTooltip="List View"
+              matTooltipPosition="below"
+              class="font-white btn m-5 list-view-button"
+              (click)="onListViewClick()"
+              [ngClass]="{ dddd: gridViewActive }"
+            >
+              <i [ngClass]="{ dddd: gridViewActive }" class="fa fa-list font-white"></i>
+            </button>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 20px;">
+            <!-- Location -->
+            <div style="display: flex; align-items: center;">
+              <label for="Location" style="font-size: 12px;">Location</label>
+              <span style="margin-left: 5px;">
+                <select (change)="fetchDropdownValuesThree()" [(ngModel)]="locationHolder" name="locationHolder" id="" style="font-size: 14px; border-radius: 10px;">
+                  <option [value]="null" [selected]="true" [disabled]="true">Select Location</option>
+                  <option *ngFor="let option of Locationdata" [value]="option.Description">{{ option.Description }}</option>
+                </select>
+              </span>
+            </div>
+            <!-- Group -->
+            <div style="display: flex; align-items: center;">
+              <label for="Group" style="font-size: 12px;">Group</label>
+              <span style="margin-left: 5px;">
+                <select (change)="fetchDropdownValuesThree()" [(ngModel)]="GroupHolder" name="GroupHolder" id="" style="font-size: 14px; border-radius: 10px;width: 133px">
+                  <option [value]="null" [selected]="true" [disabled]="true">Select Group</option>
+                  <option *ngFor="let option of workgroupdata" [value]="option.Description">{{ option.Description }}</option>
+                </select>
+              </span>
+            </div>
+            <!-- Product -->
+            <div style="display: flex; align-items: center;">
+              <label for="Product" style="font-size: 12px;">Product</label>
+              <span style="margin-left: 5px;">
+                <select (change)="fetchDropdownValuesThree()" [(ngModel)]="productHolder" name="productHolder" id="" style="font-size: 14px; border-radius: 10px;width: 133px" >
+                  <option [value]="null" [selected]="true" [disabled]="true">Select Product</option>
+                  <option *ngFor="let option of productdata" [value]="option.Description">{{ option.Description }}</option>
+                </select>
+              </span>
+            </div>
+            <span class="" style="margin-left: 80px;font-size: 17px;">
+              <span *ngIf="locationHolder != null">Location: {{locationHolder}}</span>
+              <span *ngIf="locationHolder != null">,</span>
+              <span *ngIf="GroupHolder != null">Group: {{ GroupHolder }}</span>
+              <span *ngIf="GroupHolder != null">,</span>
+              <span *ngIf="productHolder != null">Product: {{productHolder}}</span>
+            </span>
+          </div>
+          <!-- <span class="elipses" matTooltip="More Options" matTooltipPosition="below" [matMenuTriggerFor]="menu">
+            <mat-icon class="dark-white">more_vert</mat-icon>
+          </span> -->
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <div fxLayout="row" fxLayoutGap="20px" style="display: flex;margin-bottom: 2%;">
+    <!-- First card -->
+    <mat-card class="mat-card-layout mat-card statusActive" style="padding-top: 0px;">
+      <mat-card-content fxLayout="row" fxLayoutAlign="start center">
+        <div class="mine" fxFlex="100" fxLayout="column">
+          <div>
+            <h5 class="header2">Active</h5>
+          </div>
+          <!-- Content for the first card -->
+          <div>
+            <h5 class="status_count1">{{employeeCount}}</h5>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  
+    <!-- Second card -->
+    <mat-card class="mat-card-layout mat-card statusActive" style="background-color: #FFBF87;">
+      <mat-card-content fxLayout="row" fxLayoutAlign="start center">
+        <span class="mine" fxFlex="100" fxLayout="column">
+          <span>
+            <h5 class="header2">Notice</h5>
+          </span>
+          <!-- Content for the second card -->
+          <span>
+            <h5 class="status_count1">{{totalCount2}}</h5>
+          </span>
+        </span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+<!-- Cards -->
+<div class="One" style="display: flex;">
+<div class="mat-card custom-card">
+  <div class="header">
+    <div class="left-icons">
+      <i class="fa-solid fa-sun" style="margin-left: 1%;"></i>
+      <h5 class="custom-header-text">{{ cardsData[0].title }}</h5>
+      <i
+        class="fa fa-bar-chart"
+        aria-hidden="true"
+        matTooltip="View Chart"
+        matTooltipPosition="right"
+        (click)="onClickMethod1()"
+      ></i>
+      
+      <h5 class="custom-pointer" style="margin-left: -30px;margin-top: 10px;">
+        {{cardsData[0].count}}</h5>
+    </div>
+  </div>
+    <!-- <div *ngFor="let card of cardsData; let i=index" class="new-mat-card" style="overflow-y: scroll;"> -->
+    <!-- Your card content goes here -->
+    <div class="rrr" style="overflow-y: auto;">
+      <table>
+    <ng-container *ngFor="let card of cardsData[0].details; let i=index" class="new-mat-card">
+      <tr>
+      <td style="height: 3px;">{{card.label }}</td>
+      <span>
+      <b><td style="margin-left: 34px;">{{ card.value}}</td></b></span>
+      <span style="margin-left: 30px;">
+      <td >({{ card.count}}%)</td></span>
+    </tr>
+    <br>
+    <!-- <p>{{detail|json}}</p> -->
+  <!-- </div> -->
+</ng-container>
+</table>
+  </div>
+</div>
+
+<!-- second -->
+<div class="mat-card custom-card">
+  <div class="header">
+    <div class="left-icons">
+      <i class="fa-solid fa-sun" style="margin-left: 1%;"></i>
+      <h5 class="custom-header-text">{{ cardsData[1].title }}</h5>
+      <i
+        class="fa fa-bar-chart"
+        aria-hidden="true"
+        matTooltip="View Chart"
+        matTooltipPosition="right"
+        (click)="onClickMethod1()"
+      ></i>
+      <h5 class="custom-pointer">{{cardsData[1].count}}</h5>
+    </div>
+  </div>
+    <!-- <div *ngFor="let card of cardsData; let i=index" class="new-mat-card" style="overflow-y: scroll;"> -->
+    <!-- Your card content goes here -->
+    <div class="rrr" style="overflow-y: auto;">
+      <table>
+    <ng-container *ngFor="let card of cardsData[1].details; let i=index" class="new-mat-card">
+      <tr>
+      <td style="height: 3px;">{{card.label }}</td>
+      <span class="const" style="margin-left: 30px;">
+      <td style="margin-left: 34px;">{{ card.value}}</td></span>
+      <span style="margin-left: 68px;">
+      <td >({{ card.count}}%)</td> </span>
+    </tr>
+    <br>
+    <!-- <p>{{detail|json}}</p> -->
+  <!-- </div> -->
+</ng-container>
+</table>
+  </div>
+</div>
+<!-- Third -->
+<div class="mat-card custom-card">
+  <div class="header">
+    <div class="left-icons">
+      <i class="fa-solid fa-sun" style="margin-left: 1%;"></i>
+      <h5 class="custom-header-text">{{ cardsData[2].title }}</h5>
+      <i
+        class="fa fa-bar-chart"
+        aria-hidden="true"
+        matTooltip="View Chart"
+        matTooltipPosition="right"
+        (click)="onClickMethod1()"
+      ></i>
+      <h5 class="custom-pointer">{{cardsData[2].count}}</h5>
+    </div>
+  </div>
+    <!-- <div *ngFor="let card of cardsData; let i=index" class="new-mat-card" style="overflow-y: scroll;"> -->
+    <!-- Your card content goes here -->
+    <div class="rrr" style="overflow-y: auto; ">
+      <table>
+    <ng-container *ngFor="let card of cardsData[2].details; let i=index" class="new-mat-card">
+      <tr>
+      <td style="height: 3px;">{{card.label }}</td>
+      <span class="const" style="margin-left: 101px;">
+        <td>{{ card.value}}</td></span>
+        <span style="margin-left: 68px;">
+        <td >({{ card.count}}%)</td> </span>
+    </tr>
+    <br>
+    <!-- <p>{{detail|json}}</p> -->
+  <!-- </div> -->
+</ng-container>
+</table>
+  </div>
+</div>
+</div>
+<br>
+<br>
+<div class="Two" style="display: flex;">
+<!-- Four -->
+<div class="mat-card custom-card">
+  <div class="header">
+    <div class="left-icons">
+      <i class="fa-solid fa-sun" style="margin-left: 1%;"></i>
+      <h5 class="custom-header-text">{{ cardsData[3].title }}</h5>
+      <i
+        class="fa fa-bar-chart"
+        aria-hidden="true"
+        matTooltip="View Chart"
+        matTooltipPosition="right"
+        (click)="onClickMethod1()"
+      ></i>
+      <h5 class="custom-pointer">{{cardsData[3].count}}</h5>
+    </div>
+  </div>
+    <!-- <div *ngFor="let card of cardsData; let i=index" class="new-mat-card" style="overflow-y: scroll;"> -->
+    <!-- Your card content goes here -->
+    <div class="rrr" style="overflow-y: auto;">
+      <table>
+    <ng-container *ngFor="let card of cardsData[3].details; let i=index" class="new-mat-card">
+      <tr>
+      <td style="height: 3px;">{{card.label }}</td>
+      <span class="const" style="margin-left: 30px;">
+        <td>{{ card.value}}</td></span>
+        <span style="margin-left: 68px;">
+        <td >({{ card.count}}%)</td> </span>
+    </tr>
+    <br>
+    <!-- <p>{{detail|json}}</p> -->
+  <!-- </div> -->
+</ng-container>
+</table>
+  </div>
+</div>
+
+
+<!-- Five -->
+<div class="mat-card custom-card">
+  <div class="header">
+    <div class="left-icons">
+      <i class="fa-solid fa-sun" style="margin-left: 1%;"></i>
+      <h5 class="custom-header-text">{{ cardsData[4].title }}</h5>
+      <i
+        class="fa fa-bar-chart"
+        aria-hidden="true"
+        matTooltip="View Chart"
+        matTooltipPosition="right"
+        (click)="onClickMethod1()"
+      ></i>
+      <h5 class="custom-pointer">{{cardsData[4].count}}</h5>
+    </div>
+  </div>
+    <!-- <div *ngFor="let card of cardsData; let i=index" class="new-mat-card" style="overflow-y: scroll;"> -->
+    <!-- Your card content goes here -->
+    <div class="rrr" style="overflow-y: auto;">
+      <table>
+    <ng-container *ngFor="let card of cardsData[4].details; let i=index" class="new-mat-card">
+      <tr>
+      <td style="height: 3px;">{{card.label }}</td>
+      <span class="const" style="margin-left: 5px;">
+        <td>{{ card.value}}</td></span>
+        <span style="margin-left: 36px;">
+        <td >({{ card.count}}%)</td> </span>
+    </tr>
+    <br>
+    <!-- <p>{{detail|json}}</p> -->
+  <!-- </div> -->
+</ng-container>
+</table>
+  </div>
+</div>
+</div>
+
+
+

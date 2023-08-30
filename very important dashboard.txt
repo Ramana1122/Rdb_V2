@@ -1,0 +1,700 @@
+html
+
+<div class="container23">
+  
+<mat-sidenav-container class="main-container">
+  <mat-sidenav-content>
+    <mat-toolbar class="header-toolbar">
+      <mat-toolbar-row>
+        <div class="header-content">
+          <span class="dashBoard font-bold">RESOURCE DASHBOARD</span>
+          <button
+            matTooltip="Grid View"
+            matTooltipPosition="below"
+            class="font-white btn m-5 grid-view-button"
+            (click)="onGridViewClick()"
+            [ngClass]="{dddd:!gridViewActive}"
+          >
+            <i  class="fa fa-th-large"></i>
+          </button>
+          <button
+            matTooltip="List View"
+            matTooltipPosition="below"
+            class="font-white btn m-5 list-view-button"
+            (click)="onListViewClick()"
+            [ngClass]="{dddd:gridViewActive}"
+          >
+            <i  [ngClass]="{dddd:gridViewActive}"class="fa fa-list font-white"></i>
+          </button>
+        </div>
+        
+        <div class="elipses">
+          <span class="dashBoard elipses" matTooltip="Medchart, Location: IND - Status: Active" matTooltipPosition="below">RDB,Location: IND - Status: Active</span>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- //////////////////////////////////////////////////////////////////////// -->
+
+<div class="tdp">
+<div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="5px" class="cards-container">
+  <!-- First Card -->
+  <div fxFlex="33%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%">
+    <mat-card class="mat-card-layout mat-card statusActive">
+      <mat-card-content fxLayout="row" fxLayoutAlign="start center">
+        <div class="m-15" fxFlex="100" fxLayout="column">
+          <h5 class="font-white status_header">Active</h5>
+          <!-- Content for the first card -->
+          <h1 class="status_count pointer">{{employeeCount}}</h1>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+  <!-- Third Card -->
+  <div fxFlex="33%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%">
+    <mat-card class="mat-card-layout mat-card statusNotice">
+      <mat-card-content fxLayout="row" fxLayoutAlign="start center">
+        <div class="m-15" fxFlex="100" fxLayout="column">
+          <h5 class="font-white status_header">Notice</h5>
+          <!-- Content for the third card -->
+          <h1 class="status_count pointer" >30</h1>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+</div>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<div class="main-container">
+  <div class="details-container">
+    <div class="new-card-container">
+      <div  class="new-mat-card"  >
+          <span class="status_header font-white floater" style="border-right: 1px solid white;padding-left:10px; background-color:#0f7ab2 ;width: 200px;padding-top: 0px; border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px; 
+          height: 149px;
+          margin-top: -14px;
+          margin-left: -14px"
+          >
+              Designation>
+              <i class="fa fa-certificate large-icon"></i>
+             </span>  
+            <!-- <span *ngIf="card.details" class="floater1" [ngClass]="{ 'f1': card.details.length > 9 }" >  -->
+              <span *ngFor="let detail of details"  class="floater11" >
+                <span>{{ detail.Value }} </span>
+                <span>{{ detail.Count }} </span>
+                <span>{{ detail.Percentage }}</span>
+              </span>
+          <!-- </span>    -->
+          <div class="ram" style="border-left: 1px solid white; width:200px;background-color:#0f7ab2; margin-top: -14px;
+          margin-left: -14px;margin-right: -14px;margin-bottom: -14px;border-bottom-right-radius: 9px;border-top-right-radius: 9px; "> 
+          <div class="eww" style="align-items: center;margin-left: 2px;color:white;">
+            <h1 class="">{{ totalCount }}</h1>
+          </div>
+          <div style="color:white">
+            <h5>Total</h5>
+          </div>
+          <div style="color:white">
+            <i class='fa fa-bar-chart'></i>
+          </div>
+         
+      </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="main-container">
+  <div class="details-container">
+    <div class="new-card-container">
+      <div  class="new-mat-card"  >
+          <span class="status_header font-white floater" style="border-right: 1px solid white;padding-left:10px; background-color:#0f7ab2 ;width: 200px;padding-top: 0px; border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px; 
+          height: 149px;
+          margin-top: -14px;
+          margin-left: -14px"
+          >
+              Team>
+              <i class="fa fa-users large-icon"></i>
+             </span>  
+            <!-- <span *ngIf="card.details" class="floater1" [ngClass]="{ 'f1': card.details.length > 9 }" >  -->
+              <span *ngFor="let detail of details"  class="floater11" >
+                <span>{{ detail.Value }} </span>
+                <span>{{ detail.Count }} </span>
+                <span>{{ detail.Percentage }}</span>
+              </span>
+          <!-- </span>    -->
+          <div class="ram" style="border-left: 1px solid white; width:200px;background-color:#0f7ab2; margin-top: -14px;
+          margin-left: -14px;margin-right: -14px;margin-bottom: -14px;border-bottom-right-radius: 9px;border-top-right-radius: 9px; "> 
+          <div class="eww" style="align-items: center;margin-left: 2px;color:white;">
+            <h1 class="">{{ totalCount }}</h1>
+          </div>
+          <div style="color:white">
+            <h5>Total</h5>
+          </div>
+          <div style="color:white">
+            <i class='fa fa-bar-chart'></i>
+          </div>
+         
+      </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="details-container">
+    <div class="new-card-container">
+      <div  class="new-mat-card"  >
+          <span class="status_header font-white floater" style="border-right: 1px solid white;padding-left:10px; background-color:#0f7ab2 ;width: 200px;padding-top: 0px; border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px; 
+          height: 149px;
+          margin-top: -14px;
+          margin-left: -14px"
+          >
+              Release>
+              <i class="fa fa-users large-icon"></i>
+             </span>  
+            <!-- <span *ngIf="card.details" class="floater1" [ngClass]="{ 'f1': card.details.length > 9 }" >  -->
+              <span *ngFor="let detail of details1"  class="floater11" >
+                <span>{{ detail.Value }} </span>
+                <span>{{ detail.Count }} </span>
+                <span>{{ detail.Percentage }}</span>
+              </span>
+          <!-- </span>    -->
+          <div class="ram" style="border-left: 1px solid white; width:200px;background-color:#0f7ab2; margin-top: -14px;
+          margin-left: -14px;margin-right: -14px;margin-bottom: -14px;border-bottom-right-radius: 9px;border-top-right-radius: 9px; "> 
+          <div class="eww" style="align-items: center;margin-left: 2px;color:white;">
+            <h1 class="">{{ totalCount1 }}</h1>
+          </div>
+          <div style="color:white">
+            <h5>Total</h5>
+          </div>
+          <div style="color:white">
+            <i class='fa fa-bar-chart'></i>
+          </div>
+         
+      </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="details-container">
+    <div class="new-card-container">
+      <div  class="new-mat-card"  >
+          <span class="status_header font-white floater" style="border-right: 1px solid white;padding-left:10px; background-color:#0f7ab2 ;width: 200px;padding-top: 0px; border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px; 
+          height: 149px;
+          margin-top: -14px;
+          margin-left: -14px"
+          >
+              Resigned>
+              <i class="fa  fa-key large-icon"></i>
+             </span>  
+            <!-- <span *ngIf="card.details" class="floater1" [ngClass]="{ 'f1': card.details.length > 9 }" >  -->
+              <span *ngFor="let detail of details2"  class="floater11" >
+                <span>{{ detail.Value }} </span>
+                <span>{{ detail.Count }} </span>
+                <span>{{ detail.Percentage }}</span>
+              </span>
+          <!-- </span>    -->
+          <div class="ram" style="border-left: 1px solid white; width:200px;background-color:#0f7ab2; margin-top: -14px;
+          margin-left: -14px;margin-right: -14px;margin-bottom: -14px;border-bottom-right-radius: 9px;border-top-right-radius: 9px; "> 
+          <div class="eww" style="align-items: center;margin-left: 2px;color:white;">
+            <h1 class="">{{ totalCount2 }}</h1>
+          </div>
+          <div style="color:white">
+            <h5>Total</h5>
+          </div>
+          <div style="color:white">
+            <i class='fa fa-bar-chart'></i>
+          </div>
+         
+      </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="details-container">
+    <div class="new-card-container">
+      <div  class="new-mat-card"  >
+          <span class="status_header font-white floater" style="border-right: 1px solid white;padding-left:10px; background-color:#0f7ab2 ;width: 200px;padding-top: 0px; border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px; 
+          height: 149px;
+          margin-top: -14px;
+          margin-left: -14px"
+          >
+              Onboarded>
+              <i class="fa fa-user-plus large-icon"></i>
+             </span>  
+            <!-- <span *ngIf="card.details" class="floater1" [ngClass]="{ 'f1': card.details.length > 9 }" >  -->
+              <span *ngFor="let detail of details3"  class="floater11" >
+                <span>{{ detail.Value }} </span>
+                <span>{{ detail.Count }} </span>
+                <span>{{ detail.Percentage }}</span>
+              </span>
+          <!-- </span>    -->
+          <div class="ram" style="border-left: 1px solid white; width:200px;background-color:#0f7ab2; margin-top: -14px;
+          margin-left: -14px;margin-right: -14px;margin-bottom: -14px;border-bottom-right-radius: 9px;border-top-right-radius: 9px; "> 
+          <div class="eww" style="align-items: center;margin-left: 2px;color:white;">
+            <h1 class="">{{ totalCount3}}</h1>
+          </div>
+          <div style="color:white">
+            <h5>Total</h5>
+          </div>
+          <div style="color:white">
+            <i class='fa fa-bar-chart'></i>
+          </div>
+         
+      </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+-------------------------------------------------------------
+
+css
+
+.container23{
+ 
+  margin-top: 63px;
+ overflow-x: hidden;
+
+
+  /* width: 100%; */
+  /* margin-left: 60px; */
+  
+}
+
+.dddd {
+
+  color: white !important;
+
+}
+.ffff{
+  opacity: 0.5;
+  color: white !important;
+}
+
+.static-header{
+  width:100px;
+}
+.right-align:hover{
+  cursor: pointer;
+  font-weight: bold;
+}
+/* Define styles for the icons in dark white */
+.dark-white {
+  color: #FFFFFF; /* Replace with your desired dark white color */
+}
+
+/* Define styles for the icons in light white */
+.light-white {
+  color: #CCCCCC; /* Replace with your desired light white color */
+}
+/* Initial styles for grid view button */
+.grid-view-button i {
+  color: white;
+}
+
+/* Initial styles for list view button */
+.list-view-button i {
+  color: #999; /* Greyed-out color */
+}
+
+/* Styles for grid view button when active */
+.grid-view-button.active i {
+  color: white;
+}
+
+/* Styles for list view button when active */
+.list-view-button.active i {
+  color: white;
+}
+
+
+/* Add your regular styles here */
+
+/* Style for both buttons */
+
+
+
+
+
+/* Style for inactive view */
+
+
+.elipses {
+  /* display: flex; */
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 57%;
+  /* width: 214px; */
+}
+
+
+/* ... Other styles remain the same ... */
+
+.cards-container {
+  padding: 5px; /* Add padding between the header and cards */
+  display: grid;
+  /* flex-wrap:wrap;
+  justify-content: space-between; /* Center the cards horizontally */
+  grid-template-columns: repeat(5,1fr);
+  gap:5px;
+  /* align-items: center; Center the cards vertically */
+}
+
+.mat-card {
+  width: 200px; /* 10px is the sum of flex gaps in the container */
+  background-color: lightgreen;
+  padding: 10px;
+  border-radius: 5px;
+
+}
+
+.statusInactive {
+  background-color: lightcoral; /* Alternate background color for the inactive card */
+}
+.statusNotice{
+  background-color: lightgrey;
+}
+/* ... Other styles remain the same ... */
+
+/* New styles for the card layout */
+.new-card-container {
+  width:100%;
+  display: flex;
+  border-left: 1px solid white;
+  flex-direction: column;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 0px;
+  margin-left: 85px;
+}
+
+.new-mat-card {
+  background-color: #0dacf0;
+  border-right: 1px solid white;
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 1240px;
+  height: 150px;
+  position: relative;
+
+  grid-template-columns: repeat(5,1fr);
+  gap:5px;
+}
+
+.floater {
+  float: left;
+  background-color: #0dacf0;
+}
+.floater1 {
+   display: inline-flex;
+   margin-left: 30px;
+   width: 970px;
+}
+/* .f1{
+  overflow-x: scroll;
+} */
+.floater11{
+  margin-right: 20px;
+  display: inline-grid;
+  color:white;
+}
+
+.large-icon {
+  font-size: 60px; /* Adjust the size as needed */
+  margin-right: 51px;
+}
+
+.ram{
+  position: relative;
+  margin-left: 70px
+}
+.tdp{
+  margin-left: 70px;
+}
+-------------------------------------------------------------
+ts
+
+import { Component,OnInit } from '@angular/core';
+import { EmpDataService } from '../services/emp-data.service';
+import {  Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { DatePipe, formatDate } from '@angular/common';
+import { server } from '../services/allservers';
+import { DashService } from '../services/dash.service';
+
+
+@Component({
+  selector: 'app-home1',
+  templateUrl: './home1.component.html',
+  styleUrls: ['./home1.component.css'],
+  providers: [DatePipe]
+})
+export class Home1Component implements OnInit {
+
+  employeeCount : number = 0;
+
+  employeeCountd  : number = 0;
+
+ 
+
+ 
+
+  responses: any;
+
+  details: any[] = [];
+
+  details1: any[] = [];
+
+  details2: any[] = [];
+
+  details3: any[] = [];
+
+  totalCount: number = 0;
+
+  totalCount1: number = 0
+
+  totalCount2: number = 0
+
+  totalCount3: number = 0
+  gridViewActive = true;
+
+  constructor(private router: Router, private dashservice : DashService) {}
+   // Set the default active state to grid view
+  
+    ngOnInit(): void {
+      this.fetchEmployeeCount();
+
+    this.fetchEmployeeData();
+
+    this.fetchRelease();
+
+    this.fetchResigned() ;
+
+    this.fetchOnboard();
+      
+    }
+
+    fetchEmployeeData() {
+
+      this.dashservice.getDesignation().subscribe(
+  
+        (data) => {
+  
+          this.details = data;
+  
+          this.totalCount = this.details.reduce((total, detail) => total + detail.Count, 0);
+  
+        },
+  
+        (error) => {
+  
+          console.error('Error fetching data:', error);
+  
+        }
+  
+      );
+  
+    }
+  
+   
+  
+    fetchRelease() {
+  
+      this.dashservice.getRelease().subscribe(
+  
+        (data) => {
+  
+          this.details1 = data;
+  
+          this.totalCount1 = this.details1.reduce((total, detail) => total + detail.Count, 0);
+  
+        },
+  
+        (error) => {
+  
+          console.error('Error fetching data:', error);
+  
+        }
+  
+      );
+  
+    }
+  
+   
+  
+    fetchResigned() {
+  
+      this.dashservice.getResigned().subscribe(
+  
+        (data) => {
+  
+          this.details2 = data;
+  
+          this.totalCount2 = this.details2.reduce((total, detail) => total + detail.Count, 0);
+  
+        },
+  
+        (error) => {
+  
+          console.error('Error fetching data:', error);
+  
+        }
+  
+      );
+  
+    }
+  
+   
+  
+    fetchOnboard() {
+  
+      this.dashservice.getOnboard().subscribe(
+  
+        (data) => {
+  
+          this.details3= data;
+  
+          this.totalCount3 = this.details3.reduce((total, detail) => total + detail.Count, 0);
+  
+        },
+  
+        (error) => {
+  
+          console.error('Error fetching data:', error);
+  
+        }
+  
+      );
+  
+    }
+  
+   
+  
+   
+  
+   
+  
+    fetchEmployeeCount(): void {
+  
+      this.dashservice.getData('A').subscribe(
+  
+        (response) => {
+  
+          this.employeeCount = response.length;
+  
+        },
+  
+        (error) => {
+  
+          console.error('Error fetching employee count:', error);
+  
+        }
+  
+      );
+  
+   
+  
+      this.dashservice.getData('d').subscribe(
+  
+        (response) => {
+  
+          this.employeeCountd = response.length;
+  
+        },
+  
+        (error) => {
+  
+          console.error('Error fetching employee count:', error);
+  
+        }
+  
+      );
+  
+   
+  
+    }
+
+  onGridViewClick() {
+    this.gridViewActive = false;
+  }
+
+ 
+  onListViewClick() {
+    // Add your logic here for what should happen when the button is clicked
+    // For example, you can navigate to a different route using the Router
+    
+    
+    this.router.navigate(['/admin/listview']);
+  }
+ 
+  // cardsData: any[] = [
+  //   { title: 'Designation', count: 26, iconName: 'fa fa-certificate',
+  //   details: [
+  //     { label: 'Assoc. Professional', value: 53,count:20},
+  //     { label: 'Professional - I', value: 16,count:20},
+  //     { label: 'Professional - II', value: 12,count:20 },
+  //     { label: 'AssocMgr/SrProf', value: 16,count:20 },
+  //     { label: 'Manager', value: 2,count:20}
+  //   ] },
+  //   { title: 'Team', count: 8, iconName: 'fa fa-users',
+  //   details: [
+  //     { label: 'Assoc. Professional', count: 26 },
+  //   { label: 'Professional - I', count: 8 },
+  //   { label: 'Professional - II', count: 6 },
+  //   { label: 'AssocMgr/SrProf', count: 8 },
+  //   { label: 'Manager', count: 1 },
+  //   { label: 'Development', count: 28 },
+  //   { label: 'Testing', count: 10 },
+  //   ] },
+  //   { title: 'Release', count: 6, iconName: 'fa fa-key',
+  // details:[
+  //   { label: 'Testing', count: 10 },
+  //   { label: 'Design', count: 2 },
+  //   { label: 'Architecture & PE', count: 3 },
+  //   { label: 'DevOps', count: 1 },
+  //   { label: 'Technical Writer', count: 3 },
+  // ] },
+  //   { title: 'Resigned', count: 8, iconName: 'fa fa-user-times',
+  // details:[
+  //   { label: 'AssocMgr/SrProf', count: 8 },
+  //   { label: 'Manager', count: 1 },
+  //   { label: 'Development', count: 28 },
+  //   { label: 'Testing', count: 10 },
+  //   { label: 'Design', count: 2 },
+  //   { label: 'Architecture & PE', count: 3 },
+  // ] },
+  //   { title: 'OnBoard', count: 1, iconName: 'fa fa-user-plus',
+  // details:[
+  //   { label: 'Professional - II', count: 6 },
+  //   { label: 'AssocMgr/SrProf', count: 8 },
+  //   { label: 'Manager', count: 1 },
+  //   { label: 'Development', count: 28 },
+  //   { label: 'Testing', count: 10 },
+  //   { label: 'Design', count: 2 },
+  // ] },
+  // ];
+  
+}
