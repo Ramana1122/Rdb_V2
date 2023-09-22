@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input, SimpleChange, EventEmitter, Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MyapiService } from '../services/myapi.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,13 +9,14 @@ import { LogService } from '../services/log.service';
 import { EmpDataService } from '../services/emp-data.service';
 
 
-
 @Component({
   selector: 'app-editdetails',
   templateUrl: './editdetails.component.html',
   styleUrls: ['./editdetails.component.css']
 })
 export class EditdetailsComponent implements OnInit {
+
+  @Input() dataToDisplay: any;
   searchId: string = '';
   employee: any;
   
@@ -44,6 +45,9 @@ export class EditdetailsComponent implements OnInit {
   CheckAuthentication:any;
   DisabledData:boolean = false;
   employeeId : string='';
+  id2:any;
+  dataId:string='';
+  @Output() uploaded = new EventEmitter<string>();
 
   constructor(
     
@@ -56,9 +60,29 @@ export class EditdetailsComponent implements OnInit {
     private log: LogService,
     private router:ActivatedRoute,
     private employeeService: EmpDataService
-  ) {}
-
+  ) {
+    console.log(this.dataToDisplay);
+  }
+  ngOnChanges(changes: any) {
+    //console.log(changes);
+    if(changes && changes['dataToDisplay']){
+    let values = changes['dataToDisplay'].currentValue;
+    console.log('values'+JSON.stringify(values));
+    this.employee = values;
+    this.intializefomr();
+    this.populateEditForm();
+    }
+  }
   ngOnInit() {
+    
+     
+    setTimeout(() => {
+      this.id2=this.myApiService.getId();
+      console.log("Bhargav"+this.id2)
+      this.dataId = this.id2;
+    }, 1000);
+    console.log("Bhargav"+this.dataId);
+  
     this.employeeId = this.employeeService.getId();
     if (this.employeeId == '') {
       this.route.navigateByUrl('/login');
@@ -154,44 +178,52 @@ export class EditdetailsComponent implements OnInit {
     });
   }
 
-
+this.intializefomr();
  
-  this.editForm = this.formBuilder.group({
-    DedalusId: ['', Validators.required],
-    EmployeeCode: ['', Validators.required],
-    EmployeeName: ['', Validators.required],
-    DateofJoin: ['', Validators.required],
-    Gender: ['', Validators.required],
-    Location: ['', Validators.required],
-    ProductGroup: ['', Validators.required],
-    Product: ['', Validators.required],
-    UnifiedRoles: ['', Validators.required],
-    HLRole: ['', Validators.required],
-    HLDesignation: ['', Validators.required],
-    HLTitle: ['', Validators.required],
-    ManagerCode: ['', Validators.required],
-    ManagerMailId: ['', Validators.required],
-    Unit: ['', Validators.required],
-    Owning: ['', Validators.required],
-    Employee_MailId: ['', Validators.required],
-    ManagerName: ['', Validators.required],
-    ProductWorkArea: ['', Validators.required],
-    WorkGroup: ['', Validators.required],
-    Status: [''],
-    GET: [''],
-    Unallocated: [''],
-    ADId: [''],
-    AdditionalComments: ['']
-  });
-
-    // fetching route param ID value
+      // fetching route param ID value
 
     let id = this.router.snapshot.params['id'];
 
     if(id) this.employeeForm.controls['searchId'].setValue(id);
     this.searchEmployee();
   }
+   
+  intializefomr(){
+    this.editForm = this.formBuilder.group({
+      DedalusId: ['', Validators.required],
+      EmployeeCode: ['', Validators.required],
+      EmployeeName: ['', Validators.required],
+      DateofJoin: ['', Validators.required],
+      Gender: ['', Validators.required],
+      Location: ['', Validators.required],
+      ProductGroup: ['', Validators.required],
+      Product: ['', Validators.required],
+      UnifiedRoles: ['', Validators.required],
+      HLRole: ['', Validators.required],
+      HLDesignation: ['', Validators.required],
+      HLTitle: ['', Validators.required],
+      ManagerCode: ['', Validators.required],
+      ManagerMailId: ['', Validators.required],
+      Unit: ['', Validators.required],
+      Owning: ['', Validators.required],
+      Employee_MailId: ['', Validators.required],
+      ManagerName: ['', Validators.required],
+      ProductWorkArea: ['', Validators.required],
+      WorkGroup: ['', Validators.required],
+      Status: [''],
+      GET: [''],
+      Unallocated: [''],
+      ADId: [''],
+      AdditionalComments: ['']
+    });
+  
+  
+  }
+ 
+  uploadImage(value: string) {
 
+    this.uploaded.emit(value);
+  }
   searchEmployee() {
     if (this.employeeForm.invalid) {
       return;
@@ -244,7 +276,7 @@ export class EditdetailsComponent implements OnInit {
         this.employee = null;
         this.searchId = '';
         this.editForm.reset();
-        this.route.navigate(['/admin/report']);
+        this.uploadImage("clear");
         // this.showToaster = true;
         // this.toasterMessage = 'Employee updated successfully.';
       }, error => {
@@ -275,21 +307,18 @@ export class EditdetailsComponent implements OnInit {
   //   this.toasterMessage = '';
   // }
 
-  onkeypress(e: any) {
-    console.log("ManagerName",e)
-    if (e.target.value.length >= 3) {
-      this.myApiService.getManageName(e.target.value).subscribe((res) => {
-        let managernames:any = res
-        this.ManagerNames = res;
-        console.log("ManagerNames",managernames[0].EmployeeCode);
+  // onkeypress(e: any) {
+  //   console.log("ManagerName",e)
+  //   if (e.target.value.length >= 3) {
+  //     this.myApiService.getManageName(e.target.value).subscribe((res) => {
+  //       let managernames:any = res
+  //       this.ManagerNames = res;
+  //       console.log("ManagerNames",managernames[0].EmployeeCode);
        
-        // this.editForm.controls['EmployeeCode'].setValue(managernames[0].EmployeeCode)
-        // this.editForm.value.EmployeeCode = managernames[0].EmployeeCode;
-        // this.editForm.value.ManagerCode = managernames[0].ManagerCode;
-        // this.editForm.value.ManagerMailId = managernames[0].Employee_MailId;
-      });
-    }
-  }
+       
+  //     });
+  //   }
+  // }
   
   
 
@@ -365,12 +394,43 @@ export class EditdetailsComponent implements OnInit {
     });
   }
 
-  onselect(event:any,managerName:any){
-    this.editForm.patchValue({
-      ManagerCode: event.EmployeeCode,
-      ManagerMailId: event.Employee_MailId
-    })
-console.log("event",event,managerName)
+//   onselect(event:any,managerName:any){
+//     this.editForm.patchValue({
+//       ManagerCode: event.EmployeeCode,
+//       ManagerMailId: event.Employee_MailId
+//     })
+// console.log("event",event,managerName)
+//   }
+onkeypress(e: any) {
+  console.log("ManagerName", e);
+  if (e.target.value.length >= 3) {
+    this.myApiService.getManageName(e.target.value).subscribe((res) => {
+      let managernames: any = res
+      this.ManagerNames = res;
+      console.log("ManagerNames", managernames);
+    });
   }
+}
+
+
+onselect(event: any, managerName: any) {
+  for (let i = 0; i < this.ManagerNames.length; i++) {
+    // const element = array[i];
+    if (this.ManagerNames[i].EmployeeName == managerName) {
+      
+      this.editForm.patchValue({
+        ManagerCode: this.ManagerNames[i].EmployeeCode,
+        ManagerMailId: this.ManagerNames[i].Employee_MailId
+      });
+    }
+    
+  }
+  console.log("event", event, managerName)
+}
+displayFn(ManagerName: any): string {
+  // Replace 'name' with the actual property you want to display
+  return ManagerName ? ManagerName.EmployeeName : '';
+}
+
   
 }

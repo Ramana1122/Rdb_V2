@@ -1,60 +1,98 @@
 <div class="ram" style="overflow: hidden">
-  <div class="container" *ngIf="!formSubmitted">
-    <div class="card">
-      <header class="mainHeader card backhead">
+  <div class="container" *ngIf="!formSubmitted" >
+    <div class="card" style="box-shadow: 0px 13px 25px #2D5BFF12;">
+      <div class="backhead">
         <div class="row classRow">
           <div>
-            <div class="title" style="padding-top: 12px;">
-              <h4>ADD EMPLOYEE</h4>
+            <div style="padding-top: 12px; text-align: left; font: normal normal medium 15px/20px Roboto; letter-spacing: 0px; color: #4f5664; opacity: 1;" >
+              <span>Add Employee</span>
             </div>
           </div>
         </div>
-      </header>
-      <div class="container1">
+      </div>
+      <div class="container1"  >
         <form [formGroup]="pop" (ngSubmit)="submitForm()">
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="DedalusId">Dedalus Id<span style="color:red"> *</span></label>
                 <input type="text" class="form-control" id="DedalusId" formControlName="DedalusId"
                   placeholder="Enter Dedalus Id">
                 <span *ngIf="pop.get('DedalusId')?.invalid && pop.get('DedalusId')?.touched" class="text-danger">Dedalus
                   Id required.</span>
-              </div>
+              </div> -->
+
+              <mat-form-field class="width-class" style="background-color: white;">
+                <mat-label class="label">Dedalus Id</mat-label>
+                <input matInput formControlName="DedalusId" placeholder="Enter Dedalus Id">
+
+                <mat-error *ngIf="pop.get('DedalusId')?.invalid && pop.get('DedalusId')?.touched">
+                  Id required.
+                </mat-error>
+              </mat-form-field>
+            
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="EmployeeCode">Employee Code <span style="color:red"> *</span></label>
                 <input type="text" class="form-control" id="EmployeeCode" formControlName="EmployeeCode"
                   placeholder="Enter Employee Code">
                 <span *ngIf="pop.get('EmployeeCode')?.invalid && pop.get('EmployeeCode')?.touched"
                   class="text-danger">Please Enter only Numerics.</span>
-              </div>
+              </div> -->
+               <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Employee Code</mat-label>
+                <input matInput formControlName="EmployeeCode" placeholder="Enter Employee Code">
+
+                <mat-error *ngIf="pop.get('EmployeeCode')?.invalid && pop.get('EmployeeCode')?.touched">
+                  EmployeeCode required.
+                </mat-error>
+              </mat-form-field>
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="EmployeeName">Employee Name<span style="color:red"> *</span></label>
                 <input type="text" class="form-control" id="EmployeeName" formControlName="EmployeeName"
                   placeholder="Enter Employee Name">
                 <span *ngIf="pop.get('EmployeeName')?.invalid && pop.get('EmployeeName')?.touched"
                   class="text-danger">Please Enter only Characters.</span>
-              </div>
+              </div> -->
+                <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Employee Name</mat-label>
+                <input matInput formControlName="EmployeeName" placeholder="Enter EmployeeName">
+
+                <mat-error *ngIf="pop.get('EmployeeNamee')?.invalid && pop.get('EmployeeName')?.touched">
+                EmployeeName required.
+                </mat-error>
+              </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="Employee_MailId">Employee Email<span style="color:red"> *</span></label>
                 <input type="Employee_MailId" class="form-control" id="Employee_MailId"
                   formControlName="Employee_MailId" placeholder="Enter Employee Email">
                 <span *ngIf="pop.get('Employee_MailId')?.invalid && pop.get('Employee_MailId')?.touched"
                   class="text-danger">Mail Id is required.</span>
-              </div>
+              </div> -->
+               <mat-form-field class="width-class" Appearance="Standard">
+                <mat-label class="label">Employee Email</mat-label>
+                <input matInput formControlName="Employee_MailId" placeholder="Enter Employee Email">
+
+                <mat-error *ngIf="pop.get('Employee_MailId')?.invalid && pop.get('Employee_MailId')?.touched">
+                Mail Id required.
+                </mat-error>
+              </mat-form-field>
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="Gender">Gender<span style="color:red"> *</span></label>
                 <select class="form-select" id="Gender" formControlName="Gender" [(ngModel)]="pop.value.Gender">
                   <option [ngValue]="null" [disabled]="true">Select Gender</option>
@@ -63,10 +101,20 @@
                 </select>
                 <span *ngIf="pop.get('Gender')?.invalid && pop.get('Gender')?.touched" class="text-danger">Gender is
                   required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Gender</mat-label>
+                <mat-select  formControlName="Gender">
+                  <mat-option value="1">Male</mat-option>
+                   <mat-option value="2">Female</mat-option>                  
+                </mat-select>
+                <mat-error  *ngIf="pop.get('Gender')?.invalid && pop.get('Gender')?.touched" class="text-danger">Gender is
+                  required</mat-error>      
+              </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="Location">Location<span style="color:red"> *</span></label>
                 <select class="form-select" id="" formControlName="Location" [(ngModel)]="pop.value.Location">
                   <option [ngValue]="null" [disabled]="true">Select Location</option>
@@ -74,47 +122,109 @@
                 </select>
                 <span *ngIf="pop.get('Location')?.invalid && pop.get('Location')?.touched" class="text-danger">Location is
                   required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                  <mat-label class="label">Location</mat-label>                  
+                      <mat-select formControlName="Location" >
+                      <mat-option *ngFor="let s of Locationdata" [value]="s.Description">{{s.Description}}</mat-option>                                               
+                   </mat-select>
+                   <mat-error *ngIf="pop.get('Location')?.invalid && pop.get('Location')?.touched"> Location required.</mat-error>      
+              </mat-form-field>
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="ManagerName">Manager Name<span style="color:red"> *</span></label>
-                <ng-select formControlName="ManagerName" (keyup)="onkeypress($event)"
-                  (change)="onselect($event,pop.value.ManagerName)">
+                <ng-select formControlName="ManagerName" (keyup)="onkeypress($event)" (change)="onselect($event,pop.value.ManagerName)"
+                  style="border: 1px solid #ccc; padding: 5px;">
                   <ng-option *ngFor="let ManagerName of ManagerNames" [value]="ManagerName">
-                    {{ManagerName.EmployeeName}}</ng-option>
+                    {{ManagerName.EmployeeName}}
+                  </ng-option>
                 </ng-select>
-              </div>
+              </div> -->
+
+              <mat-form-field class="width-class">
+                <mat-label  class="label">Manager Name</mat-label>
+                <input type="text"
+                       placeholder="Enter Manager Name"
+                       aria-label="Number" 
+                       matInput
+                       [matAutocomplete]="auto"
+                       formControlName="ManagerName" (keyup)="onkeypress($event)" 
+                       >
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onselect($event,pop.value.ManagerName)">
+                  <mat-option *ngFor="let ManagerName of ManagerNames" [value]="ManagerName.EmployeeName">
+                    {{ManagerName.EmployeeName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <!-- <mat-form-field>
+                <mat-label class="label" >Manager Name<span style="color: red">*</span></mat-label>
+                <mat-select formControlName="ManagerName" (keyup)="onkeypress($event)" (change)="onselect($event,pop.value.ManagerName)">
+                  <mat-option *ngFor="let manager of ManagerNames" [value]="manager">
+                    {{ manager.EmployeeName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+              
+              <!-- <mat-form-field class="width-class" Appearance="fill">
+                <mat-label>Manager Name</mat-label> 
+                <input type="text"  matInput [matAutocomplete]="auto" formControlName="ManagerName" (keyup)="onkeypress($event)">                     
+                <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="onselect($event,pop.value.ManagerName)">
+                  <mat-option *ngFor="let option of ManagerNames"  [value]="option.EmployeeName">  {{option.EmployeeName}} </mat-option>
+               </mat-autocomplete>
+              </mat-form-field>   -->
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="ManagerMailId">Manager MailId<span style="color:red"> *</span></label>
                 <input type="email" class="form-control" id="managerEmail" formControlName="ManagerMailId" readonly>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Manager Email</mat-label>
+                <input matInput formControlName="ManagerMailId" >                
+              </mat-form-field>
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="ManagerCode">Manager Code<span style="color:red"> *</span> </label>
                 <input type="text" class="form-control" id="ReportingManager" formControlName="ManagerCode" readonly>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">ManagerCode</mat-label>
+                <input matInput formControlName="ManagerCode" >                
+              </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="DateofJoin">Date of Join<span style="color:red"> *</span></label>
                 <input type="date" class="form-control" id="DateofJoin" formControlName="DateofJoin"
                   placeholder="Enter Date of Join" required>
                 <span *ngIf="pop.get('DateofJoin')?.invalid && pop.get('DateofJoin')?.touched"
                   class="text-danger">Date of Join is required.</span>
-              </div>
+              </div> -->
+              <mat-form-field  class="width-class" Appearance="fill">
+                <mat-label class="label">Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="DateofJoin">                
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="pop.get('DateofJoin')?.invalid && pop.get('DateofJoin')?.touched"
+                class="text-danger">Date of Join is required</mat-error> 
+              </mat-form-field>
+              
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="ProductGroup">Product Group<span style="color:red"> *</span></label>
                 <select class="form-select" id="ProductGroup" formControlName="ProductGroup"
                   [(ngModel)]="pop.value.ProductGroup">
@@ -123,10 +233,19 @@
                 </select>
                 <span *ngIf="pop.get('ProductGroup')?.invalid && pop.get('ProductGroup')?.touched"
                   class="text-danger">Product Group is required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Product Group</mat-label>                  
+                    <mat-select formControlName="ProductGroup">
+                    <mat-option *ngFor="let a of productgroup" [value]="a.Description">{{a.Description}}</mat-option>                                                                     
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('ProductGroup')?.invalid && pop.get('ProductGroup')?.touched"
+                 class="text-danger">Product Group is required</mat-error>      
+            </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="Product">Product<span style="color:red"> *</span></label>
                 <select class="form-select" id="Product" formControlName="Product" [(ngModel)]="pop.value.Product">
                   <option [ngValue]="null" [disabled]="true">Select Product</option>
@@ -134,12 +253,21 @@
                 </select>
                 <span *ngIf="pop.get('Product')?.invalid && pop.get('Product')?.touched" class="text-danger">Product is
                   required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Product</mat-label>                  
+                    <mat-select formControlName="Product">
+                    <mat-option *ngFor="let b of productdata" [value]="b.Description">{{b.Description}}</mat-option>                                                                     
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('Product')?.invalid && pop.get('Product')?.touched" class="text-danger">Product is
+                  required.</mat-error>      
+            </mat-form-field>
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="ProductWorkArea">Product Work Area<span style="color:red"> *</span></label>
                 <select class="form-select" id="productWorkedArea" formControlName="ProductWorkArea"
                   [(ngModel)]="pop.value.ProductWorkArea">
@@ -148,10 +276,19 @@
                 </select>
                 <span *ngIf="pop.get('ProductWorkArea')?.invalid && pop.get('ProductWorkArea')?.touched"
                   class="text-danger">Product Work Area is required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Product Work Area</mat-label>                  
+                    <mat-select formControlName="ProductWorkArea" >
+                    <mat-option *ngFor="let c of productworkdata" [value]="c.Description">{{c.Description}}</mat-option>                                                                     
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('ProductWorkArea')?.invalid && pop.get('ProductWorkArea')?.touched"
+                 class="text-danger">Product Work Area is required.</mat-error>      
+            </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="WorkGroup">Work Group<span style="color:red"> *</span></label>
                 <select class="form-select" id="WorkGroup" formControlName="WorkGroup" [(ngModel)]="pop.value.WorkGroup">
                   <option [ngValue]="null" [disabled]="true">Select Work Group</option>
@@ -159,12 +296,21 @@
                 </select>
                 <span *ngIf="pop.get('WorkGroup')?.invalid && pop.get('WorkGroup')?.touched" class="text-danger">Work
                   Group is required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Work Group</mat-label>                  
+                    <mat-select formControlName="WorkGroup" >
+                    <mat-option *ngFor="let d of workgroupdata" [value]="d.Description">{{d.Description}}</mat-option>                                                                     
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('WorkGroup')?.invalid && pop.get('WorkGroup')?.touched" class="text-danger">Work
+                  Group is required.</mat-error>      
+            </mat-form-field>
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="UnifiedRoles">Unified Roles<span style="color:red"> *</span></label>
                 <select class="form-select" id="unifiedRoles" formControlName="UnifiedRoles"
                   [(ngModel)]="pop.value.UnifiedRoles">
@@ -173,10 +319,19 @@
                 </select>
                 <span *ngIf="pop.get('UnifiedRoles')?.invalid && pop.get('UnifiedRoles')?.touched"
                   class="text-danger">Unified Roles is required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Unified Roles</mat-label>                  
+                    <mat-select formControlName="UnifiedRoles" >
+                    <mat-option *ngFor="let e of unifieddata" [value]="e.Description">{{e.Description}}</mat-option>                                                                     
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('UnifiedRoles')?.invalid && pop.get('UnifiedRoles')?.touched"
+                 class="text-danger">Unified Roles is required</mat-error>      
+            </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="HLRole">HL Role<span style="color:red"> *</span></label>
                 <select class="form-select" id="HLRole" formControlName="HLRole" [(ngModel)]="pop.value.HLRole">
                   <option [ngValue]="null" [disabled]="true">Select HL Role</option>
@@ -184,12 +339,21 @@
                 </select>
                 <span *ngIf="pop.get('HLRole')?.invalid && pop.get('HLRole')?.touched" class="text-danger">HL Role is
                   required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">HL Role</mat-label>                  
+                    <mat-select formControlName="HLRole" >
+                    <mat-option *ngFor="let x of roledata" [value]="x.Description">{{x.Description}}</mat-option>                                                                     
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('HLRole')?.invalid && pop.get('HLRole')?.touched" class="text-danger">HL Role is
+                  required</mat-error>      
+            </mat-form-field>
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="HLDesignation">HL Designation<span style="color:red"> *</span></label>
                 <select class="form-select" id="HLDesignation" formControlName="HLDesignation"
                   [(ngModel)]="pop.value.HLDesignation">
@@ -199,10 +363,18 @@
                 </select>
                 <span *ngIf="pop.get('HLDesignation')?.invalid && pop.get('HLDesignation')?.touched"
                   class="text-danger">HL Designation is required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">HL Designation</mat-label>                  
+                    <mat-select formControlName="HLDesignation" >
+                    <mat-option *ngFor="let datas of desiginationdata" [value]="datas.Description">{{datas.Description}}</mat-option>                                                                     
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('HLDesignation')?.invalid && pop.get('HLDesignation')?.touched" class="text-danger">HL Designation is required.</mat-error>      
+            </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="HLTitle">HL Title<span style="color:red"> *</span></label>
                 <select class="form-select" id="HLTitle" formControlName="HLTitle" [(ngModel)]="pop.value.HLTitle">
                   <option [ngValue]="null" [disabled]="true">Select HL Title</option>
@@ -210,12 +382,22 @@
                 </select>
                 <span *ngIf="pop.get('HLTitle')?.invalid && pop.get('HLTitle')?.touched" class="text-danger">HL Title is
                   required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">HL Title</mat-label>                  
+                    <mat-select formControlName="HLTitle" >
+                    <mat-option *ngFor="let y of titledata" [value]="y.Description">{{y.Description}}</mat-option>                                                                     
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('HLTitle')?.invalid && pop.get('HLTitle')?.touched" class="text-danger">HL Title is
+                  required.</mat-error>      
+            </mat-form-field>
+              
             </div>
+            <div class="col-md-1"></div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-5 leftPadder">
+              <!-- <div class="form-group">
                 <label for="Unit">Unit<span style="color:red"> *</span></label>
                 <select class="form-select" id="Unit" formControlName="Unit" [(ngModel)]="pop.value.Unit">
                   <option [ngValue]="null" [disabled]="true">Select Unit</option>
@@ -223,10 +405,19 @@
                 </select>
                 <span *ngIf="pop.get('Unit')?.invalid && pop.get('Unit')?.touched" class="text-danger">Unit is
                   required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                <mat-label class="label">Unit</mat-label>                  
+                    <mat-select formControlName="Unit" >
+                    <mat-option *ngFor="let z of unitdata " [value]="z.Description">{{z.Description}}</mat-option>                                               
+                 </mat-select>
+                 <mat-error *ngIf="pop.get('Unit')?.invalid && pop.get('Unit')?.touched" class="text-danger">Unit is
+                  required</mat-error>      
+            </mat-form-field>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <!-- <div class="form-group">
                 <label for="owning">Owning<span style="color:red"> *</span></label>
                 <select class="form-select" id="Owning" formControlName="Owning" [(ngModel)]="pop.value.Owning">
                   <option [ngValue]="null" [disabled]="true">Select Owning</option>
@@ -234,30 +425,45 @@
                 </select>
                 <span *ngIf="pop.get('Owning')?.invalid && pop.get('Owning')?.touched" class="text-danger">Owning is
                   required.</span>
-              </div>
+              </div> -->
+              <mat-form-field class="width-class" Appearance="fill">
+                  <mat-label class="label">Owning</mat-label>                  
+                      <mat-select formControlName="Owning" >
+                      <mat-option *ngFor="let l of owingdata" [value]="l.Description">{{l.Description}}</mat-option>                                               
+                   </mat-select>
+                   <mat-error *ngIf="pop.get('Owning')?.invalid && pop.get('Owning')?.touched"> Owning required.</mat-error>      
+              </mat-form-field>
             </div>
+            <div class="col-md-1"></div>
           </div>
-          <div class="success-message" *ngIf="formSubmitted">
+          <!-- <div class="success-message" *ngIf="formSubmitted">
             <h3>Form submitted successfully!</h3>
             <p>Thank you for your submission.</p>
-          </div>
+          </div> -->
           <div class="row buttons">
             <div class="col-md-12 alignGetCheck">
-              <label for="graduate engineer">Graduate Engineer?<span> <input type="checkbox" class="chk-box"
-                    formControlName="GET"></span> </label>
+              <mat-label class="label" for="graduate engineer">Graduate Engineer?<span> <input type="checkbox" class="chk-box" formControlName="GET"></span> </mat-label>
             </div>
           </div>
         </form>
       </div>
-    </div>
-  </div>
-  <div class="row button">
-    <div class="col-md-12">
-      <div class="buto">
-        <button type="button" class="dark-blue" (click)="goToAddMultipleEmployees()">Add Multiple Employees</button>
-        <button type="button" class="btn btn-primary" (click)="clearForm()">Clear</button>
-        <button type="button" class="btn btn-success" (click)="submitForm()">Submit</button>
+      <div class="row" style="padding-top: 14px; padding-bottom: 31px; margin-right: 44px;">
+        <div class="col-md-12">
+          <div>
+            <!-- <button mat-button style="float:right" (click)="goToAddMultipleEmployees()">Add More</button>
+            <button mat-button style="float:right" (click)="clearForm()">Clear</button> -->
+            <button mat-button class="btn" style="float:right; color: #B5B5C3; text-align: left; font: normal normal normal 12px/16px Roboto;letter-spacing: 0px; opacity: 1;" [routerLink]="'/admin/home1'" >Cancel</button>
+            <button mat-button  class="clear" style="float:right;color: #B5B5C3; text-align: left;font: normal normal normal 12px/16px Roboto;letter-spacing: 0px; opacity: 1;"  (click)="clearForm()">Clear</button>
+            <button mat-button  class="btn dataRule" style="float:right" (click)="submitForm()">Add</button>
+           
+            <!-- <button type="button" class="btn btn-primary" style="float:right" (click)="goToAddMultipleEmployees()">Add More</button>
+            <button type="button" class="btn btn-primary" style="float:right" (click)="clearForm()">Clear</button>
+            <button type="button" class="btn btn-success" style="float:right" (click)="submitForm()">Submit</button> -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
 </div>
+

@@ -8,6 +8,8 @@ import { server } from './allservers';
   providedIn: 'root'
 })
 export class MyapiService {
+  sentDataGot: any;
+  private empId: string = "";
   // private apiUrl = this.serverService.ServerUrls+'employee?co=';
 
   // private apiUrl1 = this.serverService.ServerUrls+'employee';
@@ -20,8 +22,15 @@ constructor(private http: HttpClient, private serverService:server) { }
   //   // return this.http.get(`${this.apiUrl}`+employeeId+'.json');
   // } 
 
-  searchEmployeeById(employeeId: string) {
-    return this.http.get(this.serverService.ServerUrls+'employee'+`/${employeeId}`).pipe(
+  getId(): string {
+    return this.empId;
+  }
+  
+  setId(empId: string): void {
+    this.empId = empId;
+  }
+  searchEmployeeById(empId: any) {
+    return this.http.get(this.serverService.ServerUrls+'employee'+`/${empId}`).pipe(
       catchError((error: HttpErrorResponse) => {
         // Handle the error appropriately
         console.error('An error occurred:', error.message);
@@ -35,6 +44,11 @@ constructor(private http: HttpClient, private serverService:server) { }
       })
     );
   }
+  getdata(empId: any){
+    return this.http.get(this.serverService.ServerUrls+'employee'+`/${empId}`)
+    
+  }
+
 
   updateEmployee(employeeId: string, employeeData: any) {
     return this.http.put(this.serverService.ServerUrls+'employee'+`/${employeeId}`, employeeData);

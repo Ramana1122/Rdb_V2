@@ -2,10 +2,11 @@
 <div class="container-fluid g-0">
     <app-header (sideNavToggled)="apps($event)"></app-header>
     <main *ngIf="sideNavStatus==true">
-      <app-side-nav  [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}"></app-side-nav>
+      <app-side-nav  [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="rr"></app-side-nav>
     
   </main>
 </div>
-<div (click)="apps($event)">
+<div (click)="apps($event)" style="position: relative;
+top: -13px;">
   <router-outlet></router-outlet> 
 </div>

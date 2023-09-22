@@ -1,784 +1,350 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { PopService } from '../services/pop.service';
-
 import { FormBuilder, FormGroup } from '@angular/forms';
-
 import { DashService } from '../services/dash.service';
-
- 
-
+import { server } from '../services/allservers';
+import { MatSidenav } from '@angular/material/sidenav';
+import { FilterService } from '../services/filter.service';
+import { forkJoin } from 'rxjs';
+import { ApiResponse, List1Service } from '../services/list1.service';
 @Component({
-
   selector: 'app-home1',
-
   templateUrl: './home1.component.html',
-
   styleUrls: ['./home1.component.css'],
-
 })
-
 export class Home1Component implements OnInit {
-
-  gridViewActive = true;
-
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+  toggleSidenav(): void {
+    this.sidenav.toggle();
+  }
+  closeSidenav(): void {
+    this.sidenav.close();
+  }
   Locationdata: any[] = [];
-
   productdata: any[] = [];
-
-  workgroupdata:any []=[];
-
-  locationHolder:any = null;
-
+  workgroupdata: any[] = [];
+  apiResponse: ApiResponse[] = [];
+  apiResponseDesignation: ApiResponse[] = [];
+  apiResponseResigned: ApiResponse[] = [];
+  apiResponseOnboarding: ApiResponse[] = [];
+  apiResponseTeam: ApiResponse[] = [];
+  tableHeadings: string[] = ['Value', 'Count', 'Percentage'];
+  locationHolder: any = null;
   productHolder: any = null;
-
   GroupHolder: any = null;
-
-  employeeCount : number = 0;
-
-  employeeCountd  : number = 0;
-
- selectLocation:string="";
-
- selectGroup:string="";
-
- selectProduct:string="";
-
- filteredData: any[] = [];
-
-  responses: any;
-
-  details: any[] = [];
-
-  details1: any[] = [];
-
-  details2: any[] = [];
-
-  details3: any[] = [];
-
-  details4: any[] = [];
-
-  totalCount: number = 0;
-
+  employeeCount: number = 0;
   totalCount1: number = 0;
-
   totalCount2: number = 0;
-
+  totalCount27: number = 0;
   totalCount3: number = 0;
-
-  totalCount4: number = 0  ;
-
-   // Set the default active state to grid vie
-
-  // Define the FormGroup for your form
-  filtersApplied: boolean = true;
-
-  formGroup!: FormGroup;
-
-  onLocationChange() {    
-
-    console.log('Selected Location:', this.selectLocation);
-
-  }
-
-  ongroupChange() {    
-
-    console.log('Selected Location:', this.selectLocation);
-
-  }
-
-    onproductChange() {    
-
-    console.log('Selected Location:', this.selectLocation);
-
-  }
-
+  totalCount4: number = 0;
+  totalCount5: number = 0;
+  details2: any[] = [];
+  totalCount6: number = 0;
+  // This for Holding the options
+  locationOptions: any[] = [];
+  productOptions: any[] = [];
+  workGroupOptions: any[] = [];
+  combinedArray: any[] = [];
+  combinedArray1:any[]=[];
+  combinedArray2:any[]=[];
   constructor(
-
+    private listService: List1Service,
+    private filterService: FilterService,
+    private dashservice: DashService,
     private router: Router,
-
-    private popser: PopService,
-
-    private formBuilder: FormBuilder,
-
-    private dashservice:DashService
-
+    private popser: PopService
   ) {}
+  deleteItem1(index: number): void {
+    // Close the accordion
+    this.filterService.isAccordionOpen = false;
+    // Get the selected item
+    const selectedItem = this.combinedArray[index];
+    // If the item exists and is selected, uncheck the checkbox
+    if (selectedItem && this.filterService.selectedLocations[selectedItem]) {
+      this.filterService.selectedLocations[selectedItem] = false;
+    }
+    let data:any = {
+      "row":1,
+      "value":this.combinedArray[index],
+      "index":index
+    }
+    this.filterService.deleteFilter.next(data);
+    this.filterService.deleteFilter.next(this.combinedArray[index]);
+    // Remove the item from the combinedArray
+    if (index >= 0 && index < this.combinedArray.length) {
+      this.combinedArray.splice(index, 1);
+    }
+    this.fetchInitialData()
+  }
+  deleteItem2(index: number): void {
+    // Close the accordion
+    this.filterService.isAccordionOpen = false;
+    // Get the selected item
+    const selectedItem1 = this.combinedArray1[index];
+    // If the item exists and is selected, uncheck the checkbox
+    if (selectedItem1 && this.filterService.selectedLocations[selectedItem1]) {
+      this.filterService.selectedLocations[selectedItem1] = false;
+    }
+    let data:any = {
+      "row":2,
+      "value":this.combinedArray1[index],
+      "index":index
+    }
+    this.filterService.deleteFilter.next(data);
+    //this.filterService.deleteFilter.next(this.combinedArray1[index]);
+    // Remove the item from the combinedArray
+    if (index >= 0 && index < this.combinedArray1.length) {
+      this.combinedArray1.splice(index, 1);
+    }
+    this.fetchInitialData()
+  }
+  deleteItem3(index: number): void {
+    // Close the accordion
+    this.filterService.isAccordionOpen = false;
+    // Get the selected item
+    const selectedItem2 = this.combinedArray2[index];
+    // If the item exists and is selected, uncheck the checkbox
+    if (selectedItem2 && this.filterService.selectedLocations[selectedItem2]) {
+      this.filterService.selectedLocations[selectedItem2] = false;
+    }
+    let data:any = {
+      "row":3,
+      "value":this.combinedArray2[index],
+      "index":index
+    }
+    this.filterService.deleteFilter.next(data);
+    // Remove the item from the combinedArray
+    if (index >= 0 && index < this.combinedArray2.length) {
+      this.combinedArray2.splice(index, 1);
+    }
+    this.fetchInitialData()
+  }
+  ngOnInit() {
+    // Subscribe to filter changes
+    this.filterService.openMessage.subscribe((finalData) => {
+      console.log(JSON.parse(finalData['data']), "finalData");
+      let filterOpts = JSON.parse(finalData['data']);
+      console.log('keyss' + filterOpts);
+      this.locationOptions = filterOpts.Location;
+      this.productOptions = filterOpts.Product;
+      this.workGroupOptions = filterOpts.Work_Group;
 
-  cardsData: any[] = [
+      this.combinedArray= [...this.locationOptions];
+      this.combinedArray1=[...this.productOptions];
+      this.combinedArray2= [...this.workGroupOptions]
+      // Create an array of observables for fetching data for all five pivots
+      const observables = [
+        this.fetchDataForPivot('Designation', this.apiResponseDesignation),
+        this.fetchDataForPivot('Release', this.apiResponse),
+        this.fetchDataForPivot('Resigned', this.apiResponseResigned),
+        
+        this.fetchDataForPivot('ONBOARDING', this.apiResponseOnboarding),
+        this.fetchDataForPivot('PRODUCT_WORK_AREA', this.apiResponseTeam),
+      ];
 
-    { title: 'Designation', iconName: 'fa fa-certificate',
+      // Use forkJoin to make parallel requests
+      forkJoin(observables).subscribe((results) => {
+        // Results will contain the data for all five pivots
+        const [designationData, releaseData, resignedData, onboardingData, teamData] = results;
 
-    details: []},
-
-    { title: 'Team', iconName: 'fa fa-users', api:'PRODUCT_WORK_AREA',
-
-    details: [] },
-
-    { title: 'Release', iconName: 'fa fa-key',
-
-  details:[] },
-
-    { title: 'Resigned',iconName: 'fa fa-user-times',
-
-  details:[] },
-
-    { title: 'Onborded',iconName: 'fa fa-user-plus',api:'ONBOARDING',
-
-  details:[] },
-
-  ];
+        // Update the corresponding arrays with the fetched data
+        this.apiResponseDesignation = designationData;
+        console.log("My Lwewq",this.apiResponseDesignation.length)
+        this.totalCount6 = this.apiResponseDesignation.reduce((total, detail) => total + detail.Count, 0);
 
 
-  ngOnInit(): void {
+        this.apiResponse = releaseData;
+        console.log("My Lwewq",this.apiResponse.length)
+        this.totalCount4 = this.apiResponse.reduce((total, detail) => total + detail.Count, 0);
 
-    this.popser.getdesigination('Location').subscribe({
 
-      next: (data: any) => {
+        this.apiResponseResigned = resignedData;
+        this.totalCount2 = this.apiResponseResigned.reduce((total, detail) => total + detail.Count, 0);
 
-        console.log("Location",data)
+        this.apiResponseOnboarding = onboardingData;
+        this.totalCount1 = this.apiResponseOnboarding.reduce((total, detail) => total + detail.Count, 0);
 
-        let allData=[{
+        this.apiResponseTeam = teamData;
+        this.totalCount3 = this.apiResponseTeam.reduce((total, detail) => total + detail.Count, 0);;
 
-          Code: 'All', Description: 'All'
-
-        }]
-
-       let all=[]
-
-      all=[...allData,...data]
-
-      console.log("location",allData)
-
-        this.Locationdata = all;
-
-      },
-
-      error: () => {
-
-        this.Locationdata = [];
-
-      },
-
+        // Perform any additional processing if needed
+      });
     });
+
+    // Fetch initial data and options
+    this.fetchInitialData();
+  }
+
+  // Fetch initial data and options
+  fetchInitialData() {
+    const selectedOptions = this.filterService.getSelectedOptions();
+    this.locationOptions = selectedOptions.Location;
+    this.productOptions = selectedOptions.Product;
+    this.workGroupOptions = selectedOptions.Work_Group;
 
     this.popser.getdesigination('Product').subscribe({
-
       next: (data: any) => {
-
         this.productdata = data;
-
       },
-
       error: () => {
-
         this.productdata = [];
-
       }
-
     });
 
-    this.popser.getdesigination("Work_Group").subscribe({
-
+    this.popser.getdesigination('Work_Group').subscribe({
       next: (data: any) => {
-
         this.workgroupdata = data;
-
       },
-
-      error: () => { this.workgroupdata = [] }
-
+      error: () => {
+        this.workgroupdata = [];
+      }
     });
 
- 
-
+    this.fetchDataForRelease();
+    this.fetchDataForDesignation();
+    this.fetchDataForResigned();
     this.fetchEmployeeCount();
-
     this.fetchResigned();
-
-    this.dashservice.getDesignation()
-
-      .subscribe((data: any) => {
-
-        // Assuming the API response structure is similar to the "details" array structure
-
-        this.cardsData[0].count = data.length;
-
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[0].details = checked;
-
-        console.log(checked);
-
-      });
-
-//Team........................
-
-  this.dashservice.getTeam()
-
-      .subscribe((data: any) => {
-
-        // Assuming the API response structure is similar to the "details" array structure
-
-        this.cardsData[1].count = data.length;
-       
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[1].details = checked;
-
-        console.log(checked);
-
-      });
-
- 
-
-      this.dashservice.getRelease()
-
-      .subscribe((data: any) => {
-
-        // Assuming the API response structure is similar to the "details" array structure
-
-        this.cardsData[2].count = data.length;
-        
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[2].details = checked;
-
-        console.log(checked);
-
-      });
-
- 
-
-      this.dashservice.getResigned()
-
-      .subscribe((data: any) => {
-
-        // Assuming the API response structure is similar to the "details" array structure
-
-        this.cardsData[3].count = data.length;
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[3].details = checked;
-
-        console.log(checked);
-
-      });
-
-     
-
- 
-
-      this.dashservice.getOnboard()
-
-      .subscribe((data: any) => {
-
-        // Assuming the API response structure is similar to the "details" array structure
-
-        this.cardsData[4].count = data.length;
-      
-
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[4].details = checked;
-
-        console.log(checked);
-
-      });
-
-     
-
-    }
-
-  fetchResigned() {
-
-    this.dashservice.getResigned().subscribe(
-
-      (data) => {
-
-        this.details2 = data;
-
-        this.totalCount2 = this.details2.reduce((total, detail) => total + detail.Count, 0);
-
-      },
-
-      (error) => {
-
-        console.error('Error fetching data:', error);
-
-      }
-
-    );
-
-  }  
-
-    fetchEmployeeCount(): void {  
-
-      this.dashservice.getData('A').subscribe(  
-
-        (response) => {  
-
-          this.employeeCount = response.length;  
-
-        },
-
- 
-
-        (error) => {  
-
-          console.error('Error fetching employee count:', error);  
-
-        }  
-
-      );  
-
-      this.dashservice.getData('d').subscribe(  
-
-        (response) => {  
-
-          this.employeeCountd = response.length;  
-
-        },  
-
-        (error) => {  
-
-          console.error('Error fetching employee count:', error);
-
-        }  
-
-      );  
-
-    }
-
- 
-
-    // Initialize the FormGroup and define the form controls
-
- 
-
-    onClickMethod() {
-
-      this.router.navigate(['/admin/graph']);  
-
-    }  
-
-    onClickMethod1() {  
-
-      this.router.navigate(['/admin/desig-graph']);  
-
-    }  
-
-    onClickMethod2() {  
-
-      this.router.navigate(['/admin/onborard-graph']);  
-
-    }
-
- 
-
-    onClickMethod3() {  
-
-      this.router.navigate(['/admin/resign-graph']);  
-
-    }  
-
- 
-
-    onClickMethod4() {  
-
-      this.router.navigate(['/admin/team-graph']);  
-
-    }
-
- 
-
-  onGridViewClick() {
-
-    this.gridViewActive = false;
-
+    this.fetchDataForOnboarding();
+    this.fetchDataForTeam();
   }
 
- 
+  // Fetch data for a specific pivot
+  fetchDataForPivot(pivot: string, targetArray: ApiResponse[]) {
+    // Construct the filter parameters based on your requirements
+    const designation: any = pivot; // Adjust this if needed
+
+    // Use the FilterService to get filtered employees
+    return this.filterService.getFilteredEmployees(designation, this.locationOptions, this.productOptions, this.workGroupOptions);
+    
+  }
+
+  // Fetch total employee count
+  fetchEmployeeCount() {
+    this.dashservice.getData('A').subscribe(
+      (response) => {
+        this.employeeCount = response.length;
+      },
+      (error) => {
+        console.error('Error fetching employee count:', error);
+      }
+    );
+  }
+
+
+  // Fetch data for Release
+  fetchDataForRelease() {
+    this.listService.fetchData().subscribe(
+      (response) => {
+        this.apiResponse = response;
+        this.totalCount4 = this.apiResponse.reduce((total, detail) => total + detail.Count, 0);
+      },
+      (error) => {
+        console.error('Error fetching data for Release:', error);
+      }
+    );
+  }
+
+  // Fetch data for Designation
+  fetchDataForDesignation() {
+    this.listService.fetchDataForDesignation().subscribe(
+      (response) => {
+        this.apiResponseDesignation = response;
+        console.log("apiResponseDesignation",this.apiResponseDesignation);
+        this.totalCount6 = this.apiResponseDesignation.reduce((total, detail) => total + detail.Count, 0);
+        
+        console.log("totalCount6",this.totalCount6)
+        if (this.locationHolder === "All") {
+          this.totalCount6;
+        }
+      },
+      (error) => {
+        console.error('Error fetching data for Designation:', error);
+      }
+    );
+  }
+
+  // Fetch data for Resigned
+  fetchDataForResigned() {
+    this.listService.fetchDataForResigned().subscribe(
+      (response) => {
+        this.apiResponseResigned =response;
+        this.totalCount2 = this.apiResponseResigned.reduce((total, detail) => total + detail.Count, 0);
+      },
+      (error) => {
+        console.error('Error fetching data for Resigned:', error);
+      }
+    );
+  }
+
+  // Fetch data for ONBOARDING
+  fetchDataForOnboarding() {
+    this.listService.fetchDataForOnboarding().subscribe(
+      (response: any) => {
+        this.apiResponseOnboarding = response;
+        this.totalCount1 = this.apiResponseOnboarding.reduce((total, detail) => total + detail.Count, 0);
+      },
+      (error) => {
+        console.error('Error fetching data for ONBOARDING:', error);
+      }
+    );
+  }
+
+  // Fetch data for Team
+  fetchDataForTeam() {
+    this.listService.fetchDataForTeam().subscribe(
+      (response: any) => {
+        this.apiResponseTeam = response;
+        this.totalCount3 = this.apiResponseTeam.reduce((total, detail) => total + detail.Count, 0);;
+      },
+      (error) => {
+        console.error('Error fetching data for Team:', error);
+      }
+    );
+  }
+
+  // Fetch Resigned data
+  fetchResigned() {
+    this.dashservice.getResigned().subscribe(
+      (data) => {
+        this.details2 = data;
+        this.totalCount27 = this.details2.reduce((total, detail) => total + detail.Count, 0);
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
 
   onListViewClick() {
-
-    this.router.navigate(['/admin/listview']);
-
+    this.router.navigate(['/admin/home1']);
   }
 
-  fetchDropdownValuesThree(): void {
-
-    let params = {
-
- 
-
-      pivot: this.cardsData[0].title,
-
-      product: this.productHolder,
-
-      Location:this.locationHolder=="All"?'':this.locationHolder,
-
-      Group: this.GroupHolder
-
- 
-
-    };
-
-// if(this.locationHolder!="All"){
-
-//   params.Location=this.locationHolder
-
-// }
-
-   console.log("locationHolder",this.locationHolder)
-
- 
-
-    this.dashservice.getEmployeesByDesignationAndLocation(params).subscribe(
-
- 
-
-      (data:any) => {
-
- 
-
-        console.log("Fetching values here",data)
-
- 
-
-        this.details=data;
-
-        this.totalCount = this.details.reduce((total, detail) => total + detail.Count, 0);
-        
-       if(this.locationHolder=="All"){
-        
-        this.fetchEmployeeCount()
-       }else{
-        this.employeeCount=this.cardsData[0].count=data.length;
-       }
-       
-
-// this.cardsData = data;
-
- this.cardsData[0].count = data.length;
-
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[0].details = checked;
-
-        console.log(checked);
-
- 
-
-        console.log(this.cardsData)
-
-     
-
-        //////////////
-
-     
-      
-      },
-
-
- 
-
-      (error) => {
-
- 
-
-        console.error('Error fetching dropdown values:', error);
-
- 
-
-      }
-
- 
-
-    );
-
-    const paramsResign = {
-
-      pivot:this.cardsData[3].title,
-
-      Location:this.locationHolder=="All"?'':this.locationHolder,
-
-       product: this.productHolder,
-
-       Group: this.GroupHolder
-
-     };
-
-     
-
- 
-
-    this.dashservice.getEmployeesByDesignationAndLocation(paramsResign).subscribe(
-
-      (data: any) => {
-
-        console.log('Fetching values here', data);
-
-     
-
-        this.details2=data;
-
-        this.totalCount2 = this.details2.reduce((total, detail) => total + detail.Count, 0);
-
- 
-
-        this.cardsData[3].count = data.length;
-
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[3].details = checked;
-
- 
-
- 
-
- 
-
-      },
-
-      (error) => {
-
-        console.error('Error fetching dropdown values:', error);
-
-      }
-
-    );
-
-    const paramsPRODUCT_WORK_AREA = {
-
-      pivot:this.cardsData[1].api,
-
-      Location:this.locationHolder=="All"?'':this.locationHolder,
-
-       product: this.productHolder,
-
-       Group: this.GroupHolder
-
-     };
-
- 
-
-    this.dashservice.getEmployeesByDesignationAndLocation(paramsPRODUCT_WORK_AREA).subscribe(
-
-      (data: any) => {
-
-        console.log('Fetching values here', data);
-
-     
-
-        this.details4=data;
-
-        this.totalCount4 = this.details4.reduce((total, detail) => total + detail.Count, 0);
-
- 
-
-        this.cardsData[1].count = data.length;
-
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[1].details = checked;
-
- 
-
- 
-
-      },
-
-      (error) => {
-
-        console.error('Error fetching dropdown values:', error);
-
-      }
-
-    );
-
-    const paramsonb = {
-
-      pivot:this.cardsData[4].api,
-
-      Location:this.locationHolder=="All"?'':this.locationHolder,
-
-       product: this.productHolder,
-
-       Group: this.GroupHolder
-
-     };
-
- 
-
-    this.dashservice.getEmployeesByDesignationAndLocation(paramsonb).subscribe(
-
-      (data: any) => {
-
-        console.log('Fetching values here', data);
-
-     
-
-        this.details3=data;
-
-        this.totalCount3 = this.details3.reduce((total, detail) => total + detail.Count, 0);
-
- 
-
-        this.cardsData[4].count = data.length;
-
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[4].details = checked;
-
- 
-
- 
-
-      },
-
-      (error) => {
-
-        console.error('Error fetching dropdown values:', error);
-
-      }
-
-    );
-
-    const paramRelease = {
-
-      pivot:this.cardsData[2].title,
-
-      Location:this.locationHolder=="All"?'':this.locationHolder,
-
-       product: this.productHolder,
-
-       Group: this.GroupHolder
-
-     };
-
- 
-
-    this.dashservice.getEmployeesByDesignationAndLocation(paramRelease).subscribe(
-
-      (data: any) => {
-
-        console.log('Fetching values here', data);
-
-     
-
-        this.details1=data;
-
-        this.totalCount1 = this.details1.reduce((total, detail) => total + detail.Count, 0);
-
- 
-
-        this.cardsData[2].count = data.length;
-
-        let checked= data.map((item: any) => ({
-
-          label: item.Value,
-
-          value: item.Count,
-
-          count: item.Percentage
-
-        }));
-
-        this.cardsData[2].details = checked;
-
- 
-
- 
-
- 
-
-      },
-
-      (error) => {
-
-        console.error('Error fetching dropdown values:', error);
-
-      }
-
-    );
-
- 
-
+  onClickMethod() {
+    this.router.navigate(['/admin/graph']);
   }
 
+  onClickMethod1() {
+    this.router.navigate(['/admin/desig-graph']);
+  }
+
+  onClickMethod2() {
+    this.router.navigate(['/admin/onborard-graph']);
+  }
+
+  onClickMethod3() {
+    this.router.navigate(['/admin/resign-graph']);
+  }
+
+  onClickMethod4() {
+    this.router.navigate(['/admin/team-graph']);
+  }
+
+onGridViewClick() {
+
+      this.router.navigate(['/admin/listview'])
+
+    }
 }

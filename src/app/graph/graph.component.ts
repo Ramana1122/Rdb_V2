@@ -10,6 +10,7 @@ import Chart from 'chart.js/auto';
 import { BarElement } from 'chart.js/dist';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { FilterService } from '../services/filter.service';
 
 
 @Component({
@@ -34,9 +35,9 @@ export class GraphComponent implements OnInit{
   labels:any[]=[]
   dataSet:any[]=[]
   datalabels:any[]=[]
-  constructor(private apiService: ApiService,private router:Router) {}
+  constructor(private apiService: ApiService,private router:Router,private filterService:FilterService) {}
   onClickMethod4() {
-    this.router.navigate(['/admin/listview']);
+    this.router.navigate(['/admin/listview/']);
   }
   ngOnInit() {
      //this.createChart()
@@ -48,12 +49,18 @@ export class GraphComponent implements OnInit{
   }
 
   fetchRelease() {
-    this.apiService.getRelease().subscribe(
+    const selectedOptions=this.filterService.getSelectedOptions();
+    const locations=selectedOptions.Location;
+    const products=selectedOptions.Product;
+    const workGroups=selectedOptions.Work_Group;
+  
+    const pivot='Release';
+    this.filterService.getFilteredEmployees(pivot,locations,products,workGroups).subscribe(
       (data) => {
         this.details1 = data;
        let color=['#22aa99','#994499','#316395','#b82e2e','#0099c6','#109618','#22aa99']
        let dat: any[]=[] 
-       data.forEach((a)=>{
+       data.forEach((a:any)=>{
         this.count=this.count+1;
         if (this.count<=10){
           this.labels.push(a.Value)

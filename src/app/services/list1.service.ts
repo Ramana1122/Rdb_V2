@@ -9,6 +9,7 @@ export interface ApiResponse {
   Count: number;
   Percentage: string;
   Count1: number;
+  ShortValue:string;
   Count2: number;
   Count3: number;
   Count4: number;
@@ -23,7 +24,7 @@ export interface ApiResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class ListService {
+export class List1Service {
   private apiUrl = 'http://nhsappchna6210.cscidp.net/rdb/api/employee';
   private readonly pivotValue = 'Release';
   private readonly pivotValue1 = 'Designation';

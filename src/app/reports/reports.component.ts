@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService, Employee } from '../services/employee.service';
 import { DataService } from '../services/dataservice.service';
 import * as XLSX from 'xlsx';
+import { server } from '../services/allservers';
 
 @Component({
   selector: 'app-reports',
@@ -25,10 +26,12 @@ export class ReportsComponent implements OnInit {
     private route: ActivatedRoute,
     private reportsService: ReportsService,
     private datePipe: DatePipe,
-    private datas: DataService
+    private datas: DataService,
+    public dataSer:server
   ) {}
 
   ngOnInit() {
+    this.dataSer.setProfileObs(true);
     this.getCurrentDate();
     this.getEmployees();
     this.getAdditionalData();

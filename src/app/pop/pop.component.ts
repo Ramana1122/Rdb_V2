@@ -1,5 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MyapiService } from '../services/myapi.service';
 import { PopService } from '../services/pop.service';
@@ -9,14 +10,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LogService } from '../services/log.service';
 import { EmployeeService } from '../services/employee.service';
 import { EmpDataService } from '../services/emp-data.service';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
-  selector: 'app-pop',
+  selector: 'app-pop1',
   templateUrl: './pop.component.html',
   styleUrls: ['./pop.component.css']
 })
 export class PopComponent implements OnInit {
-  pop!: FormGroup;
+
+  // myControl = new FormControl('');
+
   searchId: string = '';
   employee: any;
   ManagerNames: any;
@@ -42,6 +46,8 @@ export class PopComponent implements OnInit {
   showForm: boolean = false;
   datePipe: any;
   employeeId1: any;
+  ManagerName:any;
+  filteredOptions: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,8 +61,46 @@ export class PopComponent implements OnInit {
     public dataSer: server,
     private router: Router
   ) { }
+  managerData:any;
+
+
+  private _filter(value: any): any {
+    console.log('logger console',this.pop.get('ManagerName'))
+    const filterValue = value.toLowerCase();
+    this.managerData = JSON.parse(JSON.stringify(this.ManagerNames))
+    return this.managerData.filter((Manager:any)=> Manager.EmployeeName.toLowerCase().includes(filterValue));
+  }
+
+  pop:FormGroup = this.formBuilder.group({
+    GET: [false],
+    DedalusId: ['', Validators.required],
+    EmployeeCode: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    EmployeeName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+( [A-Za-z]+)*$')]],
+    Employee_MailId: ['', [Validators.required, Validators.email]],
+    Gender: [null, Validators.required],
+    Location: [null, Validators.required],
+    ManagerName: ['', [Validators.required]],
+    ManagerMailId: ['', [Validators.required, Validators.email]],
+    ManagerCode: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    DateofJoin: ['', Validators.required],
+    ProductGroup: [null, Validators.required],
+    Product: [null, Validators.required],
+    ProductWorkArea: [null, Validators.required],
+    WorkGroup: [null, Validators.required],
+    UnifiedRoles: [null, Validators.required],
+    HLRole: [null, Validators.required],
+    HLDesignation: [null, Validators.required],
+    HLTitle: [null, Validators.required],
+    Unit: [null, Validators.required],
+    Owning: [null, Validators.required],
+  });
 
   ngOnInit(): void {
+    this.myApiService.getManageName("sel").subscribe((res) => {
+      let managernames: any = res
+      this.ManagerNames = res;
+      console.log("ManagerNames", managernames);
+    });
     this.employeeForm = this.formBuilder.group({
       searchId: ['', Validators.required]
     });
@@ -84,6 +128,12 @@ export class PopComponent implements OnInit {
           this.roledata = data;
         },
         error: () => { this.roledata = [] }
+      });
+      this.popser.getdesigination("HL_Designation").subscribe({
+        next: (data: any) => {
+          this.desiginationdata = data;
+        },
+        error: () => { this.desiginationdata = [] }
       });
 
       this.popser.getdesigination("Owning").subscribe({
@@ -144,34 +194,22 @@ export class PopComponent implements OnInit {
         this.DisabledData = true;
       }
 
-      this.pop = this.formBuilder.group({
-        GET: [false],
-        DedalusId: ['', Validators.required],
-        EmployeeCode: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-        EmployeeName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+( [A-Za-z]+)*$')]],
-        Employee_MailId: ['', [Validators.required, Validators.email]],
-        Gender: [null, Validators.required],
-        Location: [null, Validators.required],
-        ManagerName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
-        ManagerMailId: ['', [Validators.required, Validators.email]],
-        ManagerCode: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-        DateofJoin: ['', Validators.required],
-        ProductGroup: [null, Validators.required],
-        Product: [null, Validators.required],
-        ProductWorkArea: [null, Validators.required],
-        WorkGroup: [null, Validators.required],
-        UnifiedRoles: [null, Validators.required],
-        HLRole: [null, Validators.required],
-        HLDesignation: [null, Validators.required],
-        HLTitle: [null, Validators.required],
-        Unit: [null, Validators.required],
-        Owning: [null, Validators.required],
-      });
-
+     
+      console.log('after form created')
       this.dataSer.setProfileObs(true);
-    }
-  }
 
+    }
+    this.managerData = this.getControl('ManagerName').valueChanges.subscribe(value => this._filter(value || ''))
+
+    this.filteredOptions = this.ManagerName.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+    }
+    
+    getControl(control:string){
+      return this.pop.get(control) as FormControl
+    }
   clearForm(): void {
     this.pop.reset();
     this.toaster.warning("Form Cleared!!");
@@ -258,18 +296,31 @@ export class PopComponent implements OnInit {
       this.myApiService.getManageName(e.target.value).subscribe((res) => {
         let managernames: any = res
         this.ManagerNames = res;
-        console.log("ManagerNames", managernames[0].EmployeeCode);
+        console.log("ManagerNames", managernames);
       });
     }
   }
 
+
   onselect(event: any, managerName: any) {
-    this.pop.patchValue({
-      ManagerCode: managerName.EmployeeCode,
-      ManagerMailId: managerName.Employee_MailId
-    });
+    for (let i = 0; i < this.ManagerNames.length; i++) {
+      // const element = array[i];
+      if (this.ManagerNames[i].EmployeeName == managerName) {
+        
+        this.pop.patchValue({
+          ManagerCode: this.ManagerNames[i].EmployeeCode,
+          ManagerMailId: this.ManagerNames[i].Employee_MailId
+        });
+      }
+      
+    }
     console.log("event", event, managerName)
   }
+  displayFn(ManagerName: any): string {
+    // Replace 'name' with the actual property you want to display
+    return ManagerName ? ManagerName.EmployeeName : '';
+  }
+
 
   private populateEditForm() {
     if (this.employee) {
@@ -310,3 +361,5 @@ export class PopComponent implements OnInit {
   // this.showToaster = true;
   // this.toasterMessage = 'Employee updated successfully.'
 }
+
+

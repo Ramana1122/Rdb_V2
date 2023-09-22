@@ -38,6 +38,14 @@ import { DesigGraphComponent } from './desig-graph/desig-graph.component';
 import { OnborardGraphComponent } from './onborard-graph/onborard-graph.component';
 import { ResignGraphComponent } from './resign-graph/resign-graph.component';
 import { TeamGraphComponent } from './team-graph/team-graph.component';
+import {NgFor} from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { FiltersideComponent } from './filterside/filterside.component';
+import { DesgnationComponent } from './desgnation/desgnation.component';
 
 
 
@@ -67,7 +75,9 @@ import { TeamGraphComponent } from './team-graph/team-graph.component';
     DesigGraphComponent,
     OnborardGraphComponent,
     ResignGraphComponent,
-    TeamGraphComponent
+    TeamGraphComponent,
+    FiltersideComponent,
+    DesgnationComponent
   
    ], 
   imports: [
@@ -81,7 +91,15 @@ import { TeamGraphComponent } from './team-graph/team-graph.component';
     BrowserAnimationsModule,
     NgSelectModule,
     MaterialModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgFor
+
+
 
     
 

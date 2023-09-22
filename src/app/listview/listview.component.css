@@ -1,370 +1,101 @@
-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td {
-    border: none;
-    padding: 8px;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    
-    
-  }
-  
- 
-  .main-container{
-    top: 64px;
-    
-  }
- 
-  .header .header-text {
-    margin-left: 15px;
-    font-weight: bold; /* Set the text to bold */
-    font-size: 24px; /* Add 5px gap between the icon and the text */
-    /* Add any styles for the text (optional) */
-  }
-  
-  
-  .alternate-row {
-    background-color: #f2f2f2; /* Change this to your preferred color */
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  .containe{
-    margin-top: 120px;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
- 
+.mat-card {
 
-  }
-  .containe .header-text{
-    color:black !important;
-    font-weight: bold;
-    font-size: 24px;
-    margin-left: 5px;
-  }
-  .container1 .header-text {
-    color: black; /* Set text color to white */
-    font-weight: bold; /* Set the text to bold */
-    font-size: 24px; /* Increase the font size to 24px */
-    margin-left: 5px; /* Add some space between the icon and the text */
-  }
+  margin-top: 94px;
+  margin-left: 20px;
+  height: 411px;
 
-  .fa-sun{
-    font-size: 30px;
-    color: black !important;
-  }
-  .fa-users{
-    font-size: 30px;
-    color: black !important;
-  }
-  
-  .container1{
-    margin-top: 70px;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
-  }
-  .fa-bar-chart{
-    color: black !important;
-    font-size: 30px;
-   
-    padding-top:8px
-  }
-  .mat-card {
-    width: 253px;
-    background-color: #806BF8;
-    padding: 10px;
-    top: 80px;
-    height: 100px;
-    
-    border-radius: 5px;
-  }
-  
-  /* .m-15 {
-    margin: 15px;
-  } */
-  .mat-mdc-card-content:first-child{
-    padding-top:0px ;
-  }
-  
-  .font-white {
-    margin-top: -24px;
-    left:38%;
-    color: white;
-  }
-  
-  .status_header {
-    position: relative;
-  }
-  
-  .pointer {
-    cursor: pointer;
-  }
-  
-  /* You can adjust these styles as needed */
-  
-  .card {
-    position: relative;
-    width: 100%;
-    height:166px;
-    
-    display: flex;
-    height: 300px;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    /* overflow: auto; */
-  }
-  .header2{
-    top: 0px;margin-left: 43%; font-size: 35px;
-    color:white
-  }
-  .content-section{
-    overflow:auto;
-    display: flex;
-    width: auto;
-    margin: 0;
-    padding: 0;
-    
-  }
-  
-  .vertical-line {
-    position: absolute;
-    top: 0;
-    left: 150px;
-    width: 2px;
-    height: 100%;
-    background-color: #333;
-  }
-  
-  .left-section {
-   
-    position:absolute;
-   
-    flex: 1;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 100%;
-    background-color:rgb(160, 194, 231);
-     /* Set the background color */
-  }
-  .left-section2{
-    position:absolute;
-   
-    flex: 1;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 100%;
-    background-color:lightsalmon;
+  width: 466px;
+  background-color: white;
+  border-radius: 3px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  padding: 20px;
+}
+.click{
+  margin-left: 51%;
+  cursor: pointer;
+}
+.count{
+  margin-left: 10px;
+  color: white;
+  background-color: darkblue;
+  border-radius: 10px;
+  padding-left: 6px;
+  padding-right: 5px;
+  font-size: 14px;
+  height: 10px;
+  font-weight: bold;
+}
+.designation {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: darkblue;
+}
+.name-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+.pro{
+  color:darkblue;
+  font-weight: bold;
+}
+.name1 {
+  font-size: 16px;
+  margin-left: 8px;
+  color: gray;
+}
 
-  }
-  .left-section4{
-    position:absolute;
-   
-    flex: 1;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 100%;
-    background-color:dodgerblue;
+.progress {
+  font-size: 14px;
+  background-color: white;
+  margin-right: 10px;
+  color: grey; /* Set your desired color for the progress */
+}
+.heading{
+  margin-left: 8px;
+  font-weight: bold;
+  color: darkblue;
+}
+.size{
+  margin-right: 10px;
+  font-weight: bold;
+  color:darkblue;
+}
+.header{
+  font-size: 16px;
+  margin-top: 20px;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 51px;
+  width: 435px;
+}
 
-  }
-  .left-section5{
-    position:absolute;
-   
-    flex: 1;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 100%;
-    background-color:rgb(122, 245, 221);
-  }
-  .left-section6{
-    position:absolute;
-   
-    flex: 1;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 100%;
-    background-color: #E9F8FF;
 
-  }
-  .left-icons {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .table1{
-    width: 50%; /* Adjust width as needed */
-  padding-top: 0;
-  float: right;
-  list-style-type: none;
-  }
-  .nested-div{
-    padding-left: 150px;
-    width: 50%;
-    
-    
+.percentage {
+  position: absolute;
+  margin-left: 199px;
+  margin-bottom: 3px;
+  font-size: 12px; 
+  font-weight: bold;
+  color: grey;
+  margin-top: -15px;
+  margin-right: 6px; /* Adjust to position the percentage text as desired */
+}
 
-  }
-  
-  .left-icons i {
-    /* Adjust spacing between icons */
-    color: white; /* Set icon color */
-  }
-  
-  .right-section {
-    flex: 3;
-    width: 50%;
-    float: right;
-   
-  }
-  .status_count1{
-    right:55px;
-    color: white !important;
-    font-size: 40px;
-    margin-left: 127px;
+.progress-bar {
+  width:150px;
+  height: 5px;
+  background-color: #f0f0f0;
+  border-radius: 10px
+}
 
-  }
-  .scrollable-content {
-    max-height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden; /* Add vertical scrolling */
-  }
-  
- 
-  .alternate-row {
-    background-color: #f5f5f5;
-  }
-  
-  .table {
-    width: 50%;
-    margin-top: 0px;
-    padding-top: 0;
-    margin-left: 80px;
-    border-collapse: collapse;
-  }
-  
-  td {
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  
+.graph {
+  height: 100%;
+  background-color: #007bff;
+  transition: width 0.3s ease-in-out;
+}
 
- 
-  .fa-cogs{
-    color: black !important;
-    font-size: 30px;
-  }
-  .container2 .header-text {
-    color: black !important; /* Set text color to white */
-    font-weight: bold; /* Set the text to bold */
-    font-size: 24px; /* Increase the font size to 24px */
-    margin-left: 5px; /* Add some space between the icon and the text */
-  }
-  .container2{
-    margin-top: 70px;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
-
-  }
-  .fa-user-times{
-    font-size: 30px;
-    color:black !important;
-  }
-  .container3 .header-text {
-    color: black !important; /* Set text color to white */
-    font-weight: bold; /* Set the text to bold */
-    font-size: 24px; /* Increase the font size to 24px */
-    margin-left: 5px; /* Add some space between the icon and the text */
-  }
-  .icon-wrapper {
-    position: absolute; /* Set the icon wrapper as an absolutely positioned element */
-    top: 135px; /* Set the top position to 50px from the top of the container */
-    right: 0; /* Align the icon to the right side of the container */
-  }
-  
-  
-  /* Styles for the icon */
-  .icon-wrapper i {
-    font-size: 24px; /* Set the font size of the icon as needed */
-    color: black !important; /* Set the color of the icon to white */
-    background-color: white; /* Set a background color for the icon (optional) */
-    /* Add some padding around the icon for better visual appearance (optional) */
-  }
-  .hole{
-    padding-bottom: 25px;
-   
-  }
- 
-  .fa-key {
-    color:black !important;
-    font-size: 30px;
-    float: left; /* Set the font size of the icon as needed */
- /* Add some margin at the bottom to separate the icon and heading */
-  }
- 
-  .fa-user-plus{
-    font-size: 30px;
-    color: black !important;
-  }
-  .container4 .header-text {
-    color: black !important; /* Set text color to white */
-    font-weight: bold; /* Set the text to bold */
-    font-size: 24px; /* Increase the font size to 24px */
-    margin-left: 5px;
-     /* Add some space between the icon and the text */
-  }
-  .elipses {
-    /* display: flex; */
-    align-items: center;
-    justify-content: flex-end;
-    margin-left: 45%;
-    /* width: 214px; */
-  }
-  .static-header{
-    width:100px;
-  }
-  .right-align:hover{
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .jimson{
-    top: 64px;
-  }
-  
-  
-  
-  .white-icon {
-    color: white;
-  }
-  
-  .container3{
-   margin-top: 70px;
-   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
-  }
-  .container4{
-    margin-top: 70px;
-    margin-bottom: 20px;
-    
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
-  }
-  td, th {
-    border:none;
-    padding: 8px;
-  }
-  
-  /* Style for the header row */
-  .header-row {
-    background-color: rgb(6, 173, 238);
-    color: white;
-  }

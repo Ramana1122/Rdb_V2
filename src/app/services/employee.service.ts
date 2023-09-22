@@ -63,6 +63,16 @@ getReportee(employeeId1: any,reportee:any): Observable<any> {
   return this.http.get<any>(url);
 }
 
+getResignedReportee(employeeId1: any,reportee:any): Observable<any> {
+
+  const url = this.serverService.ServerUrls+`Team/`+employeeId1+"?mode="+reportee+"-resigned";
+
+  return this.http.get<any>(url);
+
+}
+
+ 
+
 getPeer(employeeId1: any,peer:any): Observable<any> {   
   const url = this.serverService.ServerUrls+`Team/`+employeeId1+"?mode="+peer;
   return this.http.get<any>(url);

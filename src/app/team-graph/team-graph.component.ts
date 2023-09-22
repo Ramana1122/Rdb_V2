@@ -11,6 +11,7 @@ import Chart from 'chart.js/auto';
 import { ApiService } from '../services/api.service';
 
 import { Router } from '@angular/router';
+import { FilterService } from '../services/filter.service';
 
  
 
@@ -50,7 +51,7 @@ export class TeamGraphComponent {
 
  
 
-  constructor(private apiService: ApiService, private router:Router) {}
+  constructor(private apiService: ApiService, private router:Router,private filterService:FilterService) {}
 
   onClickMethod3() {
 
@@ -80,7 +81,13 @@ export class TeamGraphComponent {
 
  fetchTeam() {
 
-  this.apiService.getTeam().subscribe(
+  const selectedOptions=this.filterService.getSelectedOptions();
+  const locations=selectedOptions.Location;
+  const products=selectedOptions.Product;
+  const workGroups=selectedOptions.Work_Group;
+
+  const pivot='PRODUCT_WORK_AREA';
+  this.filterService.getFilteredEmployees(pivot,locations,products,workGroups).subscribe(
 
     (data) => {
 
@@ -90,7 +97,7 @@ export class TeamGraphComponent {
 
      let dat: any[]=[]
 
-     data.forEach((a)=>{
+     data.forEach((a:any)=>{
 
       this.count=this.count+1;
 

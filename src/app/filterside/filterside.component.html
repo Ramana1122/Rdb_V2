@@ -1,0 +1,94 @@
+<div class="sidebar">
+    <div class="sidebar-header">
+
+        <div class="sidebar-title">FILTER</div>
+  
+      </div>
+  
+      <hr>
+    <div class="accordion" id="accordionExample">
+        <!-- Location -->
+
+        <div class="accordion-item" [ngClass]="{ 'show': sharedService.isAccordionOpen }">
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    Location
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                    <div class="form-check" *ngFor="let option of Locationdata">
+                        <label class="form-check-label">
+                          <input
+                            type="checkbox"
+                            class="form-check-input"
+                            [(ngModel)]="selectedLocations[option.Description]"
+                            (click)="onOptionSelected(option.Description, 'Location')"
+                          >
+                          {{ option.Description }}
+                        </label>
+                      </div>
+                      
+                </div>
+            </div>
+        </div>
+      </div>
+
+        <!-- Product -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" >
+                    Product
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse show" >
+                <div class="accordion-body">
+                    <div class="checkbox-container" style="max-height: 150px; overflow-y: auto;">
+                      <div class="form-check" *ngFor="let p of productdata">
+                        <label class="form-check-label">
+                          <input
+                            type="checkbox"
+                            class="form-check-input"
+                            [(ngModel)]="selectedProducts[p.Description]"
+                            (click)="onOptionSelected(p.Description,'Product')"
+                          >
+                          {{ p.Description }}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+            </div>
+        </div>
+
+        <!-- Group -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" >
+                    Group
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse show" >
+                <div class="accordion-body">
+                    <div class="checkbox-container" style="max-height: 150px; overflow-y: auto;">
+                    
+                      <div class="form-check" *ngFor="let g of workgroupdata">
+                        <label class="form-check-label">
+                          <input
+                            type="checkbox"
+                            class="form-check-input"
+                            [(ngModel)]="selectedGroups[g.Description]"
+                            (click)="onOptionSelected(g.Description,'Work_Group')"
+                          >
+                          {{g.Description }}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+            </div>
+        </div>
+    </div>
+</div>

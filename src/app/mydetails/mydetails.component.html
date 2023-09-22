@@ -1,197 +1,715 @@
-<div class="ram">
 
-  <div class="container">
+<mat-sidenav-container style="margin-top: 50px; height: auto; background: #F7F8FC 0% 0% no-repeat padding-box;
+opacity: 1;">
+  <mat-sidenav mode="side" opened style="background-color: white;">
 
-    <div class="row justify-content-center">
+      <img class="avatar mat-elevation-z8 " style="background: #D3D3D3 0% 0% no-repeat padding-box;
+      border: 1px solid #FFFFFF;
+      opacity: 1;" src="../../assets/img/3237472.png" />
 
-      <div class="col-lg-12 col-md-12">
+          <h4 class="name">{{ employee?.['EmployeeName'] }}</h4>
+          <h4 class="name1">{{ employee?.['HLDesignation'] }}</h4>
 
-        <div class="card">
+          <mat-divider class="horizontal"> </mat-divider>
+       <button mat-button class="menu-button" (click)="setActiveButton('profile')">
+        <span style="color: #2D2779; font-family: roboto; font-style: normal;font-size: medium;"> My-Profile</span>
+      </button>
 
-          <div class="card-header backhead">
+      <button mat-button class="menu-button"  (click)="setActiveButton('peers')">
+        <span style="color: #2D2779;font-family: roboto;font-style: normal;font-size: medium;"> My-Peers</span>
+      </button>
 
-            <h4 class="card-title">{{ employee?.['EmployeeName'] }}</h4>
+      
 
+      <button mat-button class="menu-button" (click)="setActiveButton('reportees')">
+        <span style="color: #2D2779;font-family: roboto;font-style: normal;font-size: medium;"> My-Reportees </span>
+      </button>
+      
+  </mat-sidenav>
+  <mat-sidenav-container>
+<div style="background: #F7F8FC 0% 0% no-repeat padding-box;
+opacity: 1;">
+
+    <div [ngSwitch]="activeButton">
+
+    <div class="card"    *ngSwitchCase="'profile'">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="details-row">
+      
+              <div class="label">Dedalus ID</div>
+  
+              <div class="value">{{ employee?.DedalusId }}</div>
+  
+            </div>
+            <div class="details-row">
+      
+              <div class="label">Employee ID</div>
+  
+              <div class="value" style="font: normal normal medium 13px/18px Roboto;
+              letter-spacing: 0px;
+              color: #252F4A;
+              opacity: 1;">{{ employee?.['EmployeeCode'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Employee Mail ID</div>
+  
+              <div class="value break-word">{{ employee?.['Employee_MailId'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Gender</div>
+  
+              <div class="value">{{ employee?.Gender }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Location</div>
+  
+              <div class="value">{{ employee?.Location }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Date Of Joining</div>
+  
+              <div class="value">{{ employee?.['DateofJoin'] | date:'dd-MMM-yyyy' }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Product Group</div>
+  
+              <div class="value">{{ employee?.['ProductGroup'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Product</div>
+  
+              <div class="value">{{ employee?.Product }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Product Work Area</div>
+  
+              <div class="value">{{ employee?.['ProductWorkArea'] }}</div>
+  
+            </div>
+  
+            
           </div>
 
+          <div class="col-lg-6">
+            
+            <div class="details-row">
+  
+              <div class="label">Work Group</div>
+  
+              <div class="value">{{ employee?.['WorkGroup'] }}</div>
+  
+            </div>
+
+         
+            <div class="details-row">
+  
+              <div class="label">Reporting Manager</div>
+  
+              <div class="value break-word">{{ employee?.['ManagerName'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Manager Mail ID</div>
+  
+              <div class="value break-word">{{ employee?.['ManagerMailId'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">HL Role</div>
+  
+              <div class="value break-word">{{ employee?.['HLRole'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">HL Designation</div>
+  
+              <div class="value break-word">{{ employee?.['HLDesignation'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">HL Title</div>
+  
+              <div class="value break-word">{{ employee?.['HLTitle'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Unit</div>
+  
+              <div class="value break-word">{{ employee?.Unit }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Owning</div>
+  
+              <div class="value break-word">{{ employee?.Owning }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label">Unified Roles</div>
+  
+              <div class="value break-word">{{ employee?.['UnifiedRoles'] }}</div>
+  
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <!-- my peers -->
+
+    <div class="hi-content" style="display: flex;" *ngSwitchCase="'peers'" >
+      <div class="card4">
+        <div class="col-lg-10">
+        <div class="card-heading">My Peers</div>
+        <div class="card-content">
+          <table class="employee-table">
+            <thead>
+              <tr>
+                
+                <th class="employee1">EMPLOYEES</th>
+                <th class="actions"style="width: 28vh;">ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody  style="font-family: roboto;" >
+              <tr *ngFor="let employee of employeeData3" class="employee-row">
+                <td class="employee-name">
+                  
+                  <div class="employee">{{employee.EmployeeName}}</div>
+                  <div class="employee-id" >{{employee.Employee_MailId}}</div>
+                </td>
+                <td class="actions">
+                  <button (click)="openpop(employee['data1'])"  class="btn1 btn-sm"  data-bs-toggle="tooltip" data-bs-placement="top" title="View employee details">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+
+
+      
+     
+    
+
+    <!-- ... your peer content here ... -->
+      <div class="additional-content" *ngIf="showDetails"  >
+
+        <div class="card2" style="height: 619px;  width: 162%;">
           <div class="card-body">
-
-            <div class="row">
-
-              <div class="col-lg-6">
-
-                <div class="details-row">
-
-                  <div class="label">Dedalus ID</div>
-
-                  <div class="value">{{ employee?.DedalusId }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Employee ID</div>
-
-                  <div class="value">{{ employee?.['EmployeeCode'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Employee Mail ID</div>
-
-                  <div class="value break-word">{{ employee?.['Employee_MailId'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Gender</div>
-
-                  <div class="value">{{ employee?.Gender }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Location</div>
-
-                  <div class="value">{{ employee?.Location }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Date Of Joining</div>
-
-                  <div class="value">{{ employee?.['DateofJoin'] | date:'dd-MMM-yyyy' }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Product Group</div>
-
-                  <div class="value">{{ employee?.['ProductGroup'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Product</div>
-
-                  <div class="value">{{ employee?.Product }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Product Work Area</div>
-
-                  <div class="value">{{ employee?.['ProductWorkArea'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Work Group</div>
-
-                  <div class="value">{{ employee?.['WorkGroup'] }}</div>
-
-                </div>
-
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="details-row">
+        
+                <div class="label1">Dedalus ID</div>
+    
+                <div class="value1">{{ employee10?.DedalusId }}</div>
+    
               </div>
-
-              <div class="col-lg-6">
-
-                <div class="details-row">
-
-                  <div class="label">Manager Code</div>
-
-                  <div class="value">{{ employee?.ManagerCode }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Reporting Manager</div>
-
-                  <div class="value break-word">{{ employee?.['ManagerName'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Manager Mail ID</div>
-
-                  <div class="value break-word">{{ employee?.['ManagerMailId'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">HL Role</div>
-
-                  <div class="value break-word">{{ employee?.['HLRole'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">HL Designation</div>
-
-                  <div class="value break-word">{{ employee?.['HLDesignation'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">HL Title</div>
-
-                  <div class="value break-word">{{ employee?.['HLTitle'] }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Unit</div>
-
-                  <div class="value break-word">{{ employee?.Unit }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Owning</div>
-
-                  <div class="value break-word">{{ employee?.Owning }}</div>
-
-                </div>
-
-                <div class="details-row">
-
-                  <div class="label">Unified Roles</div>
-
-                  <div class="value break-word">{{ employee?.['UnifiedRoles'] }}</div>
-
-                </div>
-
+              <div class="details-row">
+        
+                <div class="label1">Employee ID</div>
+    
+                <div class="value1" style="font: normal normal medium 13px/18px Roboto;
+                letter-spacing: 0px;
+                color: #252F4A;
+                opacity: 1;">{{ employee10?.['EmployeeCode'] }}</div>
+    
               </div>
+  
+              <div class="details-row">
+    
+                <div class="label1">Employee Name</div>
+    
+                <div class="value1">{{ employee10?.['EmployeeName'] }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Employee Mail ID</div>
+    
+                <div class="value1 break-word">{{ employee10?.['Employee_MailId'] }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Gender</div>
+    
+                <div class="value1">{{ employee10?.Gender }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Location</div>
+    
+                <div class="value1">{{ employee10?.Location }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Date Of Joining</div>
+    
+                <div class="value1">{{ employee10?.['DateofJoin'] | date:'dd-MMM-yyyy' }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Product Group</div>
+    
+                <div class="value1">{{ employee10?.['ProductGroup'] }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Product</div>
+    
+                <div class="value1">{{ employee10?.Product }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Product Work Area</div>
+    
+                <div class="value1">{{ employee10?.['ProductWorkArea'] }}</div>
+    
+              </div>
+    
+              
+            </div>
+  
+            <div class="col-sm-6">
+              
+              <div class="details-row">
+    
+                <div class="label1">Work Group</div>
+    
+                <div class="value1">{{ employee10?.['WorkGroup'] }}</div>
+    
+              </div>
+  
+           
+              <div class="details-row">
+    
+                <div class="label1">Reporting Manager</div>
+    
+                <div class="value1 break-word">{{ employee10?.['ManagerName'] }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Manager Mail ID</div>
+    
+                <div class="value1 break-word">{{ employee10?.['ManagerMailId'] }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">HL Role</div>
+    
+                <div class="value1 break-word">{{ employee10?.['HLRole'] }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">HL Designation</div>
+    
+                <div class="value1 break-word">{{ employee10?.['HLDesignation'] }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">HL Title</div>
+    
+                <div class="value1 break-word">{{ employee10?.['HLTitle'] }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Unit</div>
+    
+                <div class="value1 break-word">{{ employee10?.Unit }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Owning</div>
+    
+                <div class="value1 break-word">{{ employee10?.Owning }}</div>
+    
+              </div>
+    
+              <div class="details-row">
+    
+                <div class="label1">Unified Roles</div>
+    
+                <div class="value1 break-word">{{ employee10?.['UnifiedRoles'] }}</div>
+    
+              </div>
+  
+            </div>
+          </div>
+          </div>     
+       
+        
+      </div>
+    </div>
+  </div>
+<!-- my reportees -->
+    <div *ngSwitchCase="'reportees'" class="other-content" style="display: flex;">
+      <div class="card4">
+        <div class="card-buttons" *ngIf="button">
+          <button class="add-button " (click)="addEmployee()"  [class.add-button]="isaddButtonActive">
+            <a>Add</a>
+          </button>                   
+          <button class="active-button" (click)="filterActive()" [class.active-button]="isActiveButtonActive">
 
+            Active
+
+          </button>
+
+          <button class="resigned-button" (click)="filterResigned()" [class.resigned-button]="isResignedButtonActive">
+
+            Resigned
+
+          </button>
+        </div>
+        <div class="col-lg-10"  style="margin-left: 0; width: 45vh;">
+        <div class="card-heading">My Reportees</div>
+        <div class="card-content">
+          <table class="employee-table">  
+            <h5 *ngIf="!isReportees" style="text-align: center;" > No Reportees to Display </h5>
+            <thead >
+              <tr *ngIf="button">
+                
+                <th class="employee1">EMPLOYEES</th>
+                <th class="actions" style="width: 28vh;">VIEW</th>
+                <th class="actions" style="width: 28vh;">EDIT</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              
+              <ng-container *ngIf = 'isActive'>
+              <tr *ngFor="let employee of employeeData2" class="employee-row">
+                <td class="employee-name">
+                  
+                  <div class="employee">{{employee.EmployeeName}}</div>
+                  <div class="employee-id">{{employee.Employee_MailId}}</div>
+                </td>
+                <td class="actions">
+                  <button (click)="openpop1(employee['EmployeeCode'])"  class="btn1 btn-sm"  data-bs-toggle="tooltip" data-bs-placement="top" title="View employee details">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </td>
+                <td class="actions">
+                  <button  (click)="openpop2(employee['EmployeeCode'])" class="btn1 btn-sm"  data-bs-toggle="tooltip" data-bs-placement="top" title="View employee details">
+                    <i class="fa-sharp fa-solid fa-user-pen"></i>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+
+
+            <!-- resigned employee -->
+
+            <ng-container *ngIf="!isActive">
+
+              <!-- Display "hi hello" content here -->
+
+              <tr class="employee-row"  *ngFor="let employee of resignedemployee">
+
+               
+
+                <td class="employee-name">
+
+                 
+
+                  <div class="employee">{{employee.EmployeeName}}</div>
+
+                  <div class="employee-id">{{employee.Employee_MailId}}</div>
+
+                </td>
+
+                <td class="actions">
+
+                  <button (click)="openpop(employee['EmployeeCode'])"  class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="View employee details" style="background-color: #e9e9e9;">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                  </button>
+
+                </td>
+                <td class="actions">
+                  <button (click)="openpop2(employee['EmployeeCode'])"  class="btn1 btn-sm"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit employee details">
+                    <i class="fa-sharp fa-solid fa-user-pen"></i>
+                  </button>
+                </td>
+
+              </tr>
+
+            </ng-container>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div>
+      <app-pop1> </app-pop1>
+    </div>
+   -->
+     <div class="additional-content" *ngIf="ReportDetails" style=" width:71%;">
+        <div class="card2" style="height: 619px;  width: 92%;">
+        <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="details-row">
+      
+              <div class="label1">Dedalus ID</div>
+  
+              <div class="value1">{{ employee10?.DedalusId }}</div>
+  
+            </div>
+            <div class="details-row">
+      
+              <div class="label1">Employee ID</div>
+  
+              <div class="value1" style="font: normal normal medium 13px/18px Roboto;
+              letter-spacing: 0px;
+              color: #252F4A;
+              opacity: 1;">{{ employee10?.['EmployeeCode'] }}</div>
+  
+            </div>
+
+            <div class="details-row">
+  
+              <div class="label1">Employee Name</div>
+  
+              <div class="value1">{{ employee10?.['EmployeeName'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Employee Mail ID</div>
+  
+              <div class="value1 break-word">{{ employee10?.['Employee_MailId'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Gender</div>
+  
+              <div class="value1">{{ employee10?.Gender }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Location</div>
+  
+              <div class="value1">{{ employee10?.Location }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Date Of Joining</div>
+  
+              <div class="value1">{{ employee10?.['DateofJoin'] | date:'dd-MMM-yyyy' }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Product Group</div>
+  
+              <div class="value1">{{ employee10?.['ProductGroup'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Product</div>
+  
+              <div class="value1">{{ employee10?.Product }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Product Work Area</div>
+  
+              <div class="value1">{{ employee10?.['ProductWorkArea'] }}</div>
+  
+            </div>
+  
+            
+          </div>
+
+          <div class="col-sm-6">
+            
+            <div class="details-row">
+  
+              <div class="label1">Work Group</div>
+  
+              <div class="value1">{{ employee10?.['WorkGroup'] }}</div>
+  
+            </div>
+
+         
+            <div class="details-row">
+  
+              <div class="label1">Reporting Manager</div>
+  
+              <div class="value1 break-word">{{ employee10?.['ManagerName'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Manager Mail ID</div>
+  
+              <div class="value1 break-word">{{ employee10?.['ManagerMailId'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">HL Role</div>
+  
+              <div class="value1 break-word">{{ employee10?.['HLRole'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">HL Designation</div>
+  
+              <div class="value1 break-word">{{ employee10?.['HLDesignation'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">HL Title</div>
+  
+              <div class="value1 break-word">{{ employee10?.['HLTitle'] }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Unit</div>
+  
+              <div class="value1 break-word">{{ employee10?.Unit }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Owning</div>
+  
+              <div class="value1 break-word">{{ employee10?.Owning }}</div>
+  
+            </div>
+  
+            <div class="details-row">
+  
+              <div class="label1">Unified Roles</div>
+  
+              <div class="value1 break-word">{{ employee10?.['UnifiedRoles'] }}</div>
+  
             </div>
 
           </div>
-
         </div>
-
+        </div>     
       </div>
-
+     
+      
     </div>
 
+
+   <!-- pop details -->
+
+    <div *ngIf="popDetails">
+      <!-- Add your details here -->
+      <app-pop1></app-pop1>
+      <!-- Add more details as needed -->
+    </div>
+
+    <div *ngIf="editDetails">
+      <!-- Add your details here -->
+      <app-editdetails (uploaded)="imageUploaded($event)" [dataToDisplay]="totaldata"></app-editdetails>
+      <!-- Add more details as needed -->
+    </div>
+    
+
+
+
+
+
+
   </div>
-
 </div>
-
-
-
+</div>
+</mat-sidenav-container>
+</mat-sidenav-container>
 

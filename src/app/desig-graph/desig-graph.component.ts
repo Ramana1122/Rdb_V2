@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { FilterService } from '../services/filter.service';
 
 @Component({
   selector: 'app-desig-graph',
@@ -23,7 +24,7 @@ export class DesigGraphComponent implements OnInit {
   datalabels:any[]=[]
 
 
-  constructor(private apiService: ApiService,private router:Router) {}
+  constructor(private apiService: ApiService,private router:Router,private filterService:FilterService) {}
 
   onClickMethod1() {
     this.router.navigate(['/admin/listview']);
@@ -38,12 +39,18 @@ export class DesigGraphComponent implements OnInit {
 }
 
  fetchDesignation() {
-  this.apiService.getDesignation().subscribe(
+  const selectedOptions=this.filterService.getSelectedOptions();
+  const locations=selectedOptions.Location;
+  const products=selectedOptions.Product;
+  const workGroups=selectedOptions.Work_Group;
+
+  const pivot='Designation';
+  this.filterService.getFilteredEmployees(pivot,locations,products,workGroups).subscribe(
     (data) => {
       this.details1 = data;
      let color=['#22aa99','#994499','#316395','#b82e2e','#0099c6','#109618','#22aa99']
      let dat: any[]=[] 
-     data.forEach((a)=>{
+     data.forEach((a:any)=>{
       this.count=this.count+1;
       if (this.count<=10){
         this.labels.push(a.ShortValue)

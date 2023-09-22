@@ -106,6 +106,7 @@ export class DashService {
 let url = `http://nhsappchna6210.cscidp.net/rdb/api/Employee?pivot=${params.pivot}&product=${params.product}&Location=${params.Location}&group=${params.Group}`
 
     return this.http.get<any[]>(url);
+    
 
   }
 }

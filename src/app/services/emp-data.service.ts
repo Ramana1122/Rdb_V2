@@ -7,6 +7,12 @@ import { server } from './allservers';
   providedIn: 'root'
 })
 export class EmpDataService {
+  sendDataEmp(employee10: any) {
+    throw new Error('Method not implemented.');
+  }
+  getReportee(arg0: string, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
   private empId: string = "";
   private  empName:EventEmitter<string> = new EventEmitter();
 

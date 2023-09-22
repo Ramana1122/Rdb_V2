@@ -1,119 +1,44 @@
-/* .container {
-  max-width: 1050px;
-
-  overflow-y: scroll;
-  max-height: 55vh;
-  margin-top: 60px;
-  margin-right: 80px;
- 
-}
-
-.editemp {
-  margin-top: 50px;
-}
-
-.form-row {
-  display: flex;
-}
-
-.form-row .form-group {
-  flex: 1;
-  margin-right: 10px;
-  margin-bottom: 10px; 
-}
-
-
-.btn-primary {
-  margin-top: 0px;
-}
-
-.text-danger {
-  color: red;
-}
 .ram{
-  margin-top: 20px;
-  width: 500px;
-  margin-left: 100px;
-}
-.title{
-  margin-top: 90px;
-  margin-left: 250px;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 10px;
-  width: 500px;
-  margin-left: 400px;
+  overflow: hidden;
+  margin-top: -50px;
+  height: 682px;
+  width: 148%;
+  margin-left: 5px;
+  /* box-shadow: 0px 13px 25px #2D5BFF12; */
+  
 }
 
-.search-bar .form-row {
-  flex: 1;
+.dark-blue{
+
+  background-color: #1201f7;
+
+  color: white;
+
+  margin-left: 1%;
+
+}
+.tom:hover{
+  cursor: not-allowed;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 16px;
+  padding-right: 20px;
+}
+.disable:hover{
+  cursor: not-allowed;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 16px;
+  padding-right: 20px;
+}
+.container {
+  
+  margin-top: 70px;
+  height: 169vh;
+  width: 94%;
+  margin-left: 20px;
 }
 
-.search-bar .form-row .form-group.search-input {
-  margin-right: 10px;
-  width: 500px;
-}
-
-.search-bar .form-row .btn-primary {
-
-  margin-top: 22px;
-  height: 40px;
-}
-
-
-.toaster {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  background-color: #fff;
-  padding: 10px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-}
-
-.toaster.success {
-  background-color: #c9fdd1;
-  border-color: #7ce28c;
-}
-
-.toaster.error {
-  background-color: #fedede;
-  border-color: #f36868;
-}
-
-.toaster.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.toaster .message {
-  flex: 1;
-}
-
-.toaster .close-icon {
-  cursor: pointer;
-}
-
-
-.form-container {
-  position: relative;
-}
-
-.toaster-form {
-  margin-bottom: 20px;
-}
 .card {
   width: 100%;
   height: 50%;
@@ -121,36 +46,12 @@
   
 }
 
-.mainHeader {
+/* .mainHeader {
   border: 1px solid rgb(50, 122, 169);
   border-radius: 5px;
   background-color: rgb(50, 122, 169);
-}
-.classRow {
-  padding: 10px;
-}
- */
-
- .container {
-  margin-left: 80px;
-  margin-top: 80px;
-  max-height:60vh;
-  width: 80%;
-}
-
-.card {
-  width: 100%;
-  height: 50%;
-  min-height: 50%;
-  
-  /* overflow: hidden; */
-}
-
-.mainHeader {
-  border: 1px solid rgb(50, 122, 169);
-  border-radius: 5px;
-  background-color: rgb(50, 122, 169);
-}
+  height: 68px;
+} */
 
 .classRow {
   padding: 10px;
@@ -161,12 +62,16 @@
   text-align: left;
 }
 
-.title {
+.leftPadder{
+  margin-left: 15px;
+}
+
+/* .title {
   text-align: center;
   font-size: 18px;
   font-weight: 500;
   color: white;
-}
+} */
 .buttons{
   display: flex; 
   margin-bottom: 13px;
@@ -267,8 +172,8 @@
   margin-right: 20px;
 }
 .container1{
-    height: 360px;
-    padding-top: 41px;
+    height: 481px;
+    padding-top: 16px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -306,14 +211,61 @@ padding-left: 35px;
   left: 8px;
   top: 4px;
 }
-.bu{
-
+.buto{
   display: flex;
-
   justify-content: end;
-
+  margin-right: 50vh;
   margin-top: 5px;
+}
 
-  margin-right: 10vh;
+.width-class {
+  width:100%;
+} 
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #ffffff;
+}
+ h4 {
+    /* font-size: 1.5rem; */
+  text-align: left;
+  font: normal normal medium 15px/20px Roboto;
+  letter-spacing: 0px;
+  color: #4F5664;
+  opacity: 1;
+}
+.bu{
+ text-align: left;
+font: normal normal normal 12px/16px Roboto;
+letter-spacing: 0px;
+color: #2D2779;
+opacity: 1;
+}
+.btn{
+ text-align: left;
+font: normal normal normal 12px/16px Roboto;
+letter-spacing: 0px;
+color: #980e17;
+opacity: 1;
+}
+.label{
+ text-align: left;
+font: normal normal normal 12px/16px Roboto;
+letter-spacing: 0px;
+color: #9BA2BC;
+opacity: 1;
+}
+.dataRule{
+ text-align: left;
+  font: normal normal normal 12px/16px Roboto;
+  letter-spacing: 0px;
+  color: #2D2779;
+  opacity: 1
+}
+.clear{
+  text-align: left;
+  font: normal normal normal 12px/16px Roboto;
+  letter-spacing: 0px;
+  color:#B5B5C3;
+  opacity: 1
 
 }

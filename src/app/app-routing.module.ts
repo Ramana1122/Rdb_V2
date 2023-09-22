@@ -1,6 +1,6 @@
 // app-routing.module.ts
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { EditdetailsComponent } from './editdetails/editdetails.component';
 import { PopComponent } from './pop/pop.component';
@@ -29,18 +29,22 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {path: "admin",component: AdminComponent,
   children:[
+
+    { path: 'mydetails', component: MydetailsComponent },
+  
+    
     { path: 'report', component: ReportComponent },
     { path: 'editdetails/:id', component: EditdetailsComponent },
     { path: 'my-team', component: MyTeamComponent },
     { path: 'details', component: EmployeeDetailsComponent },
-    { path: 'pop', component: PopComponent },
-    { path: '', component: Home1Component },
+    // { path: 'pop', component: PopComponent },
+    { path: '', component: ListviewComponent },
     {path: 'home1',component:Home1Component},
     { path: 'details/:empid', component: EmployeeDetailComponent },
     { path: 'searchbar', component: SearchbarComponent },
     { path: 'employeedetails', component: EmployeeDetailComponent },
     { path: 'employee-details', component: EmployeeDetailsComponent },
-    { path: 'mydetails', component: MydetailsComponent },
+
     { path: 'hist', component: HistoryComponent },
     {path:'side-nav', component:SideNavComponent},
     { path: 'reports', component: ReportsComponent },
@@ -61,7 +65,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

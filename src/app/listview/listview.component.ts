@@ -1,14 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ListService, ApiResponse } from '../services/list1.service';
+import { List1Service, ApiResponse } from '../services/list1.service';
 import { PopService } from '../services/pop.service';
 import { DashService } from '../services/dash.service';
+import { MatSidenav } from '@angular/material/sidenav';
+import { FilterService } from '../services/filter.service';
+import { forkJoin } from 'rxjs';
+
 @Component({
   selector: 'app-listview',
   templateUrl: './listview.component.html',
   styleUrls: ['./listview.component.css']
 })
-export class ListviewComponent {
+export class ListviewComponent implements OnInit {
+
+  progress: number = 50;
+
+  
+  viewAll(){
+    alert("Clicked View All")
+}  
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  toggleSidenav(): void {
+    this.sidenav.toggle();
+  }
+
+  closeSidenav(): void {
+    this.sidenav.close();
+  }
+
   Locationdata: any[] = [];
   productdata: any[] = [];
   workgroupdata: any[] = [];
@@ -16,39 +37,196 @@ export class ListviewComponent {
   apiResponseDesignation: ApiResponse[] = [];
   apiResponseResigned: ApiResponse[] = [];
   apiResponseOnboarding: ApiResponse[] = [];
-  apiResponseTeam:ApiResponse[] = [];
-  tableHeadings: string[] = ['Value', 'Count', 'Percentage'];
+  apiResponseTeam: ApiResponse[] = [];
+  tableHeadings: string[] = ['Value', 'Count', 'Percentage','ShortValue'];
   locationHolder: any = null;
   productHolder: any = null;
   GroupHolder: any = null;
-  employeeCount : number = 0;
+  employeeCount: number = 0;
   totalCount1: number = 0;
   totalCount2: number = 0;
+  totalCount27: number = 0;
   totalCount3: number = 0;
   totalCount4: number = 0;
   totalCount5: number = 0;
   details2: any[] = [];
-
-
   totalCount6: number = 0;
-  constructor(private listService: ListService,private dashservice:DashService,private router: Router,private popser: PopService) {}
+
+  // This for Holding the options
+  locationOptions: any[] = [];
+  productOptions: any[] = [];
+  workGroupOptions: any[] = [];
+  combinedArray: any[] = [];
+  combinedArray1: any[] = [];
+  combinedArray2: any[] = [];
+
+  constructor(
+    private listService: List1Service,
+    private filterService: FilterService,
+    private dashservice: DashService,
+    private router: Router,
+    private popser: PopService
+  ) { }
+
+
+   getProgressBarStyle(index: number): any {
+    const colors = ['green', '#FFC300', '#33FF33']; // Example colors
+    const colorIndex = index % colors.length; // Cycle through colors based on index
+
+    return { 'width.%': this.apiResponseDesignation[index].Percentage, 'background-color': colors[colorIndex] };
+  }
+  deleteItem1(index: number): void {
+    // Close the accordion
+    this.filterService.isAccordionOpen = false;
+    
+
+    // Get the selected item
+    const selectedItem = this.combinedArray[index];
+
+
+    // If the item exists and is selected, uncheck the checkbox
+    if (selectedItem && this.filterService.selectedLocations[selectedItem]) {
+      this.filterService.selectedLocations[selectedItem] = false;
+    }
+
+    let data:any = {
+      "row":1,
+      "value":this.combinedArray[index],
+      "index":index
+    }
+
+    this.filterService.deleteFilter.next(data);
+
+    this.filterService.deleteFilter.next(this.combinedArray[index]);
+    // Remove the item from the combinedArray
+    if (index >= 0 && index < this.combinedArray.length) {
+      this.combinedArray.splice(index, 1);
+    }
+    this.fetchInitialData()
+  }
+
+  deleteItem2(index: number): void {
+    // Close the accordion
+    this.filterService.isAccordionOpen = false;
+
+    // Get the selected item
+    const selectedItem1 = this.combinedArray1[index];
+
+
+    // If the item exists and is selected, uncheck the checkbox
+    if (selectedItem1 && this.filterService.selectedLocations[selectedItem1]) {
+      this.filterService.selectedLocations[selectedItem1] = false;
+    }
+
+    let data:any = {
+      "row":2,
+      "value":this.combinedArray1[index],
+      "index":index
+    }
+
+    this.filterService.deleteFilter.next(data);
+
+    //this.filterService.deleteFilter.next(this.combinedArray1[index]);
+    // Remove the item from the combinedArray
+    if (index >= 0 && index < this.combinedArray1.length) {
+      this.combinedArray1.splice(index, 1);
+    }
+    this.fetchInitialData()
+  }
+
+  deleteItem3(index: number): void {
+    // Close the accordion
+    this.filterService.isAccordionOpen = false;
+
+    // Get the selected item
+    const selectedItem2 = this.combinedArray2[index];
+
+    // If the item exists and is selected, uncheck the checkbox
+    if (selectedItem2 && this.filterService.selectedLocations[selectedItem2]) {
+      this.filterService.selectedLocations[selectedItem2] = false;
+    }
+
+    let data:any = {
+      "row":3,
+      "value":this.combinedArray2[index],
+      "index":index
+    }
+
+    this.filterService.deleteFilter.next(data);
+    // Remove the item from the combinedArray
+    if (index >= 0 && index < this.combinedArray2.length) {
+      this.combinedArray2.splice(index, 1);
+    }
+    this.fetchInitialData()
+  }
+
+
   ngOnInit() {
-    this.popser.getdesigination('Location').subscribe({
-      next: (data: any) => {
-        // console.log("Location",data)
-        let allData=[{
-          Code: 'All', Description: 'All'
-        }]
-      let all=[]
-      all=[...allData,...data]
-      // console.log("location",allData)
-        this.Locationdata = all;
-      },
-      error: () => {
-        this.Locationdata = [];
-      },
+    
+    // Subscribe to filter changes
+    this.filterService.openMessage.subscribe((finalData) => {
+      console.log(JSON.parse(finalData['data']), "finalData");
+      let filterOpts = JSON.parse(finalData['data']);
+      console.log('keyss' + filterOpts);
+      this.locationOptions = filterOpts.Location;
+      this.productOptions = filterOpts.Product;
+      this.workGroupOptions = filterOpts.Work_Group;
+
+      this.combinedArray = [...this.locationOptions];
+      this.combinedArray1 = [...this.productOptions];
+      this.combinedArray2 = [...this.workGroupOptions];
+
+      // Create an array of observables for fetching data for all five pivots
+      const observables = [
+        this.fetchDataForPivot('Designation', this.apiResponseDesignation),
+        this.fetchDataForPivot('Release', this.apiResponse),
+        this.fetchDataForPivot('Resigned', this.apiResponseResigned),
+
+        this.fetchDataForPivot('ONBOARDING', this.apiResponseOnboarding),
+        this.fetchDataForPivot('PRODUCT_WORK_AREA', this.apiResponseTeam),
+      ];
+
+      // Use forkJoin to make parallel requests
+      forkJoin(observables).subscribe((results) => {
+        // Results will contain the data for all five pivots
+        const [designationData, releaseData, resignedData, onboardingData, teamData] = results;
+
+        // Update the corresponding arrays with the fetched data
+        this.apiResponseDesignation = designationData;
+        console.log("My Lwewq", this.apiResponseDesignation.length)
+        this.totalCount6 = this.apiResponseDesignation.reduce((total, detail) => total + detail.Count, 0);
+
+
+        this.apiResponse = releaseData;
+        console.log("My Lwewq", this.apiResponse.length)
+        this.totalCount4 = this.apiResponse.reduce((total, detail) => total + detail.Count, 0);
+
+
+        this.apiResponseResigned = resignedData;
+        this.totalCount2 = this.apiResponseResigned.reduce((total, detail) => total + detail.Count, 0);
+
+        this.apiResponseOnboarding = onboardingData;
+        this.totalCount1 = this.apiResponseOnboarding.reduce((total, detail) => total + detail.Count, 0);
+
+        this.apiResponseTeam = teamData;
+        this.totalCount3 = this.apiResponseTeam.reduce((total, detail) => total + detail.Count, 0);;
+
+        // Perform any additional processing if needed
+      });
     });
-  
+
+    // Fetch initial data and options
+    this.fetchInitialData();
+  }
+
+  // Fetch initial data and options
+  fetchInitialData() {
+    const selectedOptions = this.filterService.getSelectedOptions();
+    console.log("selectedOptions",selectedOptions)
+    this.locationOptions = selectedOptions.Location;
+    this.productOptions = selectedOptions.Product;
+    this.workGroupOptions = selectedOptions.Work_Group;
+
     this.popser.getdesigination('Product').subscribe({
       next: (data: any) => {
         this.productdata = data;
@@ -57,6 +235,7 @@ export class ListviewComponent {
         this.productdata = [];
       }
     });
+
     this.popser.getdesigination('Work_Group').subscribe({
       next: (data: any) => {
         this.workgroupdata = data;
@@ -65,214 +244,145 @@ export class ListviewComponent {
         this.workgroupdata = [];
       }
     });
-    this.fetchDropdownValues('Location');
-    this.fetchDropdownValues('Product');
-    this.fetchDropdownValues('Work_Group');
+
     this.fetchDataForRelease();
     this.fetchDataForDesignation();
     this.fetchDataForResigned();
     this.fetchEmployeeCount();
     this.fetchResigned();
-
     this.fetchDataForOnboarding();
     this.fetchDataForTeam();
   }
-  onListViewClick() {
-    this.router.navigate(['/admin/home1']);
-  }
-  onClickMethod() {
-    this.router.navigate(['/admin/graph']);
-  }
-  onClickMethod1() {
-    this.router.navigate(['/admin/desig-graph']);
-  }
-  onClickMethod2() {
-    this.router.navigate(['/admin/onborard-graph']);
-  }
-  onClickMethod3() {
-    this.router.navigate(['/admin/resign-graph']);
-  }
-  onClickMethod4(){
-    this.router.navigate(['/admin/team-graph']);
+
+  // Fetch data for a specific pivot
+  fetchDataForPivot(pivot: string, targetArray: ApiResponse[]) {
+    // Construct the filter parameters based on your requirements
+    const designation: any = pivot; // Adjust this if needed
+
+    // Use the FilterService to get filtered employees
+    return this.filterService.getFilteredEmployees(designation, this.locationOptions, this.productOptions, this.workGroupOptions);
 
   }
-  fetchDropdownValues(domainCode: string): void {
-    this.listService.getDropdownValues(domainCode).subscribe(
-      (data: any) => {
-        if (domainCode === 'Location') {
-          let allData=[{
-            code:'All',Description:'All'
-          }]
-          let all=[]
-          all=[...allData,...data]
-          this.Locationdata = all;
-        } else if (domainCode === 'Product') {
-          this.productdata = data;
-        } else if (domainCode === 'Work_Group') {
-          this.workgroupdata = data;
-        }
+
+  // Fetch total employee count
+  fetchEmployeeCount() {
+    this.dashservice.getData('A').subscribe(
+      (response) => {
+        this.employeeCount = response.length;
+
       },
       (error) => {
-        console.error('Error fetching dropdown values:', error);
-      });
+        console.error('Error fetching employee count:', error);
+      }
+    );
   }
 
-  fetchEmployeeCount(): void {  
-    this.dashservice.getData('A').subscribe(  
-      (response) => {  
-        this.employeeCount = response.length;  
-      },
-      (error) => {  
-        console.error('Error fetching employee count:', error);  
-      });  
-  }
-
- 
-  
-  fetchDropdownValuesThree(): void {
-    const paramsDesig = {
-     pivot:'Designation',
-     Location:this.locationHolder=="All"?'':this.locationHolder,
-     product: this.productHolder,
-     Group: this.GroupHolder
-    };
-    this.listService.getEmployeesByDesignationAndLocation(paramsDesig).subscribe(
-      (data: any) => {
-        console.log('Fetching values here', data);
-        this.apiResponseDesignation = data;  
-        this.totalCount6 = this.apiResponseDesignation.reduce((total, apiResponseDesignation) => total + apiResponseDesignation.Count, 0);
-      },
-      (error) => {
-        console.error('Error fetching dropdown values:', error);
-      });
-    const paramsonb= {
-       pivot:'ONBOARDING',
-       Location:this.locationHolder=="All"?'':this.locationHolder,
-       product: this.productHolder,
-       Group: this.GroupHolder
-     };
-     this.listService.getEmployeesByDesignationAndLocation(paramsonb).subscribe(
-       (data: any) => {
-         console.log('Fetching values here', data);
-         this.apiResponseOnboarding=data;
-         this.totalCount1 = this.apiResponseOnboarding.reduce((total, apiResponseOnboarding) => total + apiResponseOnboarding.Count, 0);
-       },
-       (error) => {
-         console.error('Error fetching dropdown values:', error);
-       });
-     const paramRelease= {
-      pivot:'Resigned',
-      Location:this.locationHolder=="All"?'':this.locationHolder,
-      product: this.productHolder,
-      Group: this.GroupHolder
-     };
-     this.listService.getEmployeesByDesignationAndLocation(paramRelease).subscribe(
-       (data: any) => {
-         console.log('Fetching values here', data);
-         this.apiResponseResigned=data;
-         this.totalCount2 = this.apiResponseResigned.reduce((total, apiResponseResigned) => total + apiResponseResigned.Count, 0);
-       },
-       (error) => {
-         console.error('Error fetching dropdown values:', error);
-       });
-    const paramsResign = {
-      pivot:'PRODUCT_WORK_AREA',
-      Location:this.locationHolder=="All"?'':this.locationHolder,
-       product: this.productHolder,
-       Group: this.GroupHolder
-     };
-    this.listService.getEmployeesByDesignationAndLocation(paramsResign).subscribe(
-      (data: any) => {
-        console.log('Fetching values here', data);
-        this.apiResponseTeam=data
-        this.totalCount3 = this.apiResponseTeam.reduce((total, apiResponseTeam) => total + apiResponseTeam.Count, 0);
-      },
-      (error) => {
-        console.error('Error fetching dropdown values:', error);
-      });
-    const paramsRel = {
-      pivot:'Release',
-      Location:this.locationHolder=="All"?'':this.locationHolder,
-       product: this.productHolder,
-       Group: this.GroupHolder
-     };
-    this.listService.getEmployeesByDesignationAndLocation(paramsRel).subscribe(
-      (data: any) => {
-        console.log('Fetching values here', data);
-        this.apiResponse=data
-        this.totalCount4 = this.apiResponse.reduce((total, apiResponse) => total + apiResponse.Count, 0);
-      },
-      (error) => {
-        console.error('Error fetching dropdown values:', error);
-      });
-  }
+  // Fetch data for Release
   fetchDataForRelease() {
     this.listService.fetchData().subscribe(
       (response) => {
-        this.apiResponse = this.apiResponse.concat(response);
+        this.apiResponse = response;
+        this.totalCount4 = this.apiResponse.reduce((total, detail) => total + detail.Count, 0);
       },
       (error) => {
         console.error('Error fetching data for Release:', error);
-      });
+      }
+    );
   }
+
+  // Fetch data for Designation
   fetchDataForDesignation() {
     this.listService.fetchDataForDesignation().subscribe(
       (response) => {
-        this.apiResponseDesignation = this.apiResponseDesignation.concat(response);
+        this.apiResponseDesignation = response;
+        console.log("apiResponseDesignation", this.apiResponseDesignation);
+        this.totalCount6 = this.apiResponseDesignation.reduce((total, detail) => total + detail.Count, 0);
+        this.employeeCount = this.apiResponseDesignation.reduce((total, detail) => total + detail.Count, 0);
+
+        console.log("totalCount6", this.totalCount6)
+        if (this.locationHolder === "All") {
+          this.totalCount6;
+        }
       },
       (error) => {
         console.error('Error fetching data for Designation:', error);
-      });
+      }
+    );
   }
+
+  // Fetch data for Resigned
   fetchDataForResigned() {
     this.listService.fetchDataForResigned().subscribe(
       (response) => {
-        this.apiResponseResigned = this.apiResponseResigned.concat(response);
+        this.apiResponseResigned = response;
+        this.totalCount2 = this.apiResponseResigned.reduce((total, detail) => total + detail.Count, 0);
       },
       (error) => {
         console.error('Error fetching data for Resigned:', error);
-      });
+      }
+    );
   }
+
+  // Fetch data for ONBOARDING
   fetchDataForOnboarding() {
     this.listService.fetchDataForOnboarding().subscribe(
       (response: any) => {
-        this.apiResponseOnboarding = this.apiResponseOnboarding.concat(response);
+        this.apiResponseOnboarding =response;
+        this.totalCount1 = this.apiResponseOnboarding.reduce((total, detail) => total + detail.Count, 0);
       },
       (error) => {
         console.error('Error fetching data for ONBOARDING:', error);
       }
     );
   }
-  fetchResigned() {
 
-    this.dashservice.getResigned().subscribe(
-
-      (data) => {
-
-        this.details2 = data;
-
-        this.totalCount2 = this.details2.reduce((total, detail) => total + detail.Count, 0);
-
-      },
-
-      (error) => {
-
-        console.error('Error fetching data:', error);
-
-      }
-
-    );
-
-  } 
-
+  // Fetch data for Team
   fetchDataForTeam() {
     this.listService.fetchDataForTeam().subscribe(
       (response: any) => {
-        this.apiResponseTeam = this.apiResponseTeam.concat(response);
+        this.apiResponseTeam = response;
+        this.totalCount3 = this.apiResponseTeam.reduce((total, detail) => total + detail.Count, 0);;
       },
       (error) => {
         console.error('Error fetching data for Team:', error);
       }
     );
+  }
+
+  // Fetch Resigned data
+  fetchResigned() {
+    this.dashservice.getResigned().subscribe(
+      (data) => {
+        this.details2 = data;
+        this.totalCount27 = this.details2.reduce((total, detail) => total + detail.Count, 0);
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
+  onListViewClick() {
+    this.router.navigate(['/admin/home1']);
+  }
+
+  onClickMethod() {
+    this.router.navigate(['/admin/graph']);
+  }
+
+  onClickMethod1() {
+    this.router.navigate(['/admin/desig-graph']);
+  }
+
+  onClickMethod2() {
+    this.router.navigate(['/admin/onborard-graph']);
+  }
+
+  onClickMethod3() {
+    this.router.navigate(['/admin/resign-graph']);
+  }
+
+  onClickMethod4() {
+    this.router.navigate(['/admin/team-graph']);
   }
 }

@@ -31,11 +31,6 @@ export class MyTeamComponent implements OnInit {
   employeeData3:any;
   employeeId1: any;
 
-  //Chat
-  showChat: boolean = false;
-  chatMessages: string[] = [];
-  newMessage: string = '';
-
 constructor(private employeeService: EmployeeService,private router: Router,private empservice : EmpDataService,public dataSer:server) { 
    
 }
@@ -97,8 +92,6 @@ if(this.employeeId1=="" ){
  
 } 
 
-
-
 openpop(empId: any) {
   sessionStorage.setItem('empId', empId);
   this.router.navigateByUrl('/admin/details');
@@ -135,7 +128,5 @@ private saveAsExcelFile(buffer: any, fileName: string): void {
   document.body.removeChild(a);
   window.URL.revokeObjectURL(url);
 }
-
-
 
 }

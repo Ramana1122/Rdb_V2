@@ -1,21 +1,50 @@
-<nav class="navbar navbar-expand navbar-dark backhead" style="overflow-x: hidden;overflow-y:hidden">
-    <div class="side-nav-button p-2 me-3 text-light" (click)="sideNavToggle()">
-        <i class="fa-solid fa-bars"></i>
-    
-    </div>
-    <a class="navbar-brand px-4"><img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/053935b5e2d38ec5249e.png" alt="" height="110"></a>
-    
-    <div class="avatar">
-    
-      <img src="../../assets/img/3237472.png" height="40">
-
+<nav class="navbar navbar-expand navbar-dark backhead" style="overflow-x: hidden;overflow-y:hidden; border:1px; display: flex;">
+   <div class="left" style="width: 30%; display: flex;">
+  <a class="navbar-brand px-4">
+    <img src="../../assets/img/download2525.jpg" style="width: 100px;height: 100%;">
+  </a>
+    <div class="side-nav-button p-2 me-3 text-light" >
+      <i class="fa-solid fa-bars" (click)="sideNavToggle()"></i>
       
-  <div class="name break-word">
-    {{ userName?.['EmployeeName']}}        
+      <h6>RESOURCE MANAGMENT</h6>
+    </div>
   </div>
-  
-     
-  </div>
+
+<div class="center" style="width: 20%">
+
+</div>
+
+  <div class="right" style="width: 50%; display: flex; align-items:center;">
+
+    <div class="input-group" style="width: 1250px;" >
+      <div class="form-outline"style="background-color: #2d2779;border: none;margin-left: 154px;" >
+        <input type="search" id="form1" placeholder="Global Search"class="form-control" style="
+        background-color: #2d2779; border: none;width: 185px;color:white;"/>
+        
+      </div>
+      <button type="button" class="btn btn-primary" class="border1">
+        <i class="fas fa-search"></i>
+      </button>
+
+    </div>
+
+    <div>
+      <button _ngcontent-tps-c31="" type="button" style="border-radius: 30px;width: 35px;height: 35px;border: none;" >
+<i _ngcontent-tps-c31="" class="fa-solid fa-bell"></i>
+</button>
+</div>
+
+<div class="cbn">
+
+</div>
+    <div class=" ">
+    <button type="button" style="border-radius: 30px;width: 43px;height: 43px;" >
+      <i class="fa-solid fa-user"></i>
+</button>   
+</div>
+<div class="name break-word" >
+  {{ userName?.['EmployeeName']}}        
+</div>
 
  
 
@@ -26,7 +55,7 @@
         <!-- </button> -->
       </div>
     
-      
+    </div>
 </nav>
 
 
